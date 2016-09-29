@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//个人中心
+Route::get('user/index','UsersController@index');
+Route::get('user/save','UsersController@save');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
