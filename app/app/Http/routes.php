@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/',"LoginController@welcome");
 Route::any('welcome',"LoginController@welcome");
 Route::any('login',"LoginController@login");
