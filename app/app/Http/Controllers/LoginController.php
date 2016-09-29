@@ -25,15 +25,21 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
           //print_r($username);die;
           if($username=="" ||  $password==""){
             echo "<script>alert('请填写表单啊亲~');location.href='welcome';</script>" ;
+          }else{
+            $users = DB::table('login')->where("username","=",$username)
+                                       ->where("password","=",$password)
+                                       ->first();
+                                       //var_dump($users->id);die;
+            if($users){
+                 Session::put('uid',$users->id);
+                 Session::put('uname',$users->username);
+                echo "<script>alert('登录成功');location.href='lists';</script>" ;
+            }else{
+                echo "<script>alert('登录失败');location.href='welcome';</script>" ;
+            }
           }
-          //数据库验证用户
-          //$user = DB::table('users')->where('name', 'John')->first();
-          // $date=DB::table('users')->where("username",$username)->first();
-          // print_r($date);die;
-          echo $username,$password;
-        	$users = DB::table('login')->where("username","=",$username)
-                                     ->where("password","=",$password)->first();
-          var_dump($users);die;
+        	
+         
     }
     //验证 登录
     public function  lists(){
