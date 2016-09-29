@@ -12,7 +12,7 @@
 		<p>Link the world. Share to world.</p>
 	</div>
 	
-	<form action="" method="post" id="registerForm">
+	<form action="register_do" method="post" id="registerForm">
 		<div>
 			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
 		</div>
