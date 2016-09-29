@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/',"LoginController@welcome");
+Route::any('welcome',"LoginController@welcome");
+Route::any('login',"LoginController@login");
+Route::any('login_do',"LoginController@login_do");
+Route::any('lists',"LoginController@lists");
+
 
 //个人中心
 Route::get('user/index','UsersController@index');
@@ -29,6 +33,7 @@ Route::get('user/save','UsersController@save');
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+/*Route::group(['middleware' => ['web']], function () {
     //
 });
+*/
