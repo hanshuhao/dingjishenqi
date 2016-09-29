@@ -88,4 +88,14 @@ class UsersController extends Controller
 			echo "<script>alert('信息更新失败');location.href='save'</script>";exit;
 		}
 	}
+
+	/**
+	 * [lists 显示顶级历史]
+	 */
+	public function lists()
+	{
+		//查询个人信息
+		$arr = DB::table('login')->where('id','=',Session::get('uid'))->first();
+		return view('user/list',['username'=>$arr['username']]);
+	}
 }
