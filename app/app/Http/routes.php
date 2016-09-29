@@ -22,6 +22,7 @@ Route::any('lists',"LoginController@lists");
 //个人中心
 Route::get('user/index','UsersController@index');
 Route::get('user/save','UsersController@save');
+Route::post('user/inifo','UsersController@info');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
