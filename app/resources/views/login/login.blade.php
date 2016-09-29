@@ -18,6 +18,7 @@
 		<div>
 			<input type="text" name="username" class="username" placeholder="用户名" autocomplete="off"/>
 		</div>
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<div>
 			<input type="password" name="password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
 		</div>

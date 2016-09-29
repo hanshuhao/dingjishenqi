@@ -29,10 +29,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
             $users = DB::table('login')->where("username","=",$username)
                                        ->where("password","=",$password)
                                        ->first();
-                                       //var_dump($users->id);die;
             if($users){
-                 Session::put('uid',$users->id);
-                 Session::put('uname',$users->username);
+                 Session::put('uid',$users['id']);
+                 Session::put('uname',$users{'username'});
                 echo "<script>alert('登录成功');location.href='lists';</script>" ;
             }else{
                 echo "<script>alert('登录失败');location.href='welcome';</script>" ;

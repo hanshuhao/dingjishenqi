@@ -21,6 +21,11 @@ Route::any('register',"LoginController@register");
 Route::any('register_do',"LoginController@register_do");
 
 
+//个人中心
+Route::get('user/index','UsersController@index');
+Route::get('user/save','UsersController@save');
+Route::get('user/list','UsersController@lists');
+Route::post('user/info','UsersController@info');
 /*
 |--------------------------------------------------------------------------
 | Application Routes
