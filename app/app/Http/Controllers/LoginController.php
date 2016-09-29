@@ -42,9 +42,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          
     }
     //验证 登录
-    public function  lists(){
-	      echo 13;
+    public function  register(){
+      return  view("login.register");  
   }
-  
+   //验证 注册
+    public function  register_do(){
+       $arr= Request::input();
+       var_dump($arr);
+          
+  }
 }
 

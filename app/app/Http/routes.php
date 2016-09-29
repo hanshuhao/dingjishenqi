@@ -17,6 +17,8 @@ Route::any('welcome',"LoginController@welcome");
 Route::any('login',"LoginController@login");
 Route::any('login_do',"LoginController@login_do");
 Route::any('lists',"LoginController@lists");
+Route::any('register',"LoginController@register");
+Route::any('register_do',"LoginController@register_do");
 
 
 //个人中心
