@@ -11,14 +11,20 @@
 |
 */
 
-
+//登录
 Route::get('/',"LoginController@welcome");
 Route::any('welcome',"LoginController@welcome");
+//登录页面
 Route::any('login',"LoginController@login");
+//登录验证
 Route::any('login_do',"LoginController@login_do");
-Route::any('lists',"LoginController@lists");
+//注册页面
 Route::any('register',"LoginController@register");
+//注册入库
 Route::any('register_do',"LoginController@register_do");
+//首页
+Route::any('index',"IndexController@index");
+
 
 
 //个人中心
