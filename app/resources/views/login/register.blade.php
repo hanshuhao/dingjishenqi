@@ -2,7 +2,16 @@
 <html lang="zh-CN">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>定机神器FOR WEB</title>
+<link rel="stylesheet" href="css/jquery-labelauty.css">
 <link rel="stylesheet" href="css/style.css">
+<style>
+ul { list-style-type: none;}
+li { display: inline-block;}
+li { margin: 10px 0;}
+input.labelauty + label { font: 12px "Microsoft Yahei";}
+</style>
+
+
 <body>
 
 <div class="register-container">
@@ -13,6 +22,8 @@
 	</div>
 	
 	<form action="register_do" method="post" id="registerForm">
+	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+
 		<div>
 			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
 		</div>
@@ -28,8 +39,16 @@
 		<div>
 			<input type="email" name="email" class="email" placeholder="输入邮箱地址" oncontextmenu="return false" onpaste="return false" />
 		</div>
-
-		<button id="submit" type="submit">注 册</button>
+ 
+          
+<ul class="dowebok">
+	<li><input type="radio" name="type" data-labelauty="商家" value="1"></li>
+	<li><input type="radio" name="type" data-labelauty="个人" value="1"></li>
+	<li><font color=red>*</font>请选择类型</li>
+</ul>
+		
+	
+		<input type="submit" value="注册" style="background:blue">
 	</form>
 	<a href="welcome">
 		<button type="button" class="register-tis">已经有账号？</button>
@@ -46,3 +65,10 @@
 <!--表单验证-->
 <script src="js/jquery.validate.min.js?var1.14.0"></script>
 </html>
+
+<script src="js/jquery-labelauty.js"></script>
+<script>
+$(function(){
+	$(':input').labelauty();
+});
+</script>
