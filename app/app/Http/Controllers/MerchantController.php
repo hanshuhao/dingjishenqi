@@ -75,6 +75,23 @@ class MerchantController extends BaseController
         return view('merchant.uplodes',['list'=>$date]);
     }
 
+    /**
+     * [addNum 生成空余机器]
+     */
+    public function addNum()
+    {
+        //查询网吧机器信息
+        $data = DB::table('internet_bar')->select('id','cnum','vnum')->where('loginid',session::get('uid'))->first();
+        $cnum = explode(',', $data['cnum']);
+        $vnum = explode(',', $data['vnum']);
+        $date['cnum'] = array_pop($cnum);
+        $date['vnum'] = array_pop($vnum);
+        $date['cnums'] = $cnum;
+        $date['vnums'] = $vnum;
+        return view('merchant/addNum',$date);
+    }
+
+
     /*
      * 执行修改
      * */

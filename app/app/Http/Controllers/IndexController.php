@@ -30,6 +30,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $arr = DB::table('login')->where('id',Session::get('uid'))->first();
          $id=Request::input('id');
          $arr=DB::table("internet_bar")->where("id",$id)->first();
+         $a=explode(',',$arr['cnum']);
+         $b=explode(',',$arr['vnum']);
+         $a=count($a);
+         $b=count($b);
+         $c=$a+$b-2;
+         $arr['c']=$c;
          $arr['username'] = Session::get('uname');
          return view('index/select',$arr);
      }

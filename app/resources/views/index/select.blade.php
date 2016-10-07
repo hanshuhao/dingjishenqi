@@ -186,7 +186,7 @@
                             <div class="table-responsive">
                                 <p>网吧名称：{{ @$iname }}</p>
                                 <p>网吧地址：{{ @$address }}</p>
-                                <p>剩余机子：{{ @$num }}台</p>
+                                <p>剩余机子：{{ @$c }}台</p>
                                 <p>联系方式：{{ @$tel }}</p>
                                 <p>网吧全景图：<img src="{{@$log}}" alt=""/></p>
                             </div>
