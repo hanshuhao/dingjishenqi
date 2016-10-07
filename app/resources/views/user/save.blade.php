@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
 	<!-- Bootstrap Styles-->
-    <link href="/style/users/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="/assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
-    <link href="/style/users/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="/assets/css/font-awesome.css" rel="stylesheet" />
         <!-- Custom Styles-->
-    <link href="/style/users/assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="/assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
 </head>
 <body>
     <div id="wrapper">
@@ -23,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><i class="fa fa-comments"></i> <strong>定机神器 </strong></a>
+                <a class="navbar-brand" href="/index"><i class="fa fa-comments"></i> <strong>定机神器 </strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -225,7 +225,7 @@
                         <li><a href="index"><i class="fa fa-user fa-fw"></i> {{ $username }}</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="out"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
+                        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -325,12 +325,12 @@
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="/style/users/assets/js/jquery-1.10.2.js"></script>
+    <script src="/assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
-    <script src="/style/users/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
-    <script src="/style/users/assets/js/jquery.metisMenu.js"></script>
+    <script src="/assets/js/jquery.metisMenu.js"></script>
       <!-- Custom Js -->
-    <script src="/style/users/assets/js/custom-scripts.js"></script>
+    <script src="/assets/js/custom-scripts.js"></script>
 </body>
 </html>

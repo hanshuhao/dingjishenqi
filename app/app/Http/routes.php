@@ -12,7 +12,7 @@
 */
 
 //登录
-Route::get('/',"LoginController@welcome");
+Route::get('/',"IndexController@index");
 Route::any('welcome',"LoginController@welcome");
 //登录页面
 Route::any('login',"LoginController@login");
@@ -22,9 +22,24 @@ Route::any('login_do',"LoginController@login_do");
 Route::any('register',"LoginController@register");
 //注册入库
 Route::any('register_do',"LoginController@register_do");
+//退出
+Route::any('logout',"LoginController@logout");
 //首页
 Route::any('index',"IndexController@index");
+//选择网吧
+Route::any('select',"IndexController@select");
+//结算价格
+Route::any('money',"IndexController@money");
+//付账
+Route::any('account',"IndexController@account");
 
+
+/*商户页面*/
+Route::get("merchant",'MerchantController@index');
+Route::get("news",'MerchantController@news');
+Route::get("uplodes",'MerchantController@uplodes');
+Route::post("add",'MerchantController@add');
+Route::post("uplodes_do",'MerchantController@uplodes_do');
 
 
 //个人中心

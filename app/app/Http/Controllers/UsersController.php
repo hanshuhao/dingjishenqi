@@ -54,7 +54,7 @@ class UsersController extends Controller
 
 			//设置路径与重命名
 			$fileName = time().rand(1000,9999);	//设置文件名
-			$path = 'upload';
+			$path = 'uploads/user';
 			$mime = $request->file('myfile')->getClientOriginalExtension();	//获取文件后缀
 			$request->file('myfile')->move($path, $fileName.'.'.$mime);	//移动文件
 			$data['uphoto'] = $path.'/'.$fileName.'.'.$mime;	//保存文件路径
@@ -90,7 +90,7 @@ class UsersController extends Controller
 	}
 
 	/**
-	 * [lists 显示顶级历史]
+	 * [lists 显示定机历史]
 	 */
 	public function lists()
 	{
