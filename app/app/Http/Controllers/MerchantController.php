@@ -89,7 +89,7 @@ class MerchantController extends BaseController
                 $clientName = $file->getClientOriginalName();
                 //这个表示的是缓存在tmp文件夹下的文件的绝对路径
                 $entension = $file->getClientOriginalExtension(); //上传文件的后缀.
-                $mimeTye = $file->getMimeType();
+               // $mimeTye = $file->getMimeType();
                 $newName = date('ymdhis' . rand(1000, 9999)) . "." . $entension;
                 $path = $file->move('uploads/merchant', $newName);
                 $arr['log'] = $path;

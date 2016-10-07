@@ -11,21 +11,28 @@
 |
 */
 
-//登录
+//首页
 Route::get('/',"IndexController@index");
-Route::any('welcome',"LoginController@welcome");
+Route::get('index',"IndexController@index");
 //登录页面
+Route::any('welcome',"LoginController@welcome");
+//注册页面
+Route::any('register',"LoginController@register");
+     
 Route::any('login',"LoginController@login");
 //登录验证
 Route::any('login_do',"LoginController@login_do");
-//注册页面
-Route::any('register',"LoginController@register");
 //注册入库
 Route::any('register_do',"LoginController@register_do");
+//错误页面
+Route::any('errors',"LoginController@errors");
+
+//防非法登录
+Route::group(['middleware' => ['webs']], function () {
+
 //退出
 Route::any('logout',"LoginController@logout");
-//首页
-Route::any('index',"IndexController@index");
+
 //选择网吧
 Route::any('select',"IndexController@select");
 //结算价格
@@ -47,6 +54,7 @@ Route::get('user/index','UsersController@index');
 Route::get('user/save','UsersController@save');
 Route::get('user/list','UsersController@lists');
 Route::post('user/info','UsersController@info');
+});
 /*
 |--------------------------------------------------------------------------
 | Application Routes
