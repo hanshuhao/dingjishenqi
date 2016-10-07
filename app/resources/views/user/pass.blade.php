@@ -23,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/index"><i class="fa fa-comments"></i> <strong>定机神器 </strong></a> 
+                <a class="navbar-brand" href="/index"><i class="fa fa-comments"></i> <strong>定机神器 </strong></a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -143,12 +143,12 @@
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
-		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="index" class="active-menu"><i class="fa fa-dashboard"></i> 个人主页</a>
+                        <a href="index"><i class="fa fa-dashboard"></i> 个人主页</a>
                     </li>
                     <li>
                         <a href="list"><i class="fa fa-qrcode"></i>定机历史 </a>
@@ -158,7 +158,7 @@
                     </li>
 
                     <li>
-                        <a href="pass"><i class="fa fa-edit"></i> 修改密码</a>
+                        <a href="pass" class="active-menu"><i class="fa fa-edit"></i> 修改密码</a>
                     </li>
                 </ul>
 
@@ -166,70 +166,63 @@
 
         </nav>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper">
+        <div id="page-wrapper" >
             <div id="page-inner">
-
-
-                <div class="row">
+			 <div class="row">
                     <div class="col-md-12">
                         <h1 class="page-header">
-                            用户中心 <small>个人信息</small>
+                            修改密码 <small>请认真填写</small>
                         </h1>
                     </div>
                 </div>
-				
-				
-                <!-- /. ROW  -->
-				
+                    <!-- /. ROW  -->
+            <div class="row">
                 <div class="row">
-                    
-                    <div class="col-md-8 col-sm-12 col-xs-12">
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                欢迎用户【 {{ $username }} 】访问
-                            </div> 
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <p>姓  名：{{ isset($uname)?$uname:'' }}</p>
-                                    <p>性  别：{{ isset($sex)?$sex:'' }}</p>
-                                    <p>邮  箱：{{ isset($email)?$email:'' }}</p>
-                                    <p>身份证：{{ isset($IDcard)?substr_replace($IDcard, '****', 6,8):'' }}</p>
-                                </div>
+                    <div class="col-lg-6">
+                        <form role="form" method="post" action="">
+                            <div class="form-group">
+                                <label>账号</label>
+                                <input class="form-control" name="uname" value="{{ $username }}">
                             </div>
-                        </div>
-
+                            <div class="form-group">
+                                <label>原密码</label>
+                                <input name="oldpass" class="form-control" placeholder="请输入原密码">
+                            </div>
+                            <div class="form-group">
+                                <label>新密码</label>
+                                <input name="newpass" class="form-control" placeholder="请输入新密码">
+                            </div>
+                            <div class="form-group">
+                                <label>确认新密码</label>
+                                <input name="qpass" class="form-control" placeholder="请确认新密码">
+                            </div>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-default">确认修改</button>
+                            <button type="reset" class="btn btn-default">重置</button>
+                        </form>
                     </div>
+                    <!-- /.col-lg-6 (nested) -->
                 </div>
-                <!-- /. ROW  -->
-				<footer><p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">定机神器</a></p></footer>
+                <!-- /.row (nested) -->
             </div>
-            <!-- /. PAGE INNER  -->
+                    <!-- /. ROW  -->
+				<footer><p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">定机神器</a></p></footer>
+					</div>
+			 <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
         </div>
-        <!-- /. PAGE WRAPPER  -->
-    </div>
-    <!-- /. WRAPPER  -->
+     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
-    <!-- Bootstrap Js -->
+      <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
-	 
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- Morris Chart Js -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
-	
-	
-	<script src="assets/js/easypiechart.js"></script>
-	<script src="assets/js/easypiechart-data.js"></script>
-	
-	
-    <!-- Custom Js -->
+      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
-
-
+    
+   
 </body>
-
 </html>

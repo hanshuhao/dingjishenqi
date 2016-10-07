@@ -1,4 +1,4 @@
-﻿<?php include 'merchan/hear.php' ?>
+﻿<?php include 'merchan/hear.blade.php' ?>
        <!--个人信息-->
         <div id="page-wrapper" >
             <div id="page-inner">
@@ -50,14 +50,14 @@
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="user/assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="user/assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="user/assets/js/jquery.metisMenu.js"></script>
      <!-- DATA TABLE SCRIPTS -->
-    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="user/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="user/assets/js/dataTables/dataTables.bootstrap.js"></script>
         <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();

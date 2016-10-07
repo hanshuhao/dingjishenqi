@@ -12,11 +12,11 @@
         <h1>XXX网吧</h1>
         <input type="hidden" name="id" id="id" value="<?php echo $id?>"/>
         <table>
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
             <tr>
                 <td>
                     <input type="radio" name="radio" class="radio" value="1"/>VIP区
-                    <input type="radio" name="radio" class="radio" value="2"/>普通区
+                    <input type="radio" name="radio" checked class="radio" value="2"/>普通区
                 </td>
             </tr>
             <tr>
@@ -36,7 +36,7 @@
                 <input type="hidden" name="money" id="money"/>
             </tr>
             <tr>
-                <td><input type="submit" value="确认支付"/></td>
+                <td><input id="submit" type="submit" value="确认支付"/></td>
             </tr>
 
         </table>
@@ -47,15 +47,34 @@
 <script>
     $(function(){
         $("#times").change(function(){
+            $('#submit').attr('disabled',true);
             var num=$(this).val()
             var id=$("#id").val()
             var radio=$(".radio:checked").val();
+            var _token = $('#_token').val();
             if(num=="0"){
                 alert("请填写所上小时数")
             }
-            $.get("money", { radio: radio, times: num ,id:id} ,function(msg){
+            $.post("money", { radio: radio, times: num ,id:id , _token:_token} ,function(msg){
                 $("#span2").html(msg)
                 $("#money").val(msg)
+                $('#submit').attr('disabled',false);
+            });
+        })
+
+        $(".radio").change(function(){
+            $('#submit').attr('disabled',true);
+            var num=$("#times").val()
+            var id=$("#id").val()
+            var radio=$(".radio:checked").val();
+            var _token = $('#_token').val();
+            if(num=="0"){
+                alert("请填写所上小时数")
+            }
+            $.post("money", { radio: radio, times: num ,id:id , _token:_token} ,function(msg){
+                $("#span2").html(msg)
+                $("#money").val(msg)
+                $('#submit').attr('disabled',false);
             });
         })
     })

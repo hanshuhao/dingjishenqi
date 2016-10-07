@@ -29,7 +29,7 @@ Route::any('index',"IndexController@index");
 //选择网吧
 Route::any('select',"IndexController@select");
 //结算价格
-Route::any('money',"IndexController@money");
+Route::post('money',"IndexController@money");
 //付账
 Route::any('account',"IndexController@account");
 
@@ -38,7 +38,9 @@ Route::any('account',"IndexController@account");
 Route::get("merchant",'MerchantController@index');
 Route::get("news",'MerchantController@news');
 Route::get("uplodes",'MerchantController@uplodes');
+Route::get("addNum",'MerchantController@addNum');
 Route::post("add",'MerchantController@add');
+Route::post("numadd",'MerchantController@numAdd');
 Route::post("uplodes_do",'MerchantController@uplodes_do');
 
 
@@ -46,6 +48,7 @@ Route::post("uplodes_do",'MerchantController@uplodes_do');
 Route::get('user/index','UsersController@index');
 Route::get('user/save','UsersController@save');
 Route::get('user/list','UsersController@lists');
+Route::get('user/pass','UsersController@pass');
 Route::post('user/info','UsersController@info');
 /*
 |--------------------------------------------------------------------------

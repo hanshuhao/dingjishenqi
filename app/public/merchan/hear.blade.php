@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
     <!-- Bootstrap Styles-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="user/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="user/assets/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom Styles-->
-    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="user/assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
    <!--  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
 </head>
@@ -32,7 +32,7 @@
 
 
             <!-- /.个人中心 -->
-            <li class="dropdown">
+            <!--<li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
@@ -43,6 +43,19 @@
                     </li>
                     <li class="divider"></li>
                     <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user
+            </li> -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="index"><i class="fa fa-user fa-fw"></i> <?php echo Session::get('uname')?></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -63,6 +76,9 @@
                 </li>
                 <li>
                     <a href="ui-elements.html"><i class="fa fa-desktop"></i>交易记录</a>
+                </li>
+                <li>
+                    <a href="addNum"><i class="fa fa-desktop"></i>添加闲置机器</a>
                 </li>
             </ul>
 

@@ -89,7 +89,7 @@ class MerchantController extends BaseController
                 $clientName = $file->getClientOriginalName();
                 //这个表示的是缓存在tmp文件夹下的文件的绝对路径
                 $entension = $file->getClientOriginalExtension(); //上传文件的后缀.
-                $mimeTye = $file->getMimeType();
+                //$mimeTye = $file->getMimeType();
                 $newName = date('ymdhis' . rand(1000, 9999)) . "." . $entension;
                 $path = $file->move('uploads/merchant', $newName);
                 $arr['log'] = $path;
@@ -99,9 +99,68 @@ class MerchantController extends BaseController
         //修改
         $str=DB::table('internet_bar')->where('id',$id)->update($arr);
         if($str){
-            echo '<script>alert("修改成功!");location.href="/";</script>';
+            echo '<script>alert("修改成功!");location.href="uplodes";</script>';
         }else{
             echo '<script>alert("修改失败!");location.href="uplodes";</script>';
+        }
+    }
+
+    /**
+     * [addNum 生成空余机器]
+     */
+    public function addNum()
+    {
+        //查询网吧机器信息
+        $data = DB::table('internet_bar')->select('id','cnum','vnum')->where('loginid',session::get('uid'))->first();
+        $cnum = explode(',', $data['cnum']);
+        $vnum = explode(',', $data['vnum']);
+        $date['cnum'] = array_pop($cnum);
+        $date['vnum'] = array_pop($vnum);
+        $date['cnums'] = $cnum;
+        $date['vnums'] = $vnum;
+        return view('merchant/addNum',$date);
+    }
+
+    /**
+     * [numAdd 添加空余的机器入库]
+     * @return [type] [description]
+     */
+    public function numAdd()
+    {
+        //获取信息
+        $arr=Request::input();
+        //设置添加信息
+        //普通区
+        if(isset($arr['cnum']))
+        {
+            $cnum = $arr['cnum'];
+            $cnum[] = $arr['cnums'];
+        }
+        else
+        {
+            $cnum[] = $arr['cnums'];
+        }
+        //VIP区
+        if(isset($arr['vnum']))
+        {
+            $vnum = $arr['vnum'];
+            $vnum[] = $arr['vnums'];
+        }
+        else
+        {
+            $vnum[] = $arr['vnums'];
+        }
+        $data['cnum'] = implode(',', $cnum);
+        $data['vnum'] = implode(',', $vnum);
+        //修改数据库信息
+        $res = DB::table('internet_bar')->where('loginid',session::get('uid'))->update($data);
+        if($res)
+        {
+            return redirect('addNum');
+        }
+        else
+        {
+            echo '0';
         }
     }
 }
