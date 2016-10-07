@@ -22,6 +22,8 @@ Route::get("/admin",'AdminController@admin');
 Route::get("/users_show",'AdminController@users_show');
 Route::get("/internet_bar",'AdminController@internet_bar');
 Route::get("/invoice",'AdminController@invoice');
+Route::get("/yes",'AdminController@yes');
+Route::get("/no" , 'AdminController@no');
 
 
 /*

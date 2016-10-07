@@ -475,7 +475,7 @@
 								<td>{{ $v->address }}</td>
 								<td>{{ $v->username }}</td>
 								<td>{{ $v->log }}</td>
-								<td>{{ $v->status }}</td>
+								<td><?php if($v->status == 0){echo "待审核(<a href='yes?id=$v->id'>通过</a>/<a href='no?id=$v->id'>不通过</a>)";}else if($v->status == 1){echo "审核通过";}else if($v->status == -1){echo "审核未通过";} ?></td>
 							</tr>
 							@endforeach
 						</tbody>

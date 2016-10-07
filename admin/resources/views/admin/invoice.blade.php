@@ -474,8 +474,8 @@
 								<td>{{ $v->c_num }}</td>
 								<td>{{ $v->username }}</td>
 								<td>{{ $v->IDcard }}</td>
-								<td>{{ $v->on_time }}</td>
-								<td>{{ $v->down_time }}</td>
+								<td><?php echo $ontime = date("Y-m-d  H:i:s",$v->on_time) ?></td>
+								<td><?php echo $ontime = date("Y-m-d  H:i:s",$v->down_time) ?></td>
 								<td>{{ $v->money }}</td>
 								<td>{{ $v->status }}</td>
 							</tr>
