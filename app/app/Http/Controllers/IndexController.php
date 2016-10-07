@@ -18,8 +18,72 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 	 * [index 首页]
 	 */
     public function  index(){
-       return  view("index.index");
+    	//查询网吧信息
+    	$data = DB::table('internet_bar')->get();
+       return  view("index.index",['data'=>$data]);
     }
 
+    /*
+      * 选择网吧
+      * */
+     public function select(){
+         $id=Request::input('id');
+         return view('index.select',['id'=>$id]);
+     }
 
+     /*
+      * 结算价格
+      * */
+     public function money(){
+         $arr=Request::input();
+         //查询网吧价格
+         $date=DB::table('price')->where('lid',$arr['id'])->get();
+         if($arr['radio']==1){
+             $vip=$date[0]['vip'];
+             $money=$arr['times']*$vip;
+             echo $money;
+         }else{
+             $ordinary=$date[0]['ordinary'];
+             $money=$arr['times']*$ordinary;
+             echo $money;
+         }
+     }
+
+
+     /*
+      * 付账，生成订单
+      * */
+     public function account(){
+         $arr=Request::input();
+         unset($arr["_token"]);
+         //$id=Session::get('uid');
+         $id=11;
+         $str=DB::table('users')->where('loginid',$id)->get();
+         $date['username']=$str[0]['uname'];
+         $date['IDcard']=$str[0]['IDcard'];
+         $on="KF_".time('H-i-s').rand(1000,9999);
+         $date['l_num']=$on;
+         $date['on_time']=time();
+         $date['down_time']=time()+3600*$arr['times'];
+         $date['c_num']=$this->a();
+         $date['money']=$arr['money'];
+         $date['iid']=$arr['id'];
+         $data=DB::table('invoice')->insert($date);
+         if($data){
+             echo '<script>alert("提交成功!");location.href="select";</script>';
+         }else{
+             echo '<script>alert("提交失败!");location.href="select";</script>';
+         }
+     }
+
+     /*
+      * 网吧机器编号
+      * */
+        public function a(){
+           $arr=array(
+                1,2,3,4,5,6,7,8,9,10
+            );
+            $arrs=array_shift($arr);
+            return $arrs;
+        }
 }
