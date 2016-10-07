@@ -1,4 +1,4 @@
-﻿<?php include 'merchan/hear.php'?>
+﻿<?php include 'merchan/hear.blade.php'?>
 <script src="js/jquery.js"></script>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
@@ -78,8 +78,3 @@
    
 </body>
 </html>
-<script>
-    $(function(){
-        alert(1)
-    })
-</script>

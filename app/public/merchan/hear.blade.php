@@ -32,7 +32,7 @@
 
 
             <!-- /.个人中心 -->
-            <li class="dropdown">
+            <!--<li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
@@ -43,6 +43,19 @@
                     </li>
                     <li class="divider"></li>
                     <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user
+            </li> -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="index"><i class="fa fa-user fa-fw"></i> <?php echo Session::get('uname')?></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -62,7 +75,10 @@
                     <a href="uplodes"><i class="fa fa-bar-chart-o"></i>商户信息修改</a>
                 </li>
                 <li>
-                    <a href="ui-elements.html"><i class="fa fa-desktop"></i>交易记录</a>
+                    <a href="price"><i class="fa fa-bar-chart-o"></i>网吧价格</a>
+                </li>
+                <li>
+                    <a href="indent"><i class="fa fa-desktop"></i>交易记录</a>
                 </li>
             </ul>
 

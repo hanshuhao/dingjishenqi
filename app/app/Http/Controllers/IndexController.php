@@ -27,8 +27,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
       * 选择网吧
       * */
      public function select(){
+         $arr = DB::table('login')->where('id',Session::get('uid'))->first();
          $id=Request::input('id');
-         return view('index.select',['id'=>$id]);
+         $arr=DB::table("internet_bar")->where("id",$id)->first();
+         $arr['username'] = Session::get('uname');
+         $num=$this->a();
+         $arr['num']=count($num);
+         return view('index/select',$arr);
      }
 
      /*
@@ -58,9 +63,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          unset($arr["_token"]);
          //$id=Session::get('uid');
          $id=11;
-         $str=DB::table('users')->where('loginid',$id)->get();
-         $date['username']=$str[0]['uname'];
-         $date['IDcard']=$str[0]['IDcard'];
+         $str=DB::table('users')->where('loginid',$id)->first();
+         $date['username']=$str['uname'];
+         $date['IDcard']=$str['IDcard'];
          $on="KF_".time('H-i-s').rand(1000,9999);
          $date['l_num']=$on;
          $date['on_time']=time();
@@ -68,6 +73,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $date['c_num']=$this->a();
          $date['money']=$arr['money'];
          $date['iid']=$arr['id'];
+         $date['loginid']=Session::get('uid');
          $data=DB::table('invoice')->insert($date);
          if($data){
              echo '<script>alert("提交成功!");location.href="select";</script>';

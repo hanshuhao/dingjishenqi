@@ -19,7 +19,9 @@ class MerchantController extends BaseController
      * 商户中心
      * */
     public function index(){
+        //$arr = DB::table('login')->where('id',Session::get('uid'))->first();
         $date=DB::table('internet_bar')->where('loginid',Session::get('uid'))->first();
+        $data['username'] = Session::get('uname');
         if(!$date){
             $date['status']='9';
         }
@@ -99,9 +101,86 @@ class MerchantController extends BaseController
         //修改
         $str=DB::table('internet_bar')->where('id',$id)->update($arr);
         if($str){
-            echo '<script>alert("修改成功!");location.href="/";</script>';
+            echo '<script>alert("修改成功!");location.href="merchant";</script>';
         }else{
             echo '<script>alert("修改失败!");location.href="uplodes";</script>';
         }
     }
+
+
+    /*
+      *查询订单
+      */
+    public function indent(){
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $str=DB::table('invoice')->where('iid',$date['id'])->get();
+        return view('merchant.indent',['str'=>$str]);
+    }
+
+    /*
+     * 添加网吧价格页面
+     */
+    public function price(){
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $str=DB::table('price')->where('iid',$date['id'])->first();
+        return view('merchant.price',['list'=>$str]);
+    }
+
+    /*
+     * 网吧价格修改页面
+     */
+    public function prupdates(){
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $str=DB::table('price')->where('iid',$date['id'])->first();
+        return view('merchant.prupdates',$str);
+    }
+
+    /*
+     * 网吧价格修改
+     */
+    public function pruplist(){
+        $id=Request::input('id');
+        $arr=Request::input();
+        unset($arr['_token']);
+        unset($arr['id']);
+        $str=DB::table('price')->where('id',$id)->update($arr);
+        if($str){
+            echo '<script>alert("修改成功!");location.href="merchant";</script>';
+        }else{
+            echo '<script>alert("修改失败!");location.href="merchant";</script>';
+        }
+    }
+
+    /*
+     * 首次录入价格
+     */
+    public function pricelist(){
+        return view('merchant.pricelist');
+    }
+
+    /*
+     * 网吧价格入库
+     */
+    public function price_do(){
+        $vip=Request::input('vip');
+        $ordinary=Request::input('ordinary');
+        if(!is_numeric($vip)||!is_numeric($ordinary)){
+            echo "请输入数字";die;
+        }
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $arr['vip']=$vip;
+        $arr['ordinary']=$ordinary;
+        $arr['iid']=$date['id'];
+        $str=DB::table('price')->insert($arr);
+        if($str){
+            echo '<script>alert("添加成功!");location.href="merchant";</script>';
+        }else{
+            echo '<script>alert("添加失败!");location.href="merchant";</script>';
+        }
+    }
+
 }

@@ -38,6 +38,12 @@ Route::any('account',"IndexController@account");
 Route::get("merchant",'MerchantController@index');
 Route::get("news",'MerchantController@news');
 Route::get("uplodes",'MerchantController@uplodes');
+Route::get("price",'MerchantController@price');
+Route::get("pricelist",'MerchantController@pricelist');
+Route::get("prupdates",'MerchantController@prupdates');
+Route::post("price_do",'MerchantController@price_do');
+Route::post("pruplist",'MerchantController@pruplist');
+Route::get("indent",'MerchantController@indent');
 Route::post("add",'MerchantController@add');
 Route::post("uplodes_do",'MerchantController@uplodes_do');
 

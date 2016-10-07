@@ -1,4 +1,4 @@
-﻿<?php include 'merchan/hear.php' ?>
+﻿<?php include 'merchan/hear.blade.php' ?>
        <!--个人信息-->
         <div id="page-wrapper" >
             <div id="page-inner">
