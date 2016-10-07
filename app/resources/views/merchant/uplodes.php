@@ -1,4 +1,4 @@
-﻿<?php include 'merchan/hear.blade.php'?>
+﻿<?php include 'merchan/hear.blade.php' ?>
 <script src="js/jquery.js"></script>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
@@ -58,7 +58,7 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-			<footer><p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p></footer>
+			<footer><p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">定机神器</a></p></footer>
 			</div>
              <!-- /. PAGE INNER  -->
             </div>
@@ -67,15 +67,12 @@
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="user/assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="user/assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
+    <script src="user/assets/js/jquery.metisMenu.js"></script>
       <!-- Custom Js -->
-    <script src="assets/js/custom-scripts.js"></script>
-
-    
-   
+    <script src="user/assets/js/custom-scripts.js"></script>
 </body>
 </html>

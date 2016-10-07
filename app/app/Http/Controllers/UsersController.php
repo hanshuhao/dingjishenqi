@@ -96,6 +96,18 @@ class UsersController extends Controller
 	{
 		//查询个人信息
 		$arr = DB::table('login')->where('id','=',Session::get('uid'))->first();
-		return view('user/list',['username'=>$arr['username']]);
+		//查询定机信息
+		$data = DB::table('invoice')->where('loginid','=',Session::get('uid'))->get();
+		return view('user/list',['username'=>$arr['username'],"data"=>$data]);
+	}
+
+	/**
+	 * [pass 修改用户密码]
+	 */
+	public function pass()
+	{
+		//查询个人信息
+		$arr = DB::table('login')->where('id','=',Session::get('uid'))->first();
+		return view('user/pass',$arr);
 	}
 }
