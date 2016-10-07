@@ -4,11 +4,13 @@
 <title>login</title>
 
 <link rel="stylesheet" href="css/style.css">
-
+<style>
+	a { text-decoration: none; color: #ffffff }
+</style>
 <body>
 
 <div class="login-container">
-	<h1>订机神器</h1>
+	<h1><a href="/">订机神器</a></h1>
 	
 	<div class="connect">
 		<p>djsq.qlh6.com</p>

@@ -9,14 +9,15 @@ ul { list-style-type: none;}
 li { display: inline-block;}
 li { margin: 10px 0;}
 input.labelauty + label { font: 12px "Microsoft Yahei";}
+a { text-decoration: none; color: #ffffff}
 </style>
 
 
 <body>
 
 <div class="register-container">
-	<h1>Ding  Ji Shen Qi</h1>
-	
+	<h1><a href="/">定机神器</a></h1>
+	 
 	<div class="connect">
 		<p>Link the world. Share to world.</p>
 	</div>
