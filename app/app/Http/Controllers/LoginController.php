@@ -32,9 +32,19 @@ class LoginController extends Controller
         $username = Request::input('username');
         $password = md5(Request::input('password'));
         //print_r($username);die;
+        $preg='/^[a-zA-Z0-9\x{4e00}-\x{9fa5}]{2,20}$/u';
+        if(!preg_match($preg,$username)){
+            /*echo "<script>alert('不许耍赖~');location.href='welcome';</script>" ;*/
+            redirect('errors');
+           // return false;
+        }
         if($username=="" ||  $password=="")
         {
-          echo "<script>alert('请填写表单啊亲~');location.href='welcome';</script>" ;die;
+            $message="请填写表单";
+            $time="4";
+            $contro="welcome";
+            //传参报错。传不了。得定全局变量
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
         }
         else
         {
@@ -49,14 +59,18 @@ class LoginController extends Controller
                 //登录时间
                 $date  =date("Y-m-d H:i:s");
                 DB::table('login')->where('id','=',$users['id'])->update(['logintime' => $date]);
-                return Redirect('index');
+                return  Redirect('index');
             }
             else
             {
-                echo "<script>alert('登录失败');location.href='welcome';</script>" ;die;
+                $message="用户名或密码错误，请重新输入";
+                $time="2";
+                $contro="welcome";
+                return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
             }
         }      
     }
+
 
     /**
      * [register 验证 登录]
@@ -77,6 +91,15 @@ class LoginController extends Controller
         //var_dump($arr);
         $res['username'] = $arr['username'];
         $res['password'] = md5($arr['password']);
+
+        $preg='/^[a-zA-Z0-9\x{4e00}-\x{9fa5}]{2,20}$/u';
+             if(!preg_match($preg,$arr['username'])){
+                 $message="用户名格式不正确，请重新输入";
+                 $time="4";
+                 $contro="register";
+                 return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+                 return false;
+             }
         $res['type'] = $arr['type'];
         $date=date("Y-m-d H:i:s");
         $res['logintime'] = $date;
@@ -85,14 +108,21 @@ class LoginController extends Controller
         {
             Session::put('uid',$return);
             Session::put('uname',$arr['username']);
-            return Redirect('index');
-
+            Session::put('type',$arr['type']);
+            $message="注册成功";
+            $time="2";
+            $contro="index";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
         }
         else
         {
-            echo "<script>alert('注册失败');location.href='register';</script>";die;
+            $message="注册失败,请核对你的信息";
+            $time="4";
+            $contro="register";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
         }
     }
+    
 
      /**
       * [logout 退出]
@@ -102,5 +132,5 @@ class LoginController extends Controller
         Request::session()->flush();
         return Redirect('index');
     }
-
+  
 }

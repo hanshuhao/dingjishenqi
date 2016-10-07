@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿<?php include 'merchan/hear.blade.php' ?>
+=======
+﻿<?php include 'merchan/hear.php' ?>
+>>>>>>> f5d15f712e9a999a04aac90203d9d558dcaba0ed
 <script src="js/jquery.js"></script>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
@@ -75,4 +79,8 @@
       <!-- Custom Js -->
     <script src="user/assets/js/custom-scripts.js"></script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> f5d15f712e9a999a04aac90203d9d558dcaba0ed
