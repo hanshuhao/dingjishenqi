@@ -189,6 +189,7 @@
                                 <p>剩余机子：{{ @$c }}台</p>
                                 <p>联系方式：{{ @$tel }}</p>
                                 <p>网吧全景图：<img src="{{@$log}}" alt=""/></p>
+                                <a href="select_do?id={{@$id}}"><input type="button" class="form-control" value="订购机器"/></a>
                             </div>
                         </div>
                     </div>

@@ -33,8 +33,10 @@ Route::group(['middleware' => ['webs']], function () {
 //退出
 Route::any('logout',"LoginController@logout");
 
-//选择网吧
+//网吧详细信息
 Route::any('select',"IndexController@select");
+//选择网吧
+Route::any('select_do',"IndexController@select_do");
 //结算价格
 Route::post('money',"IndexController@money");
 //付账

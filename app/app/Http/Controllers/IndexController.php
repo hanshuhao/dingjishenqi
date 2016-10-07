@@ -39,7 +39,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $arr['username'] = Session::get('uname');
          return view('index/select',$arr);
      }
-
+     /*
+      * 提交订单页面
+      */
+     public function select_do(){
+         $id=Request::input('id');
+         $arr=DB::table('internet_bar')->where('id',$id)->first();
+         return view('index.select_do',['list'=>$arr]);
+     }
      /*
       * 结算价格
       * */
