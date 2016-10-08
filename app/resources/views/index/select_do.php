@@ -9,8 +9,8 @@
 <body>
 <form action="account" method="post">
     <center>
-        <h1>XXX网吧</h1>
-        <input type="hidden" name="id" id="id" value="<?php echo $id?>"/>
+        <h1><?php echo $list['iname']?></h1>
+        <input type="hidden" name="id" id="id" value="<?php echo $list['id']?>"/>
         <table>
             <input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
             <tr>
@@ -46,8 +46,9 @@
 </html>
 <script>
     $(function(){
+        $('#submit').attr('disabled',true);
         $("#times").change(function(){
-            $('#submit').attr('disabled',true);
+
             var num=$(this).val()
             var id=$("#id").val()
             var radio=$(".radio:checked").val();
@@ -58,12 +59,17 @@
             $.post("money", { radio: radio, times: num ,id:id , _token:_token} ,function(msg){
                 $("#span2").html(msg)
                 $("#money").val(msg)
-                $('#submit').attr('disabled',false);
+                if(msg==0){
+                    $('#submit').attr('disabled',true);
+                }else{
+                    $('#submit').attr('disabled',false);
+                }
+
             });
         })
 
         $(".radio").change(function(){
-            $('#submit').attr('disabled',true);
+
             var num=$("#times").val()
             var id=$("#id").val()
             var radio=$(".radio:checked").val();
@@ -74,7 +80,11 @@
             $.post("money", { radio: radio, times: num ,id:id , _token:_token} ,function(msg){
                 $("#span2").html(msg)
                 $("#money").val(msg)
-                $('#submit').attr('disabled',false);
+                if(msg==0){
+                    $('#submit').attr('disabled',true);
+                }else{
+                    $('#submit').attr('disabled',false);
+                }
             });
         })
     })

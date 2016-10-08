@@ -33,22 +33,30 @@ Route::group(['middleware' => ['webs']], function () {
 //退出
 Route::any('logout',"LoginController@logout");
 
-//选择网吧
+//网吧详细信息
 Route::any('select',"IndexController@select");
+//选择网吧
+Route::any('select_do',"IndexController@select_do");
 //结算价格
 Route::post('money',"IndexController@money");
 //付账
 Route::any('account',"IndexController@account");
 
 
-/*商户页面*/
-Route::get("merchant",'MerchantController@index');
-Route::get("news",'MerchantController@news');
-Route::get("uplodes",'MerchantController@uplodes');
-Route::get("addNum",'MerchantController@addNum');
-Route::post("add",'MerchantController@add');
-Route::post("numadd",'MerchantController@numAdd');
-Route::post("uplodes_do",'MerchantController@uplodes_do');
+    /*商户页面*/
+    Route::get("merchant",'MerchantController@index');
+    Route::get("news",'MerchantController@news');
+    Route::get("uplodes",'MerchantController@uplodes');
+    Route::get("price",'MerchantController@price');
+    Route::get("pricelist",'MerchantController@pricelist');
+    Route::get("prupdates",'MerchantController@prupdates');
+    Route::post("price_do",'MerchantController@price_do');
+    Route::post("pruplist",'MerchantController@pruplist');
+    Route::get("indent",'MerchantController@indent');
+    Route::get("addNum",'MerchantController@addNum');
+    Route::post("add",'MerchantController@add');
+    Route::post("numadd",'MerchantController@numAdd');
+    Route::post("uplodes_do",'MerchantController@uplodes_do');
 
 
 //个人中心

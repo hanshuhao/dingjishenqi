@@ -19,18 +19,34 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 	 */
     public function  index(){
     	//查询网吧信息
-    	$data = DB::table('internet_bar')->get();
-       return  view("index.index",['data'=>$data]);
+        $data = DB::table('internet_bar')->get();
+        return  view("index.index",['data'=>$data]);
     }
 
     /*
       * 选择网吧
       * */
      public function select(){
+         $arr = DB::table('login')->where('id',Session::get('uid'))->first();
          $id=Request::input('id');
-         return view('index.select',['id'=>$id]);
+         $arr=DB::table("internet_bar")->where("id",$id)->first();
+         $a=explode(',',$arr['cnum']);
+         $b=explode(',',$arr['vnum']);
+         $a=count($a);
+         $b=count($b);
+         $c=$a+$b-2;
+         $arr['c']=$c;
+         $arr['username'] = Session::get('uname');
+         return view('index/select',$arr);
      }
-
+     /*
+      * 提交订单页面
+      */
+     public function select_do(){
+         $id=Request::input('id');
+         $arr=DB::table('internet_bar')->where('id',$id)->first();
+         return view('index.select_do',['list'=>$arr]);
+     }
      /*
       * 结算价格
       * */
@@ -56,7 +72,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $arr=Request::input();
          unset($arr["_token"]);
          $id=Session::get('uid');
-         //$id=11;
          $str=DB::table('users')->where('loginid',$id)->first();
          if(!$str)
          {
@@ -82,6 +97,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $date['down_time']=time()+3600*$arr['times'];
          $date['money']=$arr['money'];
          $date['iid']=$arr['id'];
+         $date['loginid']=Session::get('uid');
          $date['loginid']=$id;
          $data=DB::table('invoice')->insert($date);
          if($data){

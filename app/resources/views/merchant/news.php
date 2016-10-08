@@ -1,4 +1,4 @@
-﻿<?php include 'merchan/hear.blade.php' ?>
+<?php include 'merchan/hear.blade.php' ?>
 <script src="user/js/jquery.js"></script>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >

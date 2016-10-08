@@ -19,7 +19,9 @@ class MerchantController extends BaseController
      * 商户中心
      * */
     public function index(){
+        //$arr = DB::table('login')->where('id',Session::get('uid'))->first();
         $date=DB::table('internet_bar')->where('loginid',Session::get('uid'))->first();
+        $data['username'] = Session::get('uname');
         if(!$date){
             $date['status']='9';
         }
@@ -76,6 +78,23 @@ class MerchantController extends BaseController
         return view('merchant.uplodes',['list'=>$date]);
     }
 
+    /**
+     * [addNum 生成空余机器]
+     */
+    public function addNum()
+    {
+        //查询网吧机器信息
+        $data = DB::table('internet_bar')->select('id','cnum','vnum')->where('loginid',session::get('uid'))->first();
+        $cnum = explode(',', $data['cnum']);
+        $vnum = explode(',', $data['vnum']);
+        $date['cnum'] = array_pop($cnum);
+        $date['vnum'] = array_pop($vnum);
+        $date['cnums'] = $cnum;
+        $date['vnums'] = $vnum;
+        return view('merchant/addNum',$date);
+    }
+
+
     /*
      * 执行修改
      * */
@@ -112,62 +131,80 @@ class MerchantController extends BaseController
 
     }
 
-    /**
-     * [addNum 生成空余机器]
-     */
-    public function addNum()
-    {
-        //查询网吧机器信息
-        $data = DB::table('internet_bar')->select('id','cnum','vnum')->where('loginid',session::get('uid'))->first();
-        $cnum = explode(',', $data['cnum']);
-        $vnum = explode(',', $data['vnum']);
-        $date['cnum'] = array_pop($cnum);
-        $date['vnum'] = array_pop($vnum);
-        $date['cnums'] = $cnum;
-        $date['vnums'] = $vnum;
-        return view('merchant/addNum',$date);
+
+    /*
+      *查询订单
+      */
+    public function indent(){
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $str=DB::table('invoice')->where('iid',$date['id'])->get();
+        return view('merchant.indent',['str'=>$str]);
     }
 
-    /**
-     * [numAdd 添加空余的机器入库]
-     * @return [type] [description]
+    /*
+     * 添加网吧价格页面
      */
-    public function numAdd()
-    {
-        //获取信息
+    public function price(){
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $str=DB::table('price')->where('iid',$date['id'])->first();
+        return view('merchant.price',['list'=>$str]);
+    }
+
+    /*
+     * 网吧价格修改页面
+     */
+    public function prupdates(){
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $str=DB::table('price')->where('iid',$date['id'])->first();
+        return view('merchant.prupdates',$str);
+    }
+
+    /*
+     * 网吧价格修改
+     */
+    public function pruplist(){
+        $id=Request::input('id');
         $arr=Request::input();
-        //设置添加信息
-        //普通区
-        if(isset($arr['cnum']))
-        {
-            $cnum = $arr['cnum'];
-            $cnum[] = $arr['cnums'];
-        }
-        else
-        {
-            $cnum[] = $arr['cnums'];
-        }
-        //VIP区
-        if(isset($arr['vnum']))
-        {
-            $vnum = $arr['vnum'];
-            $vnum[] = $arr['vnums'];
-        }
-        else
-        {
-            $vnum[] = $arr['vnums'];
-        }
-        $data['cnum'] = implode(',', $cnum);
-        $data['vnum'] = implode(',', $vnum);
-        //修改数据库信息
-        $res = DB::table('internet_bar')->where('loginid',session::get('uid'))->update($data);
-        if($res)
-        {
-            return redirect('addNum');
-        }
-        else
-        {
-            echo '0';
+        unset($arr['_token']);
+        unset($arr['id']);
+        $str=DB::table('price')->where('id',$id)->update($arr);
+        if($str){
+            echo '<script>alert("修改成功!");location.href="merchant";</script>';
+        }else{
+            echo '<script>alert("修改失败!");location.href="merchant";</script>';
         }
     }
+
+    /*
+     * 首次录入价格
+     */
+    public function pricelist(){
+        return view('merchant.pricelist');
+    }
+
+    /*
+     * 网吧价格入库
+     */
+    public function price_do(){
+        $vip=Request::input('vip');
+        $ordinary=Request::input('ordinary');
+        if(!is_numeric($vip)||!is_numeric($ordinary)){
+            echo "请输入数字";die;
+        }
+        $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $arr['vip']=$vip;
+        $arr['ordinary']=$ordinary;
+        $arr['iid']=$date['id'];
+        $str=DB::table('price')->insert($arr);
+        if($str){
+            echo '<script>alert("添加成功!");location.href="merchant";</script>';
+        }else{
+            echo '<script>alert("添加失败!");location.href="merchant";</script>';
+        }
+    }
+
 }

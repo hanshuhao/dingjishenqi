@@ -75,7 +75,10 @@
                     <a href="uplodes"><i class="fa fa-bar-chart-o"></i>商户信息修改</a>
                 </li>
                 <li>
-                    <a href="ui-elements.html"><i class="fa fa-desktop"></i>交易记录</a>
+                    <a href="price"><i class="fa fa-bar-chart-o"></i>网吧价格</a>
+                </li>
+                <li>
+                    <a href="indent"><i class="fa fa-desktop"></i>交易记录</a>
                 </li>
                 <li>
                     <a href="addNum"><i class="fa fa-desktop"></i>添加闲置机器</a>

@@ -95,6 +95,7 @@
         <div class="container-fluid">
             <div class="row no-gutter">
                 @foreach($data as $v)
+                @if($v['status'] == 1)
                 <div class="col-lg-4 col-sm-6">
                     <a href="select?id={{ $v['id'] }}" class="portfolio-box">
                         <img src="{{ $v['log'] }}" class="img-responsive" alt="{{ $v['iname'] }}">
@@ -110,6 +111,7 @@
                         </div>
                     </a>
                 </div>
+                @endif
                 @endforeach
         </div>
     </section>
