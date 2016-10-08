@@ -151,7 +151,7 @@
                     <a href="index"><i class="fa fa-dashboard"></i> 返回主页</a>
                 </li>
                 <li>
-                    <a href="list"  class="active-menu"><i class="fa fa-qrcode"></i>网吧详情 </a>
+                    <a href="#"  class="active-menu"><i class="fa fa-qrcode"></i>网吧详情 </a>
                 </li>
             </ul>
 
