@@ -15,9 +15,7 @@ class UsersController extends Controller
 	public function index()
 	{
 		//查询个人信息
-		$arr = DB::table('login')->where('id',Session::get('uid'))->first();
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
-		$data['username'] = Session::get('uname');
 		return view('user/index',$data);
 	}
 
@@ -27,8 +25,8 @@ class UsersController extends Controller
 	public function save()
 	{
 		//查询个人信息
-		$arr = DB::table('login')->where('id','=',Session::get('uid'))->first();
-		return view('user/save',['username'=>$arr['username']]);
+		$arr = DB::table('users')->where('loginid','=',Session::get('uid'))->first();
+		return view('user/save',$arr);
 	}
 
 	/**
@@ -45,7 +43,10 @@ class UsersController extends Controller
 			{
 				if(empty($v))
 				{
-					echo "<script>alert('除头像外，不可有空值');location.href='save'</script>";exit;
+					$message="除头像外，不可有空值";
+	                $time="2";
+	                $contro="save";
+	                return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
 				}
 			}
 		}
@@ -81,12 +82,15 @@ class UsersController extends Controller
 		//判断
 		if($re)
 		{
-			echo "<script>alert('信息更新成功');location.href='save'</script>";exit;
+			$message="信息更新成功";
 		}
 		else
 		{
-			echo "<script>alert('信息更新失败');location.href='save'</script>";exit;
+			$message="信息更新失败";
 		}
+        $time="2";
+        $contro="save";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
 	}
 
 	/**
@@ -109,5 +113,66 @@ class UsersController extends Controller
 		//查询个人信息
 		$arr = DB::table('login')->where('id','=',Session::get('uid'))->first();
 		return view('user/pass',$arr);
+	}
+
+	/**
+	 * [passSave 修改密码]
+	 */
+	public function passSave(Request $request)
+	{
+		$arr = $request->all();
+		//验证非空
+		foreach ($arr as $k => $v) {
+			if(empty($v))
+			{
+				$message="不可有空值";
+				$time="2";
+	        	$contro="pass";
+	        	return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+			}
+		}
+		//查询用户原密码
+		$data = DB::table('login')->select('password')->where('id',Session::get('uid'))->first();
+		if(md5($arr['oldpass']) != $data['password'] || $arr['newpass'] != $arr['qpass'])
+		{
+			//验证原密码
+			if(md5($arr['oldpass']) != $data['password'])
+			{
+				$message="原密码不正确";
+			}
+			//验证新密码
+			if($arr['newpass'] != $arr['qpass'])
+			{
+				$message="两次密码输入不一致";
+			}
+
+			//错误提示
+			$time="2";
+	        $contro="pass";
+	        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+		}
+		$date['password'] = md5($arr['newpass']);
+		//修改
+		$res = DB::table('login')->where('id',Session::get('uid'))->update($date);
+		if($res)
+		{
+			$message="修改成功";
+			$time="1";
+		}
+		else
+		{
+			$message="修改失败";
+			$time="2";
+		}
+	 	$contro="pass";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+	}
+
+	/**
+	 * [AJAXpass ajax验证密码]
+	 */
+	public function AJAXpass(Request $request)
+	{
+		$arr = $request->all();
 	}
 }

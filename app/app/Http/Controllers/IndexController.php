@@ -60,7 +60,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $str=DB::table('users')->where('loginid',$id)->first();
          if(!$str)
          {
-            echo '<script>alert("请先完善个人信息!");location.href="/";</script>';die;
+            $message="请先完善个人信息";
+            $time="2";
+            $contro="/";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+         }
+         $date['c_num']=$this->a($arr['id'],$arr['radio']);
+         //判断机器号
+         if($date['c_num'] ==0)
+         {
+            $message="没有空机器";
+            $time="2";
+            $contro="/";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
          }
          $date['username']=$str['uname'];
          $date['IDcard']=$str['IDcard'];
@@ -68,16 +80,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $date['l_num']=$on;
          $date['on_time']=time();
          $date['down_time']=time()+3600*$arr['times'];
-         $date['c_num']=$this->a($arr['id'],$arr['radio']);
          $date['money']=$arr['money'];
          $date['iid']=$arr['id'];
          $date['loginid']=$id;
          $data=DB::table('invoice')->insert($date);
          if($data){
-             echo '<script>alert("提交成功!");location.href="/";</script>';
+            $message="操作成功";
+            
         }else{
-             echo '<script>alert("提交失败!");location.href="select";</script>';
+            $message="提交失败";
         }
+        $time="2";
+        $contro="/";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
      }
 
      /**
@@ -100,14 +115,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                 $arr = explode(',', $data['vnum']);
                 $vnum = array_pop($arr);
             }
-            //var_dump($arr);
+            // var_dump($arr);die;
             //判断是否有空余机器
             if(!$arr)
             {
-                echo '<script>alert("没有空机器!");location.href="/";</script>';die;
+                return 0;
             }
             else
-            {
+            {   
                 $arrs=array_shift($arr);
                 if($type == 2)
                 {

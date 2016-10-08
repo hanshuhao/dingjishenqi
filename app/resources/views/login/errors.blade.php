@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>温馨提示</title>
-        <link href="css/404.css" rel="stylesheet" type="text/css" />
-        <script src="js/jquery-1.8.3.min.js"></script>
+        <link href="/css/404.css" rel="stylesheet" type="text/css" />
+        <script src="/js/jquery-1.8.3.min.js"></script>
         <script type="text/javascript">
             $(function() {
                 var h = $(window).height();
@@ -42,11 +42,11 @@
     </head>
     <body>
         <div class="mianBox">
-            <img src="images/yun0.png" alt="" class="yun yun0" />
-            <img src="images/yun1.png" alt="" class="yun yun1" />
-            <img src="images/yun2.png" alt="" class="yun yun2" />
-            <img src="images/bird.png" alt="" class="bird" />
-            <img src="images/san.png" alt="" class="san" />
+            <img src="/images/yun0.png" alt="" class="yun yun0" />
+            <img src="/images/yun1.png" alt="" class="yun yun1" />
+            <img src="/images/yun2.png" alt="" class="yun yun2" />
+            <img src="/images/bird.png" alt="" class="bird" />
+            <img src="/images/san.png" alt="" class="san" />
             <div class="tipInfo">
                 <div class="in">
                     <div class="textThis">

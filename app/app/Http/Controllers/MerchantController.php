@@ -58,10 +58,13 @@ class MerchantController extends BaseController
         //入库
         $str=DB::table('internet_bar')->insert($arr);
         if($str){
-            echo '<script>alert("申请成功!");location.href="/";</script>';
+            $message="成功提交";
         }else{
-            echo '<script>alert("申请失败!");location.href="news";</script>';
+            $message="申请失败";
         }
+        $time="2";
+        $contro="merchant";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
 
     /*
@@ -88,12 +91,8 @@ class MerchantController extends BaseController
                 //检验一下上传的文件是否有效.
                 $clientName = $file->getClientOriginalName();
                 //这个表示的是缓存在tmp文件夹下的文件的绝对路径
-                $entension = $file->getClientOriginalExtension(); //上传文件的后缀.
-<<<<<<< HEAD
+                $entension = $file->getClientOriginalExtension(); //上传文件的后缀
                 //$mimeTye = $file->getMimeType();
-=======
-               // $mimeTye = $file->getMimeType();
->>>>>>> f5d15f712e9a999a04aac90203d9d558dcaba0ed
                 $newName = date('ymdhis' . rand(1000, 9999)) . "." . $entension;
                 $path = $file->move('uploads/merchant', $newName);
                 $arr['log'] = $path;
@@ -103,10 +102,14 @@ class MerchantController extends BaseController
         //修改
         $str=DB::table('internet_bar')->where('id',$id)->update($arr);
         if($str){
-            echo '<script>alert("修改成功!");location.href="uplodes";</script>';
+            $message="修改成功";
         }else{
-            echo '<script>alert("修改失败!");location.href="uplodes";</script>';
+            $message="修改失败";
         }
+        $time="2";
+        $contro="merchant";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+
     }
 
     /**

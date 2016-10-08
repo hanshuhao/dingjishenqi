@@ -57,6 +57,7 @@ Route::get('user/save','UsersController@save');
 Route::get('user/list','UsersController@lists');
 Route::get('user/pass','UsersController@pass');
 Route::post('user/info','UsersController@info');
+Route::post('user/passsave','UsersController@passSave');
 });
 /*
 |--------------------------------------------------------------------------
