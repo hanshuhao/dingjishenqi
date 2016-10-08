@@ -41,6 +41,8 @@ Route::any('select_do',"IndexController@select_do");
 Route::post('money',"IndexController@money");
 //付账
 Route::any('account',"IndexController@account");
+//是否下机
+Route::any('xiaji',"IndexController@xiaji");
 
 
     /*商户页面*/

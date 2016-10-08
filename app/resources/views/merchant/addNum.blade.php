@@ -35,6 +35,7 @@
                         <div class="panel-body">
                             <form action="numadd" method="post">
                                 <div class="table-responsive">
+                                <input type="hidden" name="iid" value="{{ $iid }}">
                                     <h3>普通区</h3>
                                     <p>
                                     @for($i=1;$i <= $cnum;$i++)

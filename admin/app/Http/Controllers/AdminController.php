@@ -23,7 +23,7 @@ class AdminController extends BaseController
 	 */
 	public function users_show()
 	{
-		$arr['users'] = DB::table('users')->where("type",'=','1')->rightJoin('login', 'users.loginid', '=', 'login.id')->get();
+		$arr['users'] = DB::table('login')->where("type",'=','1')->rightJoin('users', 'login.id', '=', 'users.loginid')->get();
 		//print_r($arr);die;
 		return view("admin.users_show",$arr);
 	}
@@ -34,7 +34,7 @@ class AdminController extends BaseController
 	 */
 	public function internet_bar()
 	{
-		$arr['users'] = DB::table('internet_bar')->where("type",'=','2')->rightjoin('login', 'internet_bar.loginid', '=', 'login.id')->get();
+		$arr['users'] = DB::table('login')->where("type",'=','2')->leftjoin('internet_bar', 'login.id', '=', 'internet_bar.loginid')->get();
 		//print_r($arr);die;
 		return view("admin.internet_bar",$arr);
 	}
@@ -45,9 +45,20 @@ class AdminController extends BaseController
 	 * @return [type] [description]
 	 */
 	public function invoice()
-	{
+	{	
+		$id = "";
 		$arr['invoice'] = DB::table('invoice')->select()->get();
-		//print_r($arr);die;
+		$now = time();
+		foreach ($arr['invoice'] as $k => $v) {
+			if($v->down_time < $now){
+				$id .= $v->id.",";
+			}
+		}
+		$i_id = substr($id,0,strlen($id)-1);
+		$iid = explode(',', $i_id);
+		foreach ($iid as $key => $value) {
+			DB::table('invoice')->where("id",$value)->update(['status'=>1]);
+		}
 		return view("admin.invoice",$arr);
 	}
 

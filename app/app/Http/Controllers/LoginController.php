@@ -34,7 +34,6 @@ class LoginController extends Controller
         //print_r($username);die;
         $preg='/^[a-zA-Z0-9\x{4e00}-\x{9fa5}]{2,20}$/u';
         if(!preg_match($preg,$username)){
-            /*echo "<script>alert('不许耍赖~');location.href='welcome';</script>" ;*/
             redirect('errors');
            // return false;
         }

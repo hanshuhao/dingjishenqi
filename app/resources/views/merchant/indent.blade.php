@@ -31,6 +31,7 @@
                                         <th>上机时间</th>
                                         <th>下机时间</th>
                                         <th>消费金额</th>
+                                        <th>订单状态</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -43,6 +44,7 @@
                                         <td>{{ date('Y-m-d H:i:s',$v['on_time']) }}</td>
                                         <td>{{ date('Y-m-d H:i:s',$v['down_time']) }}</td>
                                         <td class="center">{{ $v['money'] }} ￥</td>
+                                        <td><?php if($v['status']==1){echo "订单过期";}else{echo "<a href='xiaji?id=$v[id]'>下机？</a>";} ?></td>
                                     </tr>
                                     @endforeach
                                     </tbody>

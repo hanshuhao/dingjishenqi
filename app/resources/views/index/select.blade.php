@@ -186,10 +186,14 @@
                             <div class="table-responsive">
                                 <p>网吧名称：{{ @$iname }}</p>
                                 <p>网吧地址：{{ @$address }}</p>
-                                <p>剩余机子：{{ @$c }}台</p>
+                                <p>剩余机子：<span id="span">{{ @$c }}台</span></p>
                                 <p>联系方式：{{ @$tel }}</p>
                                 <p>网吧全景图：<img src="{{@$log}}" alt=""/></p>
-                                <a href="select_do?id={{@$id}}"><input type="button" class="form-control" value="订购机器"/></a>
+                                <form action="select_do" method="post">
+                                    <input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
+                                    <input type="hidden" name="id"  value="{{@$id}}"/>
+                                    <input type="submit" id="button" class="form-control" value="订购机器"/>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -223,8 +227,16 @@
 
 <!-- Custom Js -->
 <script src="/assets/js/custom-scripts.js"></script>
-
-
+<script src="js/jquery.js"></script>
+<script>
+    $(function(){
+        var num=$("#span").html()
+        if(num=="0台"){
+            $("#span").html("暂无")
+            $("#button").attr("disabled",true)
+        }
+    })
+</script>
 </body>
 
 </html>

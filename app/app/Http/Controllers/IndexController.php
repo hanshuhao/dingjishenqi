@@ -57,11 +57,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          if($arr['radio']==1){
              $vip=$date['vip'];
              $money=$arr['times']*$vip;
-             echo $money;
+             return $money;
          }else{
              $ordinary=$date['ordinary'];
              $money=$arr['times']*$ordinary;
-             echo $money;
+             return $money;
          }
      }
 
@@ -155,5 +155,21 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                 return $arrs;
             }
                 
+        }
+
+
+        public function xiaji()
+        {
+            $id = $_GET['id'];
+            $res = DB::table('invoice')->where('id',$id)->update(['status'=>1]);
+            if($res){
+                $contro="indent";
+            }else{
+                $contro="indent";
+            }
+            $message="下机成功";
+            $time="2";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+            
         }
 }

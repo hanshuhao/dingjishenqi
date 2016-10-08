@@ -91,7 +91,34 @@ class MerchantController extends BaseController
         $date['vnum'] = array_pop($vnum);
         $date['cnums'] = $cnum;
         $date['vnums'] = $vnum;
+        $date['iid'] = $data['id'];
         return view('merchant/addNum',$date);
+    }
+
+    /**
+     * [numadd 空余机器添加]
+     */
+    public function numadd()
+    {
+        $cnum = $_POST['cnum'];
+        //print_r($cnum);die;
+        $vnum = $_POST['vnum'];
+        $cnums = $_POST['cnums'];
+        $vnums = $_POST['vnums'];
+        $cnum_do = implode(",",$cnum);
+        $vnum_do = implode(",",$vnum);
+        $cnum_do_do = $cnum_do.",".$cnums;
+        $vnum_do_do = $vnum_do.",".$vnums;
+        $iid = $_POST['iid'];
+        $res = DB::table("internet_bar")->where('id',$iid)->update(array('cnum'=>$cnum_do_do,'vnum'=>$vnum_do_do));
+        if($res){
+            $message="修改成功";
+        }else{
+            $message="修改失败";
+        }
+        $time="2";
+        $contro="addNum";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
 
 
@@ -167,15 +194,25 @@ class MerchantController extends BaseController
      */
     public function pruplist(){
         $id=Request::input('id');
-        $arr=Request::input();
-        unset($arr['_token']);
-        unset($arr['id']);
+        $vip=Request::input('vip');
+        $ordinary=Request::input('ordinary');
+        if(!is_numeric($vip)||!is_numeric($ordinary)){
+            $message='请输入正确价格';
+            $time="2";
+            $contro="prupdates";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+        }
+        $arr['vip']=$vip;
+        $arr['ordinary']=$ordinary;
         $str=DB::table('price')->where('id',$id)->update($arr);
         if($str){
-            echo '<script>alert("修改成功!");location.href="merchant";</script>';
+            $message="修改成功";
         }else{
-            echo '<script>alert("修改失败!");location.href="merchant";</script>';
+            $message="修改失败";
         }
+        $time="2";
+        $contro="prupdates";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
 
     /*
@@ -192,7 +229,10 @@ class MerchantController extends BaseController
         $vip=Request::input('vip');
         $ordinary=Request::input('ordinary');
         if(!is_numeric($vip)||!is_numeric($ordinary)){
-            echo "请输入数字";die;
+            $message='请输入正确价格';
+            $time="2";
+            $contro="prupdates";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
         }
         $id=Session::get('uid');
         $date=DB::table('internet_bar')->where('loginid',$id)->first();
@@ -201,10 +241,13 @@ class MerchantController extends BaseController
         $arr['iid']=$date['id'];
         $str=DB::table('price')->insert($arr);
         if($str){
-            echo '<script>alert("添加成功!");location.href="merchant";</script>';
+            $message="添加成功";
         }else{
-            echo '<script>alert("添加失败!");location.href="merchant";</script>';
+            $message="添加失败";
         }
+        $time="2";
+        $contro="prupdates";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
 
 }
