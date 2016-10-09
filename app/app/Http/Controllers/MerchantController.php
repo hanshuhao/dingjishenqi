@@ -74,8 +74,12 @@ class MerchantController extends BaseController
      * */
     public function uplodes(){
         $id=Session::get('uid');
-        $date=DB::table('internet_bar')->where('loginid',$id)->get();
-        return view('merchant.uplodes',['list'=>$date]);
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $cnum = explode(',',$date['cnum']);
+        $vnum = explode(',',$date['vnum']);
+        $date['cnum'] = array_pop($cnum);
+        $date['vnum'] = array_pop($vnum);
+        return view('merchant.uplodes',$date);
     }
 
     /**
@@ -100,9 +104,8 @@ class MerchantController extends BaseController
      */
     public function numadd()
     {
-        $cnum = $_POST['cnum'];
-        //print_r($cnum);die;
-        $vnum = $_POST['vnum'];
+        $cnum = isset($_POST['cnum'])?$_POST['cnum']:array();
+        $vnum = isset($_POST['vnum'])?$_POST['vnum']:array();
         $cnums = $_POST['cnums'];
         $vnums = $_POST['vnums'];
         $cnum_do = implode(",",$cnum);

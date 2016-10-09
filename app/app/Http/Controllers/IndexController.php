@@ -157,7 +157,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                 
         }
 
-
+        /**
+         * [xiaji 网吧下机]
+         * @return [type] [description]
+         */
         public function xiaji()
         {
             $id = $_GET['id'];
