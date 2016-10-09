@@ -44,7 +44,7 @@
                                         <td>{{ date('Y-m-d H:i:s',$v['on_time']) }}</td>
                                         <td>{{ date('Y-m-d H:i:s',$v['down_time']) }}</td>
                                         <td class="center">{{ $v['money'] }} ￥</td>
-                                        <td><?php if($v['status']==1){echo "订单过期";}else{echo "<a href='xiaji?id=$v[id]'>下机？</a>";} ?></td>
+                                        <td><?php if($v['status']==1){echo "订单过期";}elseif($v['status']=='0'){echo "<a href='xiaji?id=$v[id]'>下机？</a>";}else{echo "死活不付账";} ?></td>
                                     </tr>
                                     @endforeach
                                     </tbody>

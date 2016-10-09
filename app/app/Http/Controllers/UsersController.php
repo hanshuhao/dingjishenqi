@@ -105,7 +105,7 @@ class UsersController extends Controller
 		$time = time();
 		$id = "";
 		foreach ($data1 as $key => $value) {
-			if( $value['down_time'] < $time){
+			if( $value['down_time'] < $time && $value['status'] != '-1'){
  				$id .= $value['id'].",";
 			}
 		}	

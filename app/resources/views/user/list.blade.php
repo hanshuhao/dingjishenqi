@@ -44,7 +44,7 @@
                                             <td>{{ date('Y-m-d H:i:s',$v['on_time']) }}</td>
                                             <td>{{ date('Y-m-d H:i:s',$v['down_time']) }}</td>
                                             <td class="center">{{ $v['money'] }} ￥</td>
-                                            <td><?php if($v['status']==1){echo "订单过期";}else{echo "一切良好";} ?></td>
+                                            <td><?php if($v['status']==1){echo "订单过期";}elseif($v['status']=='0'){echo "一切良好";}else{echo "作废";} ?></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

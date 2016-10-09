@@ -171,15 +171,14 @@ class MerchantController extends Controller
         $time = time();
         $id = "";
         foreach ($str1 as $key => $value) {
-            if( $value['down_time'] < $time){
+            if( $value['down_time'] < $time && $value['status']!='-1'){
                 $id .= $value['id'].",";
             }
         }   
         $i_id = substr($id,0,strlen($id)-1);
         $iid = explode(',', $i_id);
-        foreach ($iid as $key => $value) {
-            DB::table('invoice')->where("id",$value)->update(['status'=>1]);
-        }
+        DB::table('invoice')->whereIn("id",$iid)->update(['status'=>1]);
+        
         $str=DB::table('invoice')->where('iid',$date['id'])->get();
         return view('merchant.indent',['str'=>$str]);
     }
