@@ -26,7 +26,7 @@
                                             <input class="form-control" name="uname" placeholder="请填写您的真实姓名" value="{{ @$uname }}">
                                         </div>
                                         <div class="form-group">
-                                            <label>省份证</label>
+                                            <label>身份证</label>
                                             <input name="IDcard" class="form-control" placeholder="必须为国家二代省份证"  value="{{ @$IDcard }}">
                                         </div>
                                         <div class="form-group">

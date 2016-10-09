@@ -39,6 +39,14 @@
                                             <input class="form-control" name="tel" placeholder="请填写11位手机号">
                                         </div>
                                         <div class="form-group">
+                                            <label>VIP区机器数量</label>
+                                            <input class="form-control" name="vnum" placeholder="请填写数字">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>普通区机器数量</label>
+                                            <input class="form-control" name="cnum" placeholder="请填写数字">
+                                        </div>
+                                        <div class="form-group">
                                             <label>全景图</label>
                                             <input type="file" name="log">
                                         </div>
