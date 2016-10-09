@@ -145,7 +145,7 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="index"><i class="fa fa-user fa-fw"></i> {{ $username }}</a>
+                    <li><a href="index"><i class="fa fa-user fa-fw"></i> {{ Session::get('uname') }}</a>
                     </li>
                     <li class="divider"></li>
                     <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
