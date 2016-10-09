@@ -2,14 +2,14 @@
 <style>
     .cnum{
         display: inline-block;
-        width: 35px;
+        width: 40px;
         font: 12px "Microsoft Yahei";
         background: #0ff;
     }
     
     .vnum{
         display: inline-block;
-        width: 35px;
+        width: 40px;
         font: 12px "Microsoft Yahei";
         background: yellow;
     }

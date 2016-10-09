@@ -22,34 +22,34 @@
                                 <div class="col-lg-6">
                                     <form role="form" action="uplodes_do" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                                        <input type="hidden" name="id" value="<?php echo @$list[0]['id']?>"/>
+                                        <input type="hidden" name="id" value="<?php echo @$id ?>"/>
                                         <div class="form-group">
                                             <label>网吧名称</label>
-                                            <input class="form-control" name="iname" value="<?php echo @$list[0]['iname']?>" placeholder="请填写网吧全称">
+                                            <input class="form-control" name="iname" value="<?php echo @$iname ?>" placeholder="请填写网吧全称">
                                         </div>
                                         <div class="form-group">
                                             <label>网吧地址</label>
-                                            <input class="form-control" name="address" value="<?php echo @$list[0]['address']?>" placeholder="请填写详细地址">
+                                            <input class="form-control" name="address" value="<?php echo @$address ?>" placeholder="请填写详细地址">
                                         </div>
                                         <div class="form-group">
                                             <label>网吧负责人</label>
-                                            <input class="form-control" name="boss" value="<?php echo @$list[0]['boss']?>" placeholder="请填写法定负责人">
+                                            <input class="form-control" name="boss" value="<?php echo @$boss ?>" placeholder="请填写法定负责人">
                                         </div>
                                         <div class="form-group">
                                             <label>网吧联系</label>
-                                            <input class="form-control" name="tel" value="<?php echo @$list[0]['tel']?>" placeholder="请填写11位手机号">
+                                            <input class="form-control" name="tel" value="<?php echo @$tel ?>" placeholder="请填写11位手机号">
                                         </div>
                                         <div class="form-group">
                                             <label>VIP区机器数量</label>
-                                            <input class="form-control" name="vnum"  value="<?php echo @$list[0]['vnum']?>" placeholder="请填写数字">
+                                            <input class="form-control" name="vnum"  value="<?php echo @$vnum ?>" placeholder="请填写数字">
                                         </div>
                                         <div class="form-group">
                                             <label>普通区机器数量</label>
-                                            <input class="form-control" name="cnum"  value="<?php echo @$list[0]['cnum']?>" placeholder="请填写数字">
+                                            <input class="form-control" name="cnum"  value="<?php echo @$cnum ?>" placeholder="请填写数字">
                                         </div>
                                         <div class="form-group">
                                             <label>全景图</label>
-                                            <input type="file" name="log"><img src="<?php echo @$list[0]['log']?>" width="300" height="280" alt=""/>
+                                            <input type="file" name="log"><img src="<?php echo @$log ?>" width="300" height="280" alt=""/>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" type="submit" value="修改"/>
