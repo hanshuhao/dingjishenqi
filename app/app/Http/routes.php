@@ -30,19 +30,19 @@ Route::any('errors',"LoginController@errors");
 //防非法登录
 Route::group(['middleware' => ['webs']], function () {
 
-//退出
-Route::any('logout',"LoginController@logout");
+    //退出
+    Route::any('logout',"LoginController@logout");
 
-//网吧详细信息
-Route::any('select',"IndexController@select");
-//选择网吧
-Route::any('select_do',"IndexController@select_do");
-//结算价格
-Route::post('money',"IndexController@money");
-//付账
-Route::any('account',"IndexController@account");
-//是否下机
-Route::any('xiaji',"IndexController@xiaji");
+    //网吧详细信息
+    Route::any('select',"IndexController@select");
+    //选择网吧
+    Route::any('select_do',"IndexController@select_do");
+    //结算价格
+    Route::post('money',"IndexController@money");
+    //付账
+    Route::any('account',"IndexController@account");
+    //是否下机
+    Route::any('xiaji',"IndexController@xiaji");
 
 
     /*商户页面*/
@@ -60,14 +60,13 @@ Route::any('xiaji',"IndexController@xiaji");
     Route::post("numadd",'MerchantController@numAdd');
     Route::post("uplodes_do",'MerchantController@uplodes_do');
 
-
-//个人中心
-Route::get('user/index','UsersController@index');
-Route::get('user/save','UsersController@save');
-Route::get('user/list','UsersController@lists');
-Route::get('user/pass','UsersController@pass');
-Route::post('user/info','UsersController@info');
-Route::post('user/passsave','UsersController@passSave');
+    //个人中心
+    Route::get('user/index','UsersController@index');
+    Route::get('user/save','UsersController@save');
+    Route::get('user/list','UsersController@lists');
+    Route::get('user/pass','UsersController@pass');
+    Route::post('user/info','UsersController@info');
+    Route::post('user/passsave','UsersController@passSave');
 });
 /*
 |--------------------------------------------------------------------------
