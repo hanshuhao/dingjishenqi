@@ -16,6 +16,9 @@ class UsersController extends Controller
 	{
 		//查询个人信息
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
+		if(!$data){
+			$data=array('uname'=>Session::get('uname'));
+		}
 		return view('user/index',$data);
 	}
 
@@ -25,7 +28,11 @@ class UsersController extends Controller
 	public function save()
 	{
 		//查询个人信息
+		
 		$arr = DB::table('users')->where('loginid','=',Session::get('uid'))->first();
+		if(!$arr){
+			$arr=array('uname'=>Session::get('uname'));
+		}
 		return view('user/save',$arr);
 	}
 

@@ -43,6 +43,12 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any('account',"IndexController@account");
     //是否下机
     Route::any('xiaji',"IndexController@xiaji");
+    //支付接口
+    Route::any('pay',"IndexController@pay");
+    //支付成功
+    Route::any('notify_url',"IndexController@notify_url");
+    //支付失败
+    Route::any('return_url',"IndexController@return_url");
 
 
     /*商户页面*/

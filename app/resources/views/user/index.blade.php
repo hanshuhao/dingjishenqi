@@ -23,11 +23,11 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                欢迎用户【 {{ $uname }} 】访问
+                                欢迎用户【 {{ @$uname }} 】访问
                             </div> 
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <p>头  像：<img src="{{ @'/'.$uphoto }}" width="90px" alt="头像"></p>
+                                    <p>头  像：<img src="{{ '/'.@$uphoto }}" width="90px" alt="头像"></p>
                                     <p>姓  名：{{ @$uname }}</p>
                                     <p>性  别：{{ @$sex }}</p>
                                     <p>邮  箱：{{ @$email }}</p>

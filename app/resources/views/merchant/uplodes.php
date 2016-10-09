@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>全景图</label>
-                                            <input type="file" name="log"><img src="<?php echo @$log ?>" width="300" height="280" alt=""/>
+                                            <input type="file" name="log"><img src="<?php echo @$log ?>" width="96%" height="340" alt=""/>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" type="submit" value="修改"/>
