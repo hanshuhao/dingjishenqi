@@ -47,9 +47,9 @@ class AdminController extends BaseController
 	public function invoice()
 	{	
 		$id = "";
-		$arr['invoice'] = DB::table('invoice')->select()->get();
+		$arr['invoice_1'] = DB::table('invoice')->select()->get();
 		$now = time();
-		foreach ($arr['invoice'] as $k => $v) {
+		foreach ($arr['invoice_1'] as $k => $v) {
 			if($v->down_time < $now){
 				$id .= $v->id.",";
 			}
@@ -59,6 +59,7 @@ class AdminController extends BaseController
 		foreach ($iid as $key => $value) {
 			DB::table('invoice')->where("id",$value)->update(['status'=>1]);
 		}
+		$arr['invoice'] = DB::table('invoice')->select()->get();
 		return view("admin.invoice",$arr);
 	}
 
