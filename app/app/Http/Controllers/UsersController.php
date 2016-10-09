@@ -101,6 +101,20 @@ class UsersController extends Controller
 		//查询个人信息
 		$arr = DB::table('login')->where('id','=',Session::get('uid'))->first();
 		//查询定机信息
+		$data1 = DB::table('invoice')->where('loginid','=',Session::get('uid'))->get();
+		$time = time();
+		$id = "";
+		foreach ($data1 as $key => $value) {
+			if( $value['down_time'] < $time){
+ 				$id .= $value['id'].",";
+			}
+		}	
+		$i_id = substr($id,0,strlen($id)-1);
+		$iid = explode(',', $i_id);
+		foreach ($iid as $key => $value) {
+			DB::table('invoice')->where("id",$value)->update(['status'=>1]);
+		}
+
 		$data = DB::table('invoice')->where('loginid','=',Session::get('uid'))->get();
 		return view('user/list',['username'=>$arr['username'],"data"=>$data]);
 	}

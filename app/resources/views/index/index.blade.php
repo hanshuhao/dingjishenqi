@@ -98,7 +98,7 @@
                 @if($v['status'] == 1)
                 <div class="col-lg-4 col-sm-6">
                     <a href="select?id={{ $v['id'] }}" class="portfolio-box">
-                        <img src="{{ $v['log'] }}" class="img-responsive" alt="{{ $v['iname'] }}">
+                        <img src="{{ $v['log'] }}" class="img-responsive" alt="{{ $v['iname'] }}" style="width:500px;height:400px;">
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
                                 <div class="project-category text-faded">

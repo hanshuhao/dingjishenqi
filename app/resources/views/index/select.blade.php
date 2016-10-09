@@ -188,7 +188,7 @@
                                 <p>网吧地址：{{ @$address }}</p>
                                 <p>剩余机子：<span id="span">{{ @$c }}台</span></p>
                                 <p>联系方式：{{ @$tel }}</p>
-                                <p>网吧全景图：<img src="{{@$log}}" alt=""/></p>
+                                <p>网吧全景图：<img src="{{@$log}}" alt="" style="width:80%"/></p>
                                 <form action="select_do" method="post">
                                     <input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
                                     <input type="hidden" name="id"  value="{{@$id}}"/>

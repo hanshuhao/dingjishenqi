@@ -168,6 +168,19 @@ class MerchantController extends BaseController
     public function indent(){
         $id=Session::get('uid');
         $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $str1=DB::table('invoice')->where('iid',$date['id'])->get();
+        $time = time();
+        $id = "";
+        foreach ($str1 as $key => $value) {
+            if( $value['down_time'] < $time){
+                $id .= $value['id'].",";
+            }
+        }   
+        $i_id = substr($id,0,strlen($id)-1);
+        $iid = explode(',', $i_id);
+        foreach ($iid as $key => $value) {
+            DB::table('invoice')->where("id",$value)->update(['status'=>1]);
+        }
         $str=DB::table('invoice')->where('iid',$date['id'])->get();
         return view('merchant.indent',['str'=>$str]);
     }
