@@ -95,6 +95,7 @@ class MerchantController extends Controller
         $date['cnums'] = $cnum;
         $date['vnums'] = $vnum;
         $date['iid'] = $data['id'];
+        //var_dump($date);die;
         return view('merchant/addNum',$date);
     }
 
