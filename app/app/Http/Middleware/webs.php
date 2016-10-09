@@ -31,7 +31,7 @@ class Webs
             // return "<script>alert('请先登录');location.href='welcome'</script>";
             $message="亲，你还未登录哦";
             $time="4";
-            $contro="welcome";
+            $contro="/welcome";
             return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
         }
 

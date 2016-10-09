@@ -1,5 +1,5 @@
 <!-- 引入头部文件 -->
-<?php require_once "/user/header.php" ?>
+<?php require_once "user/header.php" ?>
 
 
         <div id="page-wrapper">
