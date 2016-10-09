@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Http\Controllers\Controller;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use Session,DB;
 
-class MerchantController extends BaseController
+class MerchantController extends Controller
 {
     /*
      * 商户中心

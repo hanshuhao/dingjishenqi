@@ -44,7 +44,7 @@ a { text-decoration: none; color: #ffffff}
           
 <ul class="dowebok">
 	<li><input type="radio" name="type" data-labelauty="商家" value="2"></li>
-	<li><input type="radio" name="type" data-labelauty="个人" value="1"></li>
+	<li><input type="radio" name="type" data-labelauty="个人" checked="true" value="1"></li>
 	<li><font color=red>*</font>请选择类型</li>
 </ul>
 		

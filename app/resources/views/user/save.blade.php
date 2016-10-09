@@ -20,18 +20,20 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" method="post" action="info" enctype="multipart/form-data">
+                                    <form role="form" method="post" onsubmit="return sub()" action="info" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>真实姓名</label>
+                 <input class="form-control" id="name" name="uname" placeholder="请填写您的真实姓名" onblur="check()" value="{{ @$uname }}"><span id='check_name'></span>
+                </div>
                                         <div class="form-group">
-                                            <label>真实姓名</label>
-                                            <input class="form-control" name="uname" placeholder="请填写您的真实姓名" value="{{ @$uname }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>身份证</label>
-                                            <input name="IDcard" class="form-control" placeholder="必须为国家二代省份证"  value="{{ @$IDcard }}">
+                                            <label>省份证</label>
+                                            <input name="IDcard" id="idcard" onblur="card()" class="form-control" placeholder="必须为国家二代省份证"  value="{{ @$IDcard }}">
+                                            <span id="check_id"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>邮箱</label>
-                                            <input name="email" class="form-control" placeholder="常用邮箱"  value="{{ @$email }}">
+                                            <input name="email" class="form-control" placeholder="常用邮箱" id="gell" onblur="gells(this)"  value="{{ @$email }}">
+                                            <span id="check_gell"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>上传头像</label>
@@ -47,7 +49,7 @@
                                             </label>
                                         </div>
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button type="submit" class="btn btn-default">确认修改</button>
+                                        <input type="submit" class="btn btn-default" id="btn" value="确认修改">
                                         <button type="reset" class="btn btn-default">重置</button>
                                     </form>
                                 </div>
@@ -76,6 +78,70 @@
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
       <!-- Custom Js -->
-    <script src="assets/js/custom-scripts.js"></script>
 </body>
 </html>
+<script type="text/javascript">        
+       /*
+       验证姓名
+        */
+       
+    function check(){
+        var name=document.getElementById('name').value;
+        var reg=/^[\u4e00-\u9fa5]{3,10}$/;
+        var check=document.getElementById('check_name');
+        if(name==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(reg.test(name)){
+            check.innerHTML="<font color='green'>√</font>"; return true;
+        }else{
+            check.innerHTML="<font color='red'>必须是三个中文名字以上</font>";
+            return false;
+        }
+    }
+     function card(){
+        var idcard=document.getElementById('idcard').value;
+        var check=document.getElementById('check_id');
+        var reg=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/; 
+        if(idcard==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(reg.test(idcard)){
+            check.innerHTML="<font color='green'>√</font>"; return true;
+        }else{
+            check.innerHTML="<font color='red'>身份证格式错误</font>";
+            return false;
+        }
+
+    }
+     function gells(obj){
+        var gell=obj.value;
+        var check=document.getElementById('check_gell');
+        var reg=/^[a-z0-9]{1,}\@qq\.com$/;
+        if(gell==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(reg.test(gell)){
+            check.innerHTML="<font color='green'>√</font>"; return true;
+        }else{
+            check.innerHTML="<font color='red'>邮箱格式错误</font>";
+            return false;
+        }
+
+    }
+    
+
+    function sub(){
+        if(gells(document.getElementById('gell'))&check()&card())
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+</script>

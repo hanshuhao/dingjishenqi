@@ -20,32 +20,32 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" action="uplodes_do" method="post" enctype="multipart/form-data">
+                                    <form role="form" action="uplodes_do" onsubmit="return sub()" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                         <input type="hidden" name="id" value="<?php echo @$id ?>"/>
                                         <div class="form-group">
                                             <label>网吧名称</label>
-                                            <input class="form-control" name="iname" value="<?php echo @$iname ?>" placeholder="请填写网吧全称">
+                                            <input class="form-control" id="wname" name="iname"  onblur="check()" value="<?php echo @$iname ?>" placeholder="请填写网吧全称"><span id="check_name"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>网吧地址</label>
-                                            <input class="form-control" name="address" value="<?php echo @$address ?>" placeholder="请填写详细地址">
+                                            <input class="form-control" name="address" id="adre" onblur="ad()" value="<?php echo @$address ?>" placeholder="请填写详细地址"><span id="check_adre"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>网吧负责人</label>
-                                            <input class="form-control" name="boss" value="<?php echo @$boss ?>" placeholder="请填写法定负责人">
+                                            <input class="form-control" id="people" onblur="peo()" name="boss" value="<?php echo @$boss ?>" placeholder="请填写法定负责人"><span id="check_people"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>网吧联系</label>
-                                            <input class="form-control" name="tel" value="<?php echo @$tel ?>" placeholder="请填写11位手机号">
+                                            <input class="form-control" id="call" onblur="cal()" name="tel" value="<?php echo @$tel ?>" placeholder="请填写11位手机号"><span id="check_call"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>VIP区机器数量</label>
-                                            <input class="form-control" name="vnum"  value="<?php echo @$vnum ?>" placeholder="请填写数字">
+                                            <input class="form-control" id="vip" onblur="vi()" name="vnum"  value="<?php echo @$vnum ?>" placeholder="请填写数字"><span id="check_vip"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>普通区机器数量</label>
-                                            <input class="form-control" name="cnum"  value="<?php echo @$cnum ?>" placeholder="请填写数字">
+                                            <input class="form-control" id="now" onblur="no()" name="cnum"  value="<?php echo @$cnum ?>" placeholder="请填写数字"><span id="check_now"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>全景图</label>
@@ -84,3 +84,133 @@
     <script src="user/assets/js/custom-scripts.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+
+/*
+验证网吧名称
+ */
+       
+    function check(){
+        var name=document.getElementById('wname').value;
+
+        var reg= /^([a-zA-Z0-9\u4e00-\u9fa5\·]{1,10})$/;
+ 
+        var check=document.getElementById('check_name');
+        if(name==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(!reg.exec(name)){
+            check.innerHTML="<font color='red'>中文名称或字母等（如：快乐网吧123）</font>";
+            return false;
+            
+        }else{
+            check.innerHTML="<font color='green'>√</font>"; return true;
+            
+        }
+    }
+      function ad(){
+        var name=document.getElementById('adre').value;
+
+        var reg= /^([a-zA-Z0-9\u4e00-\u9fa5\·]{4,20})$/;
+ 
+        var check=document.getElementById('check_adre');
+        if(name==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(!reg.exec(name)){
+            check.innerHTML="<font color='red'>地址详细（如：北京市海淀区XX街）</font>";
+            return false;
+            
+        }else{
+            check.innerHTML="<font color='green'>√</font>"; return true;
+            
+        }
+    }
+     function peo(){
+        var name=document.getElementById('people').value;
+
+        var reg= /^([\u4e00-\u9fa5\·]{2,6})$/;
+ 
+        var check=document.getElementById('check_people');
+        if(name==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(!reg.exec(name)){
+            check.innerHTML="<font color='red'>姓名不规范（如：张三）</font>";
+            return false;
+            
+        }else{
+            check.innerHTML="<font color='green'>√</font>"; return true;
+            
+        }
+    }
+     function cal(){
+        var name=document.getElementById('call').value;
+
+        var reg= /^(13[0-9]|14[0-9]|15[0-9]|18[0-9])\d{8}$/i;
+ 
+        var check=document.getElementById('check_call');
+        if(name==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(!reg.exec(name)){
+            check.innerHTML="<font color='red'>手机号为11位</font>";
+            return false;
+            
+        }else{
+            check.innerHTML="<font color='green'>√</font>"; return true;
+            
+        }
+    }
+     function vi(){
+        var name=document.getElementById('vip').value;
+
+        var reg= /^\d{1,4}$/i;
+ 
+        var check=document.getElementById('check_vip');
+        if(name==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(!reg.exec(name)){
+            check.innerHTML="<font color='red'>数字且合理</font>";
+            return false;
+            
+        }else{
+            check.innerHTML="<font color='green'>√</font>"; return true;
+            
+        }
+    }
+     function no(){
+        var name=document.getElementById('now').value;
+
+        var reg= /^\d{1,4}$/i;
+ 
+        var check=document.getElementById('check_now');
+        if(name==""){
+            check.innerHTML="<font color='red'>不能为空<font>";
+            return false;
+        }
+        if(!reg.exec(name)){
+            check.innerHTML="<font color='red'>数字且合理</font>";
+            return false;
+            
+        }else{
+            check.innerHTML="<font color='green'>√</font>"; return true;
+            
+        }
+    }
+
+    function sub(){
+        if(no()&check()&vi()&cal()&peo()&ad())
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
