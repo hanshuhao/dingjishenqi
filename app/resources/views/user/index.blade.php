@@ -24,26 +24,14 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 欢迎用户【 {{ @$uname }} 】访问
-                                    @if(isset($integral_level))
-                                        @if($integral_level != 0)
-                                        &nbsp;&nbsp;&nbsp;&nbsp;目前您在本站定机可享有<font color="red">{{ Session::get('discount')*100 }}%</font>优惠
-                                        @endif
-                                    @endif
                             </div> 
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    @if(isset($info))
-                                        <h3>请修改、设置个人信息</h3>
-                                        <p><font color="red">首次设置可获得20积分奖励</font></p>
-                                    @else
-                                        <p>头  像：<img src="{{ '/'.@$uphoto }}" width="90px" alt="头像"></p>
-                                        <p>姓  名：{{ @$uname }}</p>
-                                        <p>性  别：{{ @$sex }}</p>
-                                        <p>邮  箱：{{ @$email }}</p>
-                                        <p>身份证：{{ @substr_replace($IDcard, '****', 6,8) }}</p>
-                                        <p>目前积分：{{ @$integral }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">*如果积分与优惠不符合，请重新登陆</font></p>
-                                        <p>积分等级：{{ @$integral_type }}</p>
-                                    @endif
+                                    <p>头  像：<img src="{{ '/'.@$uphoto }}" width="90px" alt="头像"></p>
+                                    <p>姓  名：{{ @$uname }}</p>
+                                    <p>性  别：{{ @$sex }}</p>
+                                    <p>邮  箱：{{ @$email }}</p>
+                                    <p>身份证：{{ @substr_replace($IDcard, '****', 6,8) }}</p>
                                 </div>
                             </div>
                         </div>
