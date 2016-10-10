@@ -20,24 +20,27 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" action="" onsubmit="return sub()" method="post" enctype="multipart/form-data">
+                                    <form role="form" action="addinto" onsubmit="return sub()" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                         <input type="hidden" name="id" value="<?php echo @$id ?>"/>
                                         <div class="form-group">
                                             <label>网吧名称</label>
-                                            <input class="form-control" id="wname" name="iname"  onblur="check()" value="<?php echo @$iname ?>" placeholder="请填写网吧全称"><span id="check_name"></span>
+                                            <input class="form-control" id="wname"   onblur="check()" readonly="readonly" value="<?php echo @$iname ?>" placeholder="请填写网吧全称"><span id="check_name"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>网吧广告</label>
-                                            <input class="form-control" name="address" id="adre" onblur="ad()" placeholder="请填写"><span id="check_adre"></span>
+                                            <textarea class="form-control" name="addtext" id="adre" onblur="ad()" placeholder="请填写"></textarea> <span id="check_adre"></span>
                                         </div>
                                         <div class="form-group">
                                             <label>广告添加人</label>
-                                            <input class="form-control" id="people" onblur="peo()" name="boss" placeholder="请填写"><span id="check_people"></span>
+                                            <input class="form-control" id="people" name="addname" onblur="peo()" name="boss" placeholder="请填写"><span id="check_people"></span>
                                         </div>
-                                       
+                                       <div class="form-group">
+                                            <label>广告显示日期</label>
+                                            <input type="text" class="form-control" id="datepicker" name="addtime" onblur="peo()" name="boss" placeholder="请填写"><span id="check_people"></span>
+                                        </div>
                                         <div class="form-group">
-                                            <input class="form-control" type="submit" value="修改"/>
+                                            <input class="form-control" type="submit" value="添加广告"/>
                                         </div>
                                     </form>
                                 </div>
@@ -67,6 +70,14 @@
     <script src="user/assets/js/jquery.metisMenu.js"></script>
       <!-- Custom Js -->
     <script src="user/assets/js/custom-scripts.js"></script>
+    <link rel="stylesheet" href="date/jquery-ui.css">
+  <script src="js/jq.js"></script>
+  <script src="date/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 </body>
 </html>
 <script type="text/javascript">

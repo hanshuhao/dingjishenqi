@@ -21,8 +21,11 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
+
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <input type="text" id="datepicker">
                                     <thead>
+
                                         <tr>
                                             <th>订单号</th>
                                             <th>机器号</th>
@@ -85,4 +88,12 @@
    
 </body>
 </html>
+<link rel="stylesheet" href="date/jquery-ui.css">
+  <script src="js/jq.js"></script>
+  <script src="date/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 
