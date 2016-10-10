@@ -34,7 +34,13 @@ class UsersController extends Controller
         
 
 		if(!$data){
-			$data=array('uname'=>Session::get('uname'));
+			$data=array('uname'=>Session::get('uname'),'info'=>1);
+		}
+		else
+		{
+			$integral = DB::table('integral')->select('type','level')->where('min','<=',$data['integral'])->where('max','>',$data['integral'])->first();
+			$data['integral_type'] = $integral['type'];
+			$data['integral_level'] = $integral['level'];
 		}
 		return view('user/index',$data);
 	}
@@ -213,13 +219,5 @@ class UsersController extends Controller
 		}
 	 	$contro="pass";
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
-	}
-
-	/**
-	 * [AJAXpass ajax验证密码]
-	 */
-	public function AJAXpass(Request $request)
-	{
-		$arr = $request->all();
 	}
 }

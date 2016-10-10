@@ -96,13 +96,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
             $contro="/";
             return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
         }
+        //接受折扣
+        $discount = 1-Session::get("discount");
         $date['username']=$str['uname'];
         $date['IDcard']=$str['IDcard'];
         $on="KF_".time('H-i-s').rand(1000,9999);
         $date['l_num']=$on;
         $date['on_time']=time();
         $date['down_time']=time()+3600*$arr['times'];
-        $date['money']=$arr['money'];
+        //算出折扣后的金钱
+        $date['money']=sprintf('%.2f',$arr['money']*$discount);
+        //print_r($date);die;
         $date['iid']=$arr['id'];
         $date['loginid']=Session::get('uid');
         $date['loginid']=$id;
@@ -114,7 +118,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
              Session::put("I_".$id,$arr['id']);
              Session::put("C_".$id,$date['c_num']);
              Session::put("T_".$id,$arr['radio']);
-             Session::put("M_".$id,$arr['money']);
+             Session::put("M_".$id,$date['money']);
              return  Redirect('pay');
         }else{
             $message="提交失败";
@@ -319,6 +323,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                 $id= Session::get("uid");
                 $num  = Session::get("K_".$id);
                 $res =  DB::table('invoice')->where('l_num', $num)->update(['status' => 0]);
+                $integral = ceil(Session::get('M_'.$id));
+                DB::table("users")->where("id",$id)->increment('integral',$integral);
                 if($res){
                 //删除session
                 Session::forget("K_".$id);

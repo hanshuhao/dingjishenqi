@@ -404,6 +404,17 @@
 									</span>
 								</a>
 							</li>
+							<li class="bg-palette4">
+								<a href="integral">
+									<span class="menu-content block">
+										<span class="menu-icon"><i class="block fa fa-clock-o fa-lg"></i></span>
+										<span class="text m-left-sm">积分规则</span>
+									</span>
+									<span class="menu-content-hover block">
+										积分规则
+									</span>
+								</a>
+							</li>
 							<li class="menu-header">
 								Others
 							</li>
@@ -455,6 +466,7 @@
 					<table class="table table-striped" id="dataTable">
 						<thead>
 							<tr>
+                                <td><input type="checkbox" name="" ></td>
 								<th>No</th>
 								<th>Iname</th>
 								<th>boss</th>
@@ -463,11 +475,13 @@
 								<th>username</th>
 								<th>log</th>
 								<th>Status</th>
+								<th>Delete</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($users as $v)
 							<tr>
+                                <td><input type="checkbox" name="g_id" value="{{ $v->id }}"></td>
 								<td>{{ $v->id }}</td>
 								<td>{{ $v->iname }}</td>
 								<td>{{ $v->boss }}</td>
@@ -475,11 +489,20 @@
 								<td>{{ $v->address }}</td>
 								<td>{{ $v->username }}</td>
 								<td>{{ $v->log }}</td>
-								<td><?php if($v->status == 0){echo "待审核(<a href='yes?id=$v->id'>通过</a>/<a href='no?id=$v->id'>不通过</a>)";}else if($v->status == 1){echo "审核通过";}else if($v->status == -1){echo "审核未通过";} ?></td>
-							</tr>
+                                <td><?php if($v->status == 0){echo "待审核(<a href='yes?id=$v->id'>通过</a>/<a href='no?id=$v->id'>不通过</a>)";}else if($v->status == 1){echo "审核通过";}else if($v->status == -1){echo "审核未通过";} ?></td>
+                                <td  ><a href="javascript:;" class="del" id="{{$v->id}}" ><s><img src="images/20161009110547.png" align="center" width="25px" height="20px"  /></s></a></td>
+                            </tr>
 							@endforeach
 						</tbody>
 					</table>
+                    {!! $users->links() !!}
+                    <center>
+                        <td width="26%">
+                            <input type="button" name="button" id="button1" value="全选">
+                            <input type="button" name="button2" id="button2" value="反选">
+                        </td><br/>
+                        <button id="del">批量删除</button>
+                    </center>
 				</div><!-- ./padding-md -->
 			</div><!-- /main-container -->
 
@@ -589,7 +612,7 @@
 					if(_activeCheckbox.is(':checked'))	{
 						$(this).parent().addClass('selected');					
 					}
-					else	{
+					else{
 						$(this).parent().removeClass('selected');
 					}
 				
@@ -607,3 +630,69 @@
 	<script src='http://www.jz21.net/plus/ad_js.php?aid=42' language='javascript'></script>
   	</body>
 </html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+    //删除
+    $(document).ready(function(){
+        $(".del").click(function(){
+            var id = $(this).attr('id');
+            //alert(id);
+            var _this = $(this);
+            if(confirm("Are you sure ?")){
+                $.ajax({
+                    type:'get',
+                    url:'i_center_del',
+                    data:{
+                        id:id
+                    },
+                    success:function(msg){
+                        if(msg==1){
+                            _this.parents('tr').remove();
+                        }else{
+                            alert("删除失败");
+                        }
+                    }
+                });
+            }else{
+                alert('fuck');
+            }
+        });
+        /*
+         *批删
+         */
+        $('#del').click(function(){
+            var checked = [];
+            var g_id = $('input[name="g_id"]:checked').each(function() {
+                checked.push($(this).val());
+            });
+            $.ajax({
+                type:"get",
+                url:"i_center_p_del",
+                data:{
+                    g_id : checked
+                },
+                success:function(mag){
+                    $('input[name="g_id"]:checked').parents('tr').remove();
+                }
+            });
+            //alert(checked);
+        });
+        /*
+         删除
+         */
+        $("tr").mousemove(function(){
+            $(this).css("background","#F0F0F0");  //鼠标经过背景颜色变为灰色
+
+        })
+        $("tr").mouseout(function(){
+            $(this).css("background","#fff");  //离开后背景颜色回复白色
+        })
+
+        $("#button1").click(function(){
+            $(":checkbox").attr("checked",true);   //设置所有复选框默认勾选
+        })
+        $("#button2").click(function(){
+            $(":checkbox").attr("checked",false);   //设置所有复选框未勾选
+        })
+    });
+</script>

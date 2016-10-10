@@ -23,9 +23,7 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                欢迎
-                                {{ @$type }}
-                                用户【 {{ @$uname }} 】访问
+                                欢迎用户【 {{ @$uname }} 】访问
                             </div> 
                             <div class="panel-body">
                                 <div class="table-responsive">
