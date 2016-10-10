@@ -87,7 +87,7 @@
        
     function check(){
         var name=document.getElementById('name').value;
-        var reg=/^[\u4e00-\u9fa5]{3,10}$/;
+        var reg=/^[\u4e00-\u9fa5]{2,10}$/;
         var check=document.getElementById('check_name');
         if(name==""){
             check.innerHTML="<font color='red'>不能为空<font>";
@@ -96,7 +96,7 @@
         if(reg.test(name)){
             check.innerHTML="<font color='green'>√</font>"; return true;
         }else{
-            check.innerHTML="<font color='red'>必须是三个中文名字以上</font>";
+            check.innerHTML="<font color='red'>必须是两个中文名字以上</font>";
             return false;
         }
     }
