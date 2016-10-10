@@ -6,6 +6,7 @@ use DB;
 use Session;
 use Request;
 use Redirect;
+use Mail;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -100,19 +101,29 @@ class LoginController extends Controller
     public function  register_do()
     {
         $arr= Request::input();
-        //var_dump($arr);
+        //var_dump($arr);die;
         $res['username'] = $arr['username'];
         $res['password'] = md5($arr['password']);
-
+        //验证邮箱验证码
+        if($arr['check_email'] != Session::get('check_email'))
+        {
+            $message="邮箱验证码不正确";
+            $time="3";
+            $contro="register";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+            return false;
+        }
+        Session::forget('check_email');
         $preg='/^[a-zA-Z0-9\x{4e00}-\x{9fa5}]{2,20}$/u';
              if(!preg_match($preg,$arr['username'])){
                  $message="用户名格式不正确，请重新输入";
-                 $time="4";
+                 $time="3";
                  $contro="register";
                  return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
                  return false;
              }
         $res['type'] = $arr['type'];
+        $res['email'] = $arr['email'];
         $date=date("Y-m-d H:i:s");
         $res['logintime'] = $date;
         $return = DB::table('login')->insertGetId($res);//获取插入的id
@@ -140,9 +151,30 @@ class LoginController extends Controller
      * @return [arr] []
      */
     public function check_email()
-    {
+    {   
+        //获取信息
         $arr = Request::input();
-        var_dump($arr);die;
+        $email = $arr['email'];
+        //生成验证码
+        $code = rand(1000,9999);
+        //保存验证码
+        Session::put('check_email',$code);
+        $content = "您使用了本邮箱注册定机神器，请在注册页面输入验证码：".$code;
+        //发送验证码
+        $flag = Mail::send('user.test',['name'=>$content],function($message)use($email){
+            $message ->to($email)->subject('定机神器邮箱验证');
+        });
+        if($flag)
+        {
+            $data['message']="发送成功";
+            $data['success'] = 2;
+        }
+        else
+        {
+            $data['message']="发送失败";
+            $data['success'] = 1;
+        }
+        echo json_encode($data);
     }
 
      /**
@@ -153,5 +185,13 @@ class LoginController extends Controller
         Request::session()->flush();
         return Redirect('index');
     }
-  
+    
+    /**
+     * [savePass 邮箱找回密码]
+     * @return [type] [description]
+     */
+    public function savePass()
+    {
+        return view('login.savepass');
+    }
 }

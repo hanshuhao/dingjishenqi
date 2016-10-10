@@ -16,8 +16,11 @@ Route::get('/',"IndexController@index");
 Route::get('index',"IndexController@index");
 //登录页面
 Route::any('welcome',"LoginController@welcome");
+//忘记密码
+Route::any('savepass',"LoginController@savePass");
 //注册页面
 Route::any('register',"LoginController@register");
+//验证邮箱
 Route::any('check_email',"LoginController@check_email");
      
 Route::any('login',"LoginController@login");

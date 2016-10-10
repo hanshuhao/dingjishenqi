@@ -31,11 +31,6 @@
                                             <span id="check_id"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label>邮箱</label>
-                                            <input name="email" class="form-control" placeholder="常用邮箱" id="gell" onblur="gells(this)"  value="{{ @$email }}">
-                                            <span id="check_gell"></span>
-                                        </div>
-                                        <div class="form-group">
                                             <label>上传头像</label>
                                             <input type="file" name="myfile">
                                         </div>

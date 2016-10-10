@@ -38,7 +38,7 @@ a { text-decoration: none; color: #ffffff}
 			<input type="text" name="phone_number" class="phone_number" placeholder="输入手机号码" autocomplete="off" id="number"/>
 		</div>
 		<div>
-			<input type="email" name="email" class="email" placeholder="输入邮箱地址" oncontextmenu="return false" onpaste="return false" /><input type="button" value="获取验证码" id="check_email"><br /><font color='red'></font>
+			<input type="email" name="email" class="email" placeholder="输入邮箱地址" oncontextmenu="return false" onpaste="return false" /><input type="button" value="获取验证码" id="check_email">
 		</div>
 		<div>
 			<input type="text" name="check_email" class="check_email" placeholder="输入邮箱验证码" oncontextmenu="return false" onpaste="return false" />

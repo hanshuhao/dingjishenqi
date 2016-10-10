@@ -114,17 +114,37 @@ $(document).ready(function(){
 		//获取信息
 		var email = $('.email').val();
 		var csrf = $('#_token').val();
+		var but = $(this);
 		if(email == '')
 		{
-			$(this).next().next().html("请先输入邮箱");
+			but.val("请先输入邮箱");
 		}
 		else
 		{
-			$(this).next().next().html("");
+			but.attr('disabled',true);
+			but.val("正在发送请等候。。。");
+			//发送邮件
+			$.post("check_email",{email:email,_token:csrf},function(msg){
+				if(msg.success == 2)
+				{	
+					var _time = 60;
+					var time_out = setInterval(function(){
+						but.val("已发送，"+_time+"后可以重新发送");
+						_time--;
+						if(_time === 0)
+						{
+							but.val('重新发送');
+							but.attr('disabled',false);
+							clearInterval(_time);
+						}
+					},1000)
+				}
+				else
+				{
+					but.val('发送失败，请检查邮箱后重新发送');
+					but.attr('disabled',false);
+				}
+			},'json');
 		}
-		//发送邮件
-		$.post("check_email",{email:email,_token:csrf},function(msg){
-			alert(msg);
-		});
 	});
 });
