@@ -14,7 +14,7 @@ class UsersController extends Controller
 	 * [index 个人中心显示]
 	 */
 	public function index()
-	{
+	{	
 		//查询个人信息
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
        //print_r($data);die;

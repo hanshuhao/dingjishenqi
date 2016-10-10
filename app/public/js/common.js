@@ -10,7 +10,7 @@ $(document).ready(function(){
 		rules:{
 			username:{
 				required:true,//必填
-				minlength:3, //最少6个字符
+				minlength:3, //最少3个字符
 				maxlength:32,//最多20个字符
 			},
 			password:{
@@ -40,9 +40,8 @@ $(document).ready(function(){
 		rules:{
 			username:{
 				required:true,//必填
-				minlength:3, //最少6个字符
+				minlength:3, //最少3个字符
 				maxlength:32,//最多20个字符
-				
 			},
 			password:{
 				required:true,
@@ -52,6 +51,11 @@ $(document).ready(function(){
 			email:{
 				required:true,
 				email:true,
+			},
+			check_email:{
+				required:true,
+				rangelength:[4,4],
+				digits:true,//整数
 			},
 			confirm_password:{
 				required:true,
@@ -81,6 +85,11 @@ $(document).ready(function(){
 				required:"请输入邮箱地址",
 				email: "请输入正确的email地址"
 			},
+			check_email:{
+				required:"请输入邮箱验证码",
+				rangelength:"请输入4位数字",
+				digits:"请输入4位数字",
+			},
 			confirm_password:{
 				required: "请再次输入密码",
 				minlength: "确认密码不能少于3个字符",
@@ -99,4 +108,43 @@ $(document).ready(function(){
 		var phone_number = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/ 
 		return this.optional(element) || (length == 11 && phone_number.test(value)); 
 	}, "手机号码格式错误"); 
+
+	//获取邮箱验证码
+	$("#check_email").click(function(){
+		//获取信息
+		var email = $('.email').val();
+		var csrf = $('#_token').val();
+		var but = $(this);
+		if(email == '')
+		{
+			but.val("请先输入邮箱");
+		}
+		else
+		{
+			but.attr('disabled',true);
+			but.val("正在发送请等候。。。");
+			//发送邮件
+			$.post("check_email",{email:email,_token:csrf},function(msg){
+				if(msg.success == 2)
+				{	
+					var _time = 60;
+					var time_out = setInterval(function(){
+						but.val("已发送，"+_time+"后可以重新发送");
+						_time--;
+						if(_time === 0)
+						{
+							but.val('重新发送');
+							but.attr('disabled',false);
+							clearInterval(_time);
+						}
+					},1000)
+				}
+				else
+				{
+					but.val('发送失败，请检查邮箱后重新发送');
+					but.attr('disabled',false);
+				}
+			},'json');
+		}
+	});
 });

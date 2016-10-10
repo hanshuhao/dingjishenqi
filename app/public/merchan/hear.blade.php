@@ -83,6 +83,9 @@
                 <li>
                     <a href="addNum"><i class="fa fa-desktop"></i>添加闲置机器</a>
                 </li>
+                 <li>
+                    <a href="addad"><i class="fa fa-desktop"></i>广告添加</a>
+                </li>
             </ul>
 
         </div>

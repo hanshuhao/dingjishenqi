@@ -31,10 +31,10 @@
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <div>
-                                        <input id="txtBeginDate" style="width:170px;padding:7px 10px;border:1px solid #ccc;margin-right:10px;"/>
-                                        <input id="txtEndDate" style="width:170px;padding:7px 10px;border:1px solid #ccc;" />
-                                    </div>
+                                    <div class="form-group">
+                                            <label>日期搜索</label>
+                                            <input type="text" class="form-control" id="datepicker" name="addtime" onblur="peo()" name="boss" placeholder="请填写"><span id="check_people"></span>
+                                        </div>
                                     <thead>
                                     <tr>
                                         <th>订单号</th>
@@ -87,8 +87,16 @@
 <!-- DATA TABLE SCRIPTS -->
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+<link rel="stylesheet" href="date/jquery-ui.css">
+  <script src="js/jq.js"></script>
+  <script src="date/jquery-ui.js"></script>
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
 <script>
-    // $(document).ready(function () {
+    // $(document).ready(function () 
     //     $('#dataTables-example').dataTable();
     // });
 </script>
@@ -98,19 +106,3 @@
 
 </body>
 </html>
-<script>
-    $(function () {
-        $("#txtBeginDate").calendar({
-            controlId: "divDate",                                 // 弹出的日期控件ID，默认: $(this).attr("id") + "Calendar"
-            speed: 200,                                           // 三种预定速度之一的字符串("slow", "normal", or "fast")或表示动画时长的毫秒数值(如：1000),默认：200
-            complement: true,                                     // 是否显示日期或年空白处的前后月的补充,默认：true
-            readonly: true,                                       // 目标对象是否设为只读，默认：true
-            upperLimit: new Date(),                               // 日期上限，默认：NaN(不限制)
-            lowerLimit: new Date("2011/01/01"),                   // 日期下限，默认：NaN(不限制)
-            callback: function () {                               // 点击选择日期后的回调函数
-                alert("您选择的日期是：" + $("#txtBeginDate").val());
-            }
-        });
-        $("#txtEndDate").calendar();
-    });
-</script>

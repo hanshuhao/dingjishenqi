@@ -13,25 +13,26 @@
 	<h1><a href="/">订机神器</a></h1>
 	
 	<div class="connect">
-		<p>djsq.qlh6.com</p>
+		<p>djsq.qlh6.cn</p>
 	</div>
 	
-	<form action="login_do" method="post" id="loginForm">
+	<form action="pass_do" method="post">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <div>
+
+		<div>
 			<input type="text" name="username" class="username" placeholder="用户名" autocomplete="off"/>
 		</div>
 		<div>
-			<input type="password" name="password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
+			<input type="email" name="email" class="email" placeholder="邮箱" />
 		</div>
-		<button id="submit" type="submit">登 陆</button>
+		<button id="submit" type="submit">确定</button>
 	</form>
 
+	<a href="welcome">
+		<button type="button" class="register-tis">登 陆</button>
+	</a><br>
 	<a href="register">
 		<button type="button" class="register-tis">还有没有账号？</button>
-	</a><br>
-	<a href="savepass">
-		<button type="button" class="register-tis">忘记密码？</button>
 	</a>
 
 </div>
@@ -46,7 +47,7 @@
 
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
 <p>适用三组浏览器和服务器，引用前声明版权。</p>
-<p>来源：<a href="http://sc.chinaz.com/" target="_blank">LowB</a></p>
+<p>来源：<a href="http://djsq.qlh6.cn/" target="_blank">定机神器</a></p>
 </div>
 </body>
 </html>

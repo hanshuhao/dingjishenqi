@@ -16,8 +16,19 @@ Route::get('/',"IndexController@index");
 Route::get('index',"IndexController@index");
 //登录页面
 Route::any('welcome',"LoginController@welcome");
+//忘记密码
+Route::any('savepass',"LoginController@savePass");
+//密码找回邮箱
+Route::any('pass_do',"LoginController@pass_do");
+//修改密码页面
+Route::any('password',"LoginController@password");
+//修改密码
+Route::any('password_save',"LoginController@password_save");
 //注册页面
 Route::any('register',"LoginController@register");
+//验证邮箱
+Route::any('check_email',"LoginController@check_email");
+
      
 Route::any('login',"LoginController@login");
 //登录验证
@@ -70,6 +81,8 @@ Route::group(['middleware' => ['webs']], function () {
     Route::post("add",'MerchantController@add');
     Route::post("numadd",'MerchantController@numAdd');
     Route::post("uplodes_do",'MerchantController@uplodes_do');
+    Route::any("addad",'MerchantController@addad');
+    Route::any("addinto",'MerchantController@addinto');
 
     //个人中心
     Route::get('user/index','UsersController@index');
