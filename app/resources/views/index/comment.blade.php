@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -17,12 +17,14 @@
             margin-top: 5px;
             display: none;    
         }
-        .ping{
-            display: block;
-            display: none;
-            width: 104%;
+        .cont{
+            margin-top: 4px;
+            width:100%;
             border: 1px solid blue;
-            margin-top: 8px;
+            text-align: center;
+        }
+        .name{
+            color: red;
         }
     </style>
 </head>
@@ -143,7 +145,7 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="index"><i class="fa fa-user fa-fw"></i> {{ $username }}</a>
+                    <li><a href="index"><i class="fa fa-user fa-fw"></i> </a>
                     </li>
                     <li class="divider"></li>
                     <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> 退出登录</a>
@@ -163,12 +165,12 @@
                 <li>
                     <a href="index"><i class="fa fa-dashboard"></i> 返回主页</a>
                 </li>
+                <?php $iid = Session::get('iid'); ?>
                 <li>
-                    <a href="#"  class="active-menu"><i class="fa fa-qrcode"></i>网吧详情 </a>
+                    <a href="select?id={{ $id }}"><i class="fa fa-qrcode"></i>网吧详情 </a>
                 </li>
                 <li>
-                <?php $iid = Session::get('iid'); ?>
-                    <a href="comment_show?id={{ $iid }}"><i class="fa fa-qrcode"></i>网吧评论 </a>
+                    <a href="#" class="active-menu"><i class="fa fa-qrcode"></i>网吧评论 </a>
                 </li>
             </ul>
 
@@ -184,8 +186,8 @@
                 <div class="col-md-12">
                     <h1 class="page-header">
                         <input type="hidden" value="0" name="cc">
-                        网吧详情 <small>网吧信息</small>  
-
+                        网吧详情 <small>网吧评论</small>  
+    
                     </h1>
                 </div>
             </div>
@@ -198,29 +200,28 @@
                 <div class="col-md-8 col-sm-12 col-xs-12">
 
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            欢迎用户【 {{ $username }} 】访问
-                        </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <p>网吧名称：{{ @$iname }}</p>
-                                <p>网吧地址：{{ @$address }}</p>
-                                <p>剩余机子：<span id="span">{{ @$c }}台</span></p>
-                                <p>联系方式：{{ @$tel }}</p>
-                                <p>网吧全景图：<img src="{{@$log}}" alt="" style="width:80%"/></p>
-                                <form action="select_do" method="post">
-                                    <input type="hidden" name="iid"  value="{{@$id}}"/>
-                                    <input type="submit" id="button" class="form-control" value="订购机器"/>
-                                </form>
+                                <p><img src="{{@$log}}" alt="" style="width:80%"/></p>
+                                
+                            </div>
+                            <div>评论专区：<br/>
+                                @foreach($comment as $v)
+                                <div class="cont"><b><span class="name">{{ $v['username'] }}</span></b>:<br/>
+                                {{ $v['content'] }}
+                                <?php $uid = Session::get("uid"); ?>
+                                <?php if($v['uid']==$uid || $v['iid']==$uid){
+                                        echo "<a href='javascript:void(0)' id='$v[cid]' class='del'>del?</a>";
+                                      } ?>
+                                </div>
+                                                                                                   
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
-                        <center><small><button class="comment">点击打开评论之旅~</button></small></center>
-                        <textarea name="content" id="content" cols="100" rows="8"></textarea>
-                        <center><a href="javascript:void(0)" class="ping">评论</a></center>
-                        
-                        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                        <input type="hidden" name="iid" value="{{ $id }}">
+                       
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -253,47 +254,19 @@
 <script src="js/jquery.js"></script>
 <script>
     $(function(){
-        var num=$("#span").html()
-        if(num=="0台"){
-            $("#span").html("暂无")
-            $("#button").attr("disabled",true)
-        }
-
-
-        $('.comment').click(function(){
-            var cc = $('input[name="cc"]');
-            if(cc.val()==1){
-                $('#content').show('slow');
-                $('.ping').show('slow');
-                cc.val('0');
-            }else{
-                $('#content').hide('slow');
-                $('.ping').hide('slow');
-                cc.val('1');
-            }
-        });
-
-        $('.ping').click(function(){
-            var iid = $('input[name="iid"]').val();
-            var content = $('#content').val();
-            $.ajax({
-                type:'GET',
-                url:"comment",
-                data:{
-                    iid : iid,
-                    content : content,
-                },
-                success:function(obj){
-                    if(obj==-1){
-                        alert('请输入评论内容');
-                    }else if(obj==1){
-                        alert("评论成功");
-                        $("#content").val("");
-                    }else{
-                        alert("评论失败");
-                    }
+        $('.del').click(function(){
+            var cid = $(this).attr('id');
+            var _this = $(this);
+            $.get("comment_del",{cid:cid},function(obj){
+                if(obj==1)
+                {
+                    _this.parent().remove();
                 }
-            });
+                else
+                {
+                    alert("删除失败");
+                }
+            })
         });
     })
 </script>
