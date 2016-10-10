@@ -39,7 +39,6 @@
                                         <p>头  像：<img src="{{ '/'.@$uphoto }}" width="90px" alt="头像"></p>
                                         <p>姓  名：{{ @$uname }}</p>
                                         <p>性  别：{{ @$sex }}</p>
-                                        <p>邮  箱：{{ @$email }}</p>
                                         <p>身份证：{{ @substr_replace($IDcard, '****', 6,8) }}</p>
                                         <p>目前积分：{{ @$integral }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">*如果积分与优惠不符合，请重新登陆</font></p>
                                         <p>积分等级：{{ @$integral_type }}</p>
