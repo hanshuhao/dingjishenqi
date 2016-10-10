@@ -18,7 +18,13 @@ class UsersController extends Controller
 		//查询个人信息
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
 		if(!$data){
-			$data=array('uname'=>Session::get('uname'));
+			$data=array('uname'=>Session::get('uname'),'info'=>1);
+		}
+		else
+		{
+			$integral = DB::table('integral')->select('type','level')->where('min','<=',$data['integral'])->where('max','>',$data['integral'])->first();
+			$data['integral_type'] = $integral['type'];
+			$data['integral_level'] = $integral['level'];
 		}
 		return view('user/index',$data);
 	}
@@ -189,6 +195,7 @@ class UsersController extends Controller
 	 	$contro="pass";
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
 	}
+<<<<<<< HEAD
 
 	/**
 	 * [AJAXpass ajax验证密码]
@@ -250,4 +257,6 @@ class UsersController extends Controller
 
         return view('user/enroll',['id'=>$id]);
     }
+=======
+>>>>>>> ff5e173ec6d8ebf14cf2ccb2071e848678ed5c7c
 }

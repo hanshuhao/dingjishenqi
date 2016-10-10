@@ -31,7 +31,7 @@
 
 		<!-- Simplify -->
 		<link href="css/simplify.min.css" rel="stylesheet">
-	
+	   <script src="js/jquery-1.11.1.min.js"></script>
   	</head>
 
   	<body class="overflow-hidden">
@@ -284,7 +284,7 @@
 						</ul>
 						
 						<a href="index.html" class="brand">
-							<i class="fa fa-database"></i><span class="brand-name">SIMPLIFY ADMIN</span>
+							<i class="fa fa-database"></i><span class="brand-name">定机神器</span>
 						</a>
 					</div>
 					<div class="nav-container">
@@ -303,7 +303,6 @@
 								</div>
 							</li>
 						</ul>
-						<!-- 登录人信息 -->
 						<div class="pull-right m-right-sm">
 							<div class="user-block hidden-xs">
 								<a href="#" id="userToggle" data-toggle="dropdown">
@@ -317,17 +316,27 @@
 									<div class="panel-body paddingTB-sm">
 										<ul>
 											<li>
+												<a href="profile.html">
+													<i class="fa fa-edit fa-lg"></i><span class="m-left-xs">My Profile</span>
+												</a>
+											</li>
+											<li>
+												<a href="inbox.html">
+													<i class="fa fa-inbox fa-lg"></i><span class="m-left-xs">Inboxes</span>
+													<span class="badge badge-danger bounceIn animation-delay3">2</span>
+												</a>
+											</li>
+											<li>
 												<a href="signin.html">
-													<i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">退出</span>
+													<i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">Sign out</span>
 												</a>
 											</li>
 										</ul>
 									</div>
 								</div>
 							</div>
-						
+							
 						</div>
-						<!-- 登录人信息end -->
 					</div>
 				</div><!-- ./top-nav-inner -->	
 			</header>
@@ -445,7 +454,44 @@
 					</div>
 				</div><!-- sidebar-inner -->
 			</aside>
-				
+				<!-- 中心内容 -->
+			<div class="main-container">
+				<div class="padding-md">
+					<ul class="breadcrumb">
+						<li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> 定机神器</a></li>
+						<li>积分等级设置</li>	 
+							 
+					</ul>
+
+					<form action="integralUpdate_do" method="post">
+					<table class="table table-striped" id="dataTable">
+					   <input type="hidden" name="id" value="{{$res->id}}">
+						<thead>
+							<tr>
+								<th>名称</th>
+								<td><input type="text" name="type" value="{{$res->type}}"></td>
+							</tr>
+							<tr>
+								<th>最少积分</th>
+								<td><input type="text" name="min" value="{{$res->min}}"></td>
+							</tr>
+							<tr>
+								<th>最大积分</th>
+								<td><input type="text" name="max" value="{{$res->max}}"></td>
+							</tr>
+							<tr>
+								<td colspan="2"> <input type="submit" value="修改规则"></td>
+							</tr>
+						</thead>
+						
+					</table>
+					</form>
+					  
+
+				</div><!-- ./padding-md -->
+			</div><!-- /main-container -->
+
+			<!-- 内容结束 -->
 
 
 			<footer class="footer">
@@ -486,7 +532,7 @@
 	    <!-- Placed at the end of the document so the pages load faster -->
 		
 		<!-- Jquery -->
-		<script src="js/jquery-1.11.1.min.js"></script>
+		
 		
 		<!-- Bootstrap -->
 	    <script src="bootstrap/js/bootstrap.min.js"></script>
