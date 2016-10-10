@@ -70,6 +70,7 @@ Route::group(['middleware' => ['webs']], function () {
     Route::get('user/index','UsersController@index');
     Route::get('user/save','UsersController@save');
     Route::get('user/list','UsersController@lists');
+    Route::get('user/vip','UsersController@vip');
     Route::get('user/pass','UsersController@pass');
     Route::post('user/info','UsersController@info');
     Route::post('user/passsave','UsersController@passSave');
