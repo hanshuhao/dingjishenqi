@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">定机神器</a>
+                <a class="navbar-brand page-scroll" href="djsq.qlh6.com">定机神器</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -115,6 +115,60 @@
                 @endforeach
         </div>
     </section>
+
+            
+    <section class="no-padding" id="about">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+               
+                <div class="col-lg-4 col-sm-6">
+                    <body>
+
+                        <style type="text/css">
+                        *{margin:0;padding:0;list-style-type:none;}
+                        a,img{border:0;}
+                        body{min-width:1007px;font:12px/1.5 tahoma,sans-serif;}
+                        .advbox{position:relative;margin:0px auto;width:980px;background:#e8e8e8}
+                        .advbox .advbtn{position:absolute;width:19px;display:none;height:55px;top:10px;right:-23px}
+                        .advbox .advbtn a{display:block;background:url(images/gg_btn.png) no-repeat 0px 0px;height:55px;overflow:hidden}
+                        .advbox .advbtn .advclose{background:url(images/gg_btn.png) no-repeat -19px 0px;}
+                        .advbox .advcon{display:none;height:200px;}
+                        </style>
+
+                        <div class="advbox">
+
+                            <div class="advbtn">
+                                <a style="display:none" class="advreplay" title="重播" href="javascript:void(0);"></a>
+
+                                <a class="advclose" title="关闭" href="javascript:void(0);"></a>
+                            </div>
+                            <div class="advcon"></div>
+                        </div><!--advbox end-->
+                        </body>
+                </div>
+        </div>
+        <!-- 广告展示 -->
+             
+
+
+<body>
+<p style="color:black">商家广告展示：</p>
+<div id="scrollDiv">
+  <ul>
+    <li>这是公告标题的第一行</li>
+    <li>这是公告标题的第二行</li>
+    <li>这是公告标题的第三行</li>
+    <li>这是公告标题的第四行</li>
+    <li>这是公告标题的第五行</li>
+    <li>这是公告标题的第六行</li>
+    <li>这是公告标题的第七行</li>
+    <li>这是公告标题的第八行</li>
+  </ul>
+</div>
+</body>
+    </section>
+
+
 
     <section id="services">
     </section>
@@ -187,6 +241,105 @@
 </body>
 
 </html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>多行滚动jQuery循环新闻列表代码</title>
+<style type="text/css">
+ul,li{margin:0;padding:0}
+#scrollDiv{width:900px;height:100px;min-height:25px;line-height:25px;border:#ccc 1px solid;overflow:hidden}
+#scrollDiv li{height:25px;padding-left:10px;}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+//滚动插件
+(function($){
+$.fn.extend({
+        Scroll:function(opt,callback){
+                //参数初始化
+                if(!opt) var opt={};
+                var _this=this.eq(0).find("ul:first");
+                var        lineH=_this.find("li:first").height(), //获取行高
+                        line=opt.line?parseInt(opt.line,10):parseInt(this.height()/lineH,10), //每次滚动的行数，默认为一屏，即父容器高度
+                        speed=opt.speed?parseInt(opt.speed,10):800, //卷动速度，数值越大，速度越慢（毫秒）
+                        timer=opt.timer?parseInt(opt.timer,10):8000; //滚动的时间间隔（毫秒）
+                if(line==0) line=1;
+                var upHeight=0-line*lineH;
+                //滚动函数
+                scrollUp=function(){
+                        _this.animate({
+                                marginTop:upHeight
+                        },speed,function(){
+                                for(i=1;i<=line;i++){
+                                        _this.find("li:first").appendTo(_this);
+                                }
+                                _this.css({marginTop:0});
+                        });
+                }
+                //鼠标事件绑定
+                _this.hover(function(){
+                        clearInterval(timerID);
+                },function(){
+                        timerID=setInterval("scrollUp()",timer);
+                }).mouseout();
+        }        
+})
+})(jQuery);
+
+$(document).ready(function(){
+        $("#scrollDiv").Scroll({line:4,speed:800,timer:2000});
+});
+</script>
+</head>
+<script type="text/javascript">
+//首页大广告
+var gg960ShowTime = 10000; //播放时间
+var gg960Time = null;
+
+function open_gg960(showBtn){
+    $('.advbox .advcon').html(gg960Con).slideDown(300,function(){
+        if(showBtn !== false){
+            $('.advbox .advbtn').fadeIn();
+        }
+        if(gg960Time){clearTimeout(gg960Time);}
+        gg960Time = setTimeout(close_gg960,gg960ShowTime);
+    });
+}
+function close_gg960(){
+    $('.advbox .advcon').slideUp(500,function(){
+        $(this).html('');
+        $('.advclose').hide();
+        $('.advreplay').show();
+    });
+}
+$('.advclose').click(function(){
+    if(gg960Time){clearTimeout(gg960Time);}
+    close_gg960();
+    return false;
+});
+$('.advreplay').click(function(){
+    if(gg960Time){clearTimeout(gg960Time);}
+    open_gg960(false);
+    $('.advreplay').hide();
+    $('.advclose').show();
+    return false;
+});
+
+var gg960Con;
+var fullAdType = 'swf';
+var fullAdUrl = 'http://djsq.qlh6.com/'
+var fullAdName = 'images/qpad.swf';;
+if(fullAdName){
+    if(fullAdType == 'swf'){
+        gg960Con = '<embed wmode="transparent" height="400" width="980" flashvars="alink1='+fullAdUrl+'" allowscriptaccess="always" quality="high" name="Advertisement" id="Advertisement" style="" src="images/qpad.swf" type="application/x-shockwave-flash"></embed>';
+        
+    }else{
+        gg960Con = '<a href="'+fullAdUrl+'" target="_blank"><img width="980" height="600" src="images/qpad.jpg"/></a>';//flash无法显示时，显示JPG广告
+    }
+    
+    setTimeout(open_gg960,1500);//延迟显示
+}
+</script>
+
 <script type="text/javascript">
     $(function(){
         // 百度地图API功能
