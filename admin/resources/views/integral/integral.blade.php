@@ -31,7 +31,7 @@
 
 		<!-- Simplify -->
 		<link href="css/simplify.min.css" rel="stylesheet">
-	
+	   <script src="js/jquery-1.11.1.min.js"></script>
   	</head>
 
   	<body class="overflow-hidden">
@@ -284,7 +284,7 @@
 						</ul>
 						
 						<a href="index.html" class="brand">
-							<i class="fa fa-database"></i><span class="brand-name">SIMPLIFY ADMIN</span>
+							<i class="fa fa-database"></i><span class="brand-name">定机神器</span>
 						</a>
 					</div>
 					<div class="nav-container">
@@ -303,7 +303,6 @@
 								</div>
 							</li>
 						</ul>
-						<!-- 登录人信息 -->
 						<div class="pull-right m-right-sm">
 							<div class="user-block hidden-xs">
 								<a href="#" id="userToggle" data-toggle="dropdown">
@@ -317,17 +316,27 @@
 									<div class="panel-body paddingTB-sm">
 										<ul>
 											<li>
+												<a href="profile.html">
+													<i class="fa fa-edit fa-lg"></i><span class="m-left-xs">My Profile</span>
+												</a>
+											</li>
+											<li>
+												<a href="inbox.html">
+													<i class="fa fa-inbox fa-lg"></i><span class="m-left-xs">Inboxes</span>
+													<span class="badge badge-danger bounceIn animation-delay3">2</span>
+												</a>
+											</li>
+											<li>
 												<a href="signin.html">
-													<i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">退出</span>
+													<i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">Sign out</span>
 												</a>
 											</li>
 										</ul>
 									</div>
 								</div>
 							</div>
-						
+							
 						</div>
-						<!-- 登录人信息end -->
 					</div>
 				</div><!-- ./top-nav-inner -->	
 			</header>
@@ -445,7 +454,111 @@
 					</div>
 				</div><!-- sidebar-inner -->
 			</aside>
-				
+				<!-- 中心内容 -->
+			<div class="main-container">
+				<div class="padding-md">
+					<ul class="breadcrumb">
+						<li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> 定机神器</a></li>
+						<li>积分等级设置</li>	 
+							 
+					</ul>
+
+					<table class="table table-striped" id="dataTable">
+							<tr class="tr">
+							    <th>NUM</th>
+								<th>名称</th>
+								<th>最小积分</th>
+								<th>最大积分</th>
+							</tr>
+							@foreach($arr as $k=>$v)
+							<tr>
+							    <td  >{{$v->id}}</td>
+								<td  pid="{{$v->id}}"><span class="update2">{{$v->type}}</span></td>
+								<td  pid="{{$v->id}}"><span class="update1">{{$v->min}}</span></td>
+								<td  pid="{{$v->id}}"><span class="update">{{$v->max}}</span></td>
+								<td><a href="integralUpdate?id={{$v->id}}">修改</a></td>
+							</tr>
+						
+							@endforeach
+						<button class="add">增加积分等级</button>
+					</table>
+					
+				</div><!-- ./padding-md -->
+			</div><!-- /main-container -->
+<script>
+//增加
+  $(".add").click(function(){
+  	_this = $('.tr').parents('tbody');
+  	// /alert(_this)
+     $.get("add",function(msg){
+        var str="";
+            str+='<tr><td  pid="'+msg+'"><span class="update2">0</span></td><td  pid="'+msg+'"><span class="update1">0</span></td><td  pid="'+msg+'"><span class="update">0</span></td><td><a href="integralUpdate?id=pid="'+msg+'"">修改</a></td></tr>';
+            _this.append(str);
+     })
+
+  })
+//即点击该积分名称
+ 	$(document).on("click", ".update2", function () {  
+            var con = $(this).html();  
+            var pid = $(this).parent().attr('pid');  
+            //alert(pid)
+            $(this).parent().html('<input type="text" value="'+con +'" class="input1" pid="'+pid+'" />');  
+            $("input1").focus();  
+            $(document).on("blur", ".input1", function () {
+                var min = $(this).val();  
+                pid = $(this).attr("pid");
+                //alert(min)
+                $(this).parent().html('<span class="update2">'+min +'</span>'); 
+                $.post("type",{type:min,pid:pid},function(msg){
+                //alert(msg)
+            	location.href="integral";
+
+            }) 
+            });  
+            
+        });
+//即点击该积分mix
+ 	$(document).on("click", ".update1", function () {  
+            var con = $(this).html();  
+            var pid = $(this).parent().attr('pid');  
+            //alert(pid)
+            $(this).parent().html('<input type="text" value="'+con +'" class="input1" pid="'+pid+'" />');  
+            $("input1").focus();  
+            $(document).on("blur", ".input1", function () {
+                var min = $(this).val();  
+                pid = $(this).attr("pid");
+               // alert(pid)
+                $(this).parent().html('<span class="update1">'+min +'</span>'); 
+                $.post("min",{min:min,pid:pid},function(msg){
+                //alert(msg)
+            	location.href="integral";
+
+            }) 
+            });  
+            
+        });
+	//即点击该积分max
+ 	$(document).on("click", ".update", function () {  
+            var con = $(this).html();  
+            var pid = $(this).parent().attr('pid');  
+            //alert(pid)
+            $(this).parent().html('<input type="text" value="'+con +'" class="input1" pid="'+pid+'" />');  
+            $("input1").focus();  
+            $(document).on("blur", ".input1", function () {
+                var max = $(this).val();  
+                pid = $(this).attr("pid");
+               // alert(pid)
+                $(this).parent().html('<span class="update">'+max +'</span>'); 
+                $.post("max",{max:max,pid:pid},function(msg){
+                //alert(msg)
+            	location.href="integral";
+
+            }) 
+            });  
+            
+        });
+</script>
+			<!-- 内容结束 -->
 
 
 			<footer class="footer">
@@ -486,7 +599,7 @@
 	    <!-- Placed at the end of the document so the pages load faster -->
 		
 		<!-- Jquery -->
-		<script src="js/jquery-1.11.1.min.js"></script>
+		
 		
 		<!-- Bootstrap -->
 	    <script src="bootstrap/js/bootstrap.min.js"></script>

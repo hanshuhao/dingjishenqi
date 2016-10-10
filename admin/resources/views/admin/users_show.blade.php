@@ -405,6 +405,17 @@
 									</span>
 								</a>
 							</li>
+							<li class="bg-palette4">
+								<a href="integral">
+									<span class="menu-content block">
+										<span class="menu-icon"><i class="block fa fa-clock-o fa-lg"></i></span>
+										<span class="text m-left-sm">积分规则</span>
+									</span>
+									<span class="menu-content-hover block">
+										积分规则
+									</span>
+								</a>
+							</li>
 							<li class="menu-header">
 								Others
 							</li>
