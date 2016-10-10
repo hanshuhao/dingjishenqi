@@ -23,7 +23,7 @@ a { text-decoration: none; color: #ffffff}
 	</div>
 	
 	<form action="register_do" method="post" id="registerForm">
-	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+	<input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
 
 		<div>
 			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
@@ -38,23 +38,23 @@ a { text-decoration: none; color: #ffffff}
 			<input type="text" name="phone_number" class="phone_number" placeholder="输入手机号码" autocomplete="off" id="number"/>
 		</div>
 		<div>
-			<input type="email" name="email" class="email" placeholder="输入邮箱地址" oncontextmenu="return false" onpaste="return false" />
+			<input type="email" name="email" class="email" placeholder="输入邮箱地址" oncontextmenu="return false" onpaste="return false" /><input type="button" value="获取验证码" id="check_email"><br /><font color='red'></font>
 		</div>
- 
-          
-<ul class="dowebok">
-	<li><input type="radio" name="type" data-labelauty="商家" value="2"></li>
-	<li><input type="radio" name="type" data-labelauty="个人" checked="true" value="1"></li>
-	<li><font color=red>*</font>请选择类型</li>
-</ul>
-		
-	
+		<div>
+			<input type="text" name="check_email" class="check_email" placeholder="输入邮箱验证码" oncontextmenu="return false" onpaste="return false" />
+		</div>
+		<div>
+			<ul class="dowebok">
+				<li><input type="radio" name="type" data-labelauty="商家" value="2"></li>
+				<li><input type="radio" name="type" data-labelauty="个人" checked="true" value="1"></li>
+				<li><font color=red>*</font>请选择类型</li>
+			</ul>
+		</div>
 		<input type="submit" value="注册" style="background:blue">
 	</form>
 	<a href="welcome">
 		<button type="button" class="register-tis">已经有账号？</button>
 	</a>
-
 </div>
 
 </body>

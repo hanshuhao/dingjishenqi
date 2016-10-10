@@ -18,6 +18,7 @@ Route::get('index',"IndexController@index");
 Route::any('welcome',"LoginController@welcome");
 //注册页面
 Route::any('register',"LoginController@register");
+Route::any('check_email',"LoginController@check_email");
      
 Route::any('login',"LoginController@login");
 //登录验证

@@ -135,6 +135,15 @@ class LoginController extends Controller
         }
     }
     
+    /**
+     * [check_email 验证邮箱]
+     * @return [arr] []
+     */
+    public function check_email()
+    {
+        $arr = Request::input();
+        var_dump($arr);die;
+    }
 
      /**
       * [logout 退出]
