@@ -20,6 +20,22 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 	 * [index 首页]
 	 */
     public function  index(){
+        header("Content-Type:text/html;charset=utf-8");
+        $id=Request::input('id');
+        if(isset($id)){
+            //解密
+            $id=base64_decode($id);
+            $id=substr($id,0,-4);
+            $id=substr($id,-1,4);
+            Session::put("invite",$id);
+            //查询网吧信息
+            $data = DB::table('internet_bar')->get();
+            return  view("index.index",['data'=>$data]);
+        }else{
+            //查询网吧信息
+            $data = DB::table('internet_bar')->get();
+            return  view("index.index",['data'=>$data]);
+        }
     	//查询网吧信息
         $data = DB::table('internet_bar')->get();
         return  view("index.index",['data'=>$data]);

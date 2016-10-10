@@ -74,6 +74,9 @@ Route::group(['middleware' => ['webs']], function () {
     Route::get('user/pass','UsersController@pass');
     Route::post('user/info','UsersController@info');
     Route::post('user/passsave','UsersController@passSave');
+    Route::any('user/invite_do','UsersController@invite_do');
+    Route::get('user/invite','UsersController@invite');
+    Route::get('user/enroll','UsersController@enroll');
 });
 /*
 |--------------------------------------------------------------------------

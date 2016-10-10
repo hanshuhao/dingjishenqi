@@ -179,7 +179,7 @@ class MerchantController extends Controller
         $iid = explode(',', $i_id);
         DB::table('invoice')->whereIn("id",$iid)->update(['status'=>1]);
         
-        $str=DB::table('invoice')->where('iid',$date['id'])->get();
+        $str=DB::table('invoice')->where('iid',$date['id'])->simplePaginate(8);
         return view('merchant.indent',['str'=>$str]);
     }
 
