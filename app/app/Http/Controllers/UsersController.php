@@ -19,7 +19,7 @@ class UsersController extends Controller
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
        //print_r($data);die;
 		//查询个人积分
-		/*$dat = DB::table('integral')->get();
+		$dat = DB::table('integral')->get();
 
 		$data['dat']=$dat;
 		$fen=$data['integral'];
@@ -31,7 +31,7 @@ class UsersController extends Controller
 
 		//print_r($type);die;
         $data['type']=$type;
-		//print_r($data);die;*/
+		//print_r($data);die;
         
 
 		if(!$data){
