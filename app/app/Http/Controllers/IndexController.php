@@ -236,6 +236,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                         "anti_phishing_key" => "", // 防钓鱼时间戳  若要使用请调用类文件submit中的query_timestamp函数
                         "exter_invoke_ip" => "", // 客户端的IP地址
                         "_input_charset" => 'utf-8', // 字符编码格式
+                        "it_b_pay"		 => '1m',	//时间
                 );
                 // 去除值为空的参数
                 foreach ($parameter as $k => $v) {

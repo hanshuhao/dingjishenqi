@@ -47,13 +47,26 @@ class LoginController extends Controller
         }
         else
         {
+            //查询登陆信息
             $users = DB::table('login')->where("username","=",$username)
                        ->where("password","=",$password)
                        ->first();                             
             if($users)
             {
                 Session::put('uid',$users['id']);
-                Session::put('uname',$users['username']);
+                //获取用户信息
+                $data = DB::table('users')->select('uname','integral')->where('loginid',$users['id'])->first();
+                if(!$data)
+                {
+                    Session::put('uname',$users['username']);
+                    Session::put('discount','0');
+                }
+                else
+                {
+                    Session::put('uname',$data['uname']);
+                    $integral = DB::table('integral')->select('level')->where('min','<=',$data['integral'])->where('max','>',$data['integral'])->first();
+                    Session::put('discount',$integral['level']*10/100);
+                }
                 Session::put('type',$users['type']);
                 //登录时间
                 $date  =date("Y-m-d H:i:s");
