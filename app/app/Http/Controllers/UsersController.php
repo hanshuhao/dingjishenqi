@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use DB;
+use Mail;
 use Session;
 use Illuminate\Http\Request;
 
@@ -108,7 +109,7 @@ class UsersController extends Controller
 		//查询个人信息
 		$arr = DB::table('login')->where('id','=',Session::get('uid'))->first();
 		//查询定机信息
-		$data1 = DB::table('invoice')->where('loginid','=',Session::get('uid'))->get();
+		$data1 = DB::table('invoice')->where('loginid','=',Session::get('uid'))->simplePaginate(8);
 		$time = time();
 		$id = "";
 		foreach ($data1 as $key => $value) {
@@ -122,7 +123,7 @@ class UsersController extends Controller
 			DB::table('invoice')->where("id",$value)->update(['status'=>1]);
 		}
 
-		$data = DB::table('invoice')->where('loginid','=',Session::get('uid'))->get();
+		$data = DB::table('invoice')->where('loginid','=',Session::get('uid'))->simplePaginate(5);
 		return view('user/list',['username'=>$arr['username'],"data"=>$data]);
 	}
 
@@ -196,4 +197,57 @@ class UsersController extends Controller
 	{
 		$arr = $request->all();
 	}
+
+
+    /*
+     * 邀请好友页面
+     */
+    public  function  invite(){
+        return view('user/invite');
+    }
+
+    /*
+     * 发送邮件
+     */
+    public function invite_do(Request $request){
+        $arr=$request->all();
+        $email=$arr['uname'];
+        $mail="";
+        $id=$arr['id'];
+        $date=DB::table('login')->where('id',$id)->first();
+        $uname=$date['username'];
+        $id=rand(1000,9999).$id.'djsq';//id加密
+        $text="邀请您来体验定机神器快来体验吧。快猛戳此链接";
+        $id=base64_encode($id);
+        $url='http://www.pengwenjie.com/?id='.$id;//邀请地址
+        $arr=$uname.$text.$url;
+        foreach($email as $v){
+        $flag = Mail::send('user.test',['name'=>$arr],function($message)use ($v){
+            $message ->to($v)->subject('定机神器');
+        });
+        }
+        if($flag)
+        {
+            $message="发送成功";
+            $time="1";
+        }
+        else
+        {
+            $message="发送失败";
+            $time="2";
+        }
+        $contro="invite";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+    }
+
+    public function enroll(Request $request){
+       header("Content-Type:text/html;charset=utf-8");
+        $id=$request->all();
+        $id=$id['id'];
+        $id=base64_decode($id);
+        $id=substr($id,0,-4);
+        $id=substr($id,-1,4);
+
+        return view('user/enroll',['id'=>$id]);
+    }
 }

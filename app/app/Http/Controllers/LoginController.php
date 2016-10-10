@@ -77,7 +77,7 @@ class LoginController extends Controller
      */
     public function  register()
     {
-        return  view("login.register");  
+            return  view("login.register");
     }
 
     /**
@@ -87,7 +87,6 @@ class LoginController extends Controller
     public function  register_do()
     {
         $arr= Request::input();
-        //var_dump($arr);
         $res['username'] = $arr['username'];
         $res['password'] = md5($arr['password']);
 
@@ -105,6 +104,13 @@ class LoginController extends Controller
         $return = DB::table('login')->insertGetId($res);//获取插入的id
         if($return)
         {
+            if($arr['id']!=""){
+                $id=$arr['id'];
+                $str=DB::table('login')->where('id','=',$id)->first();
+                $str=DB::table('users')->where("loginid",'=',$str['id'])->first();
+                $integral=$str['integral']+20;
+                $arr=DB::table('users')->where('id',$str['id'])->update(['integral'=>$integral]);
+            }
             Session::put('uid',$return);
             Session::put('uname',$arr['username']);
             Session::put('type',$arr['type']);

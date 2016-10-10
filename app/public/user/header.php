@@ -160,6 +160,10 @@
                     <li>
                         <a href="pass"><i class="fa fa-edit"></i> 修改密码</a>
                     </li>
+
+                    <li>
+                        <a href="invite"><i class="fa fa-qrcode"></i> 邀请注册</a>
+                    </li>
                 </ul>
 
             </div>

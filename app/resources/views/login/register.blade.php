@@ -24,7 +24,7 @@ a { text-decoration: none; color: #ffffff}
 	
 	<form action="register_do" method="post" id="registerForm">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
+        <input type="hidden" name="id" value="{{ Session::get("invite") }}"/>
 		<div>
 			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
 		</div>
