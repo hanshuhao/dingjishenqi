@@ -3,6 +3,7 @@
   	<head>
 	    <meta charset="utf-8">
 	    <title>定机神器</title>
+
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
@@ -455,6 +456,7 @@
 					<table class="table table-striped" id="dataTable">
 						<thead>
 							<tr>
+								<th><input type="checkbox" name=""/></th>
 								<th>No</th>
 								<th>Uname</th>
 								<th>Sex</th>
@@ -463,11 +465,13 @@
 								<th>Username</th>
 								<th>Uphoto</th>
 								<th>Status</th>
+								<th>Delete</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($users as $v)
 							<tr>
+                                <td><input type="checkbox" name="g_id" value="{{ $v->id }}"></td>
 								<td>{{ $v->id }}</td>
 								<td>{{ $v->uname }}</td>
 								<td>{{ $v->sex }}</td>
@@ -476,10 +480,20 @@
 								<td>{{ $v->username }}</td>
 								<td>{{ $v->uphoto }}</td>
 								<td>{{ $v->status }}</td>
+								<td><a href="javascript:;" class="del" id="{{$v->id}}" ><s>删除</s></a></td>
 							</tr>
 							@endforeach
 						</tbody>
 					</table>
+                    {!! $users->links() !!}
+                    <center>
+                        <td width="26%">
+                            <input type="button" name="button" id="button1" value="全选">
+                            <input type="button" name="button2" id="button2" value="反选">
+                        </td><br/>
+                            <button id="del">批量删除</button>
+                    </center>
+
 				</div><!-- ./padding-md -->
 			</div><!-- /main-container -->
 
@@ -564,46 +578,71 @@
 		<script src='js/modernizr.min.js'></script>
 		
 		<!-- Simplify -->
-		<script src="js/simplify/simplify.js"></script>
-		<script src="js/simplify/simplify_dashboard.js"></script>
-
-
-		<script>
-			$(function()	{
-				$('.chart').easyPieChart({
-					easing: 'easeOutBounce',
-					size: '140',
-					lineWidth: '7',
-					barColor: '#7266ba',
-					onStep: function(from, to, percent) {
-						$(this.el).find('.percent').text(Math.round(percent));
-					}
-				});
-
-				$('.sortable-list').sortable();
-
-				$('.todo-checkbox').click(function()	{
-					
-					var _activeCheckbox = $(this).find('input[type="checkbox"]');
-
-					if(_activeCheckbox.is(':checked'))	{
-						$(this).parent().addClass('selected');					
-					}
-					else	{
-						$(this).parent().removeClass('selected');
-					}
-				
-				});
-
-				//Delete Widget Confirmation
-				$('#deleteWidgetConfirm').popup({
-					vertical: 'top',
-					pagecontainer: '.container',
-					transition: 'all 0.3s'
-				});
-			});
-			
-		</script>
-	<script src='http://www.jz21.net/plus/ad_js.php?aid=42' language='javascript'></script>
   	</body>
 </html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+    $(document).ready(function(){
+        //alert(id);
+        $(".del").click(function(){
+            var id = $(this).attr('id');
+            //alert(id);
+            var _this = $(this);
+            if(confirm("Are you sure ?")){
+                $.ajax({
+                    type:'get',
+                    url:'del',
+                    data:{
+                        id:id
+                    },
+                    success:function(msg){
+                        if(msg==1){
+                            _this.parents('tr').remove();
+                        }else{
+                            alert("删除失败");
+                        }
+                    }
+                });
+            }else{
+                alert('fuck');
+            }
+        });
+        /*
+        *批删
+        */
+        $('#del').click(function(){
+            var checked = [];
+            var g_id = $('input[name="g_id"]:checked').each(function() {
+                checked.push($(this).val());
+            });
+            $.ajax({
+                type:"get",
+                url:"p_del",
+                data:{
+                    g_id : checked
+                },
+                success:function(mag){
+                    $('input[name="g_id"]:checked').parents('tr').remove();
+                }
+            });
+            //alert(checked);
+        });
+        /*
+        删除
+         */
+            $("tr").mousemove(function(){
+                $(this).css("background","#F0F0F0");  //鼠标经过背景颜色变为灰色
+
+            })
+            $("tr").mouseout(function(){
+                $(this).css("background","#fff");  //离开后背景颜色回复白色
+            })
+
+            $("#button1").click(function(){
+                $(":checkbox").attr("checked",true);   //设置所有复选框默认勾选
+            })
+            $("#button2").click(function(){
+                $(":checkbox").attr("checked",false);   //设置所有复选框未勾选
+            })
+        });
+</script>
