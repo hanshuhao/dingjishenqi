@@ -78,6 +78,7 @@ Route::group(['middleware' => ['webs']], function () {
     Route::post("uplodes_do",'MerchantController@uplodes_do');
     Route::any("addad",'MerchantController@addad');
     Route::any("addinto",'MerchantController@addinto');
+     Route::any("addlist",'MerchantController@addlist');
 
     //个人中心
     Route::get('user/index','UsersController@index');
