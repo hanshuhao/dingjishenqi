@@ -53,7 +53,7 @@ class IntegralController extends BaseController
      */
     public function add(){
     	$arr=array();
-        $id = DB::table('integral')->insertGetId(['type'=>"0","min"=>"0","max"=>"","level"=>"0"]);
+        $id = DB::table('integral')->insertGetId(['type'=>"请点击修改","min"=>"请点击修改","max"=>"请点击修改","level"=>"请点击修改"]);
         return $id;
     }
 }

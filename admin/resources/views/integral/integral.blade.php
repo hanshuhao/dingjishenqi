@@ -469,10 +469,11 @@
 								<th>名称</th>
 								<th>最小积分</th>
 								<th>最大积分</th>
+								<th>操作</th>
 							</tr>
 							@foreach($arr as $k=>$v)
 							<tr>
-							    <td  >{{$v->id}}</td>
+							    <td>{{$v->id}}</td>
 								<td  pid="{{$v->id}}"><span class="update2">{{$v->type}}</span></td>
 								<td  pid="{{$v->id}}"><span class="update1">{{$v->min}}</span></td>
 								<td  pid="{{$v->id}}"><span class="update">{{$v->max}}</span></td>
@@ -492,7 +493,7 @@
   	// /alert(_this)
      $.get("add",function(msg){
         var str="";
-            str+='<tr><td  pid="'+msg+'"><span class="update2">0</span></td><td  pid="'+msg+'"><span class="update1">0</span></td><td  pid="'+msg+'"><span class="update">0</span></td><td><a href="integralUpdate?id=pid="'+msg+'"">修改</a></td></tr>';
+            str+='<tr><td>'+msg+'</td><td  pid="'+msg+'"><span class="update2">请点击修改</span></td><td  pid="'+msg+'"><span class="update1">请点击修改</span></td><td  pid="'+msg+'"><span class="update">请点击修改</span></td><td><a href="integralUpdate?id=pid="'+msg+'"">修改</a></td></tr>';
             _this.append(str);
      })
 
