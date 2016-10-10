@@ -48,6 +48,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
          $arr = DB::table('login')->where('id',Session::get('uid'))->first();
          $id=Request::input('id');
          $arr=DB::table("internet_bar")->where("id",$id)->first();
+         Session::put('iid',$id);
          $a=explode(',',$arr['cnum']);
          $b=explode(',',$arr['vnum']);
          $a=count($a);
@@ -353,5 +354,46 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                 $contro="user/list";
                 return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
             }
+        }
+
+
+        public function comment(Request $request)
+        { 
+          $data['content'] = Request::input('content');
+          $data['uid'] = Session::get('uid');
+          $data['iid'] = Request::input('iid');
+          $data['c_time'] = date("Y-m-d H:i:s",time());
+          if($data['content']==""){
+            return -1;
+          }else{
+            $res = DB::table("comment")->insert($data);
+            if($res){
+              return 1;
+            }else{
+              return 0;
+            }
+          }
+          
+        }
+
+        public function comment_show()
+        {
+          $iid = Session::get('iid');
+          $arr = DB::table("internet_bar")->where("id",$iid)->first();
+          $data['comment'] = DB::table("comment")->join('login','comment.uid','=','login.id')->join('internet_bar','comment.iid','=','internet_bar.id')->get();
+          //print_r($comment);die;
+          return view('index.comment',$arr,$data);
+        }
+
+        public function comment_del()
+        {
+          $cid = $_GET['cid'];
+          $res = DB::table("comment")->where("cid",$cid)->delete();
+          if($res)
+          { 
+            return 1;
+          }else{
+            return 0;
+          }
         }
 }

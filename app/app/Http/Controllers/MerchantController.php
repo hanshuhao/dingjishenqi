@@ -263,5 +263,36 @@ class MerchantController extends Controller
         $contro="prupdates";
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
+     /*
+     * 网吧广告入库
+     */
+    public function addad(){
+         $id=Session::get('uid');
+        $date=DB::table('internet_bar')->where('loginid',$id)->first();
+        $cnum = explode(',',$date['cnum']);
+        $vnum = explode(',',$date['vnum']);
+        $date['cnum'] = array_pop($cnum);
+        $date['vnum'] = array_pop($vnum);
+        return view('merchant.addad',$date);
+    }
+    public function addinto(){
+         $arr=Request::input();
+         
+        $ids=Session::get('uid');
+        $arr['com_id']=$arr['id'];
+        unset($arr['id']);
+        unset($arr['_token']);  
+        $arr=DB::table('addad')->insert($arr);
+         
+        if(!$arr){
+            $message="添加失败";
+        }else{
+            $message="添加成功";
+        }
+        //print_r($arr);die;
+        $time="2";
+        $contro="prupdates";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+    }
 
 }

@@ -14,9 +14,26 @@ class UsersController extends Controller
 	 * [index 个人中心显示]
 	 */
 	public function index()
-	{
+	{	
 		//查询个人信息
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
+       //print_r($data);die;
+		//查询个人积分
+		$dat = DB::table('integral')->get();
+
+		$data['dat']=$dat;
+		$fen=$data['integral'];
+		//print_r($data);die;
+		$dar=DB::select("select type from integral where min<=$fen and max >=$fen");
+        foreach ($dar as $key => $value) {
+        	$type = $value['type'];
+        }
+
+		//print_r($type);die;
+        $data['type']=$type;
+		//print_r($data);die;
+        
+
 		if(!$data){
 			$data=array('uname'=>Session::get('uname'),'info'=>1);
 		}
@@ -204,6 +221,15 @@ class UsersController extends Controller
 	 	$contro="pass";
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
 	}
+
+	/**
+	 * [AJAXpass ajax验证密码]
+	 */
+	public function AJAXpass(Request $request)
+	{
+		$arr = $request->all();
+	}
+
 
     /*
      * 邀请好友页面
