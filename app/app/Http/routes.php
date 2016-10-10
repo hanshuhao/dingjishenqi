@@ -60,7 +60,12 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any('notify_url',"IndexController@notify_url");
     //支付失败
     Route::any('return_url',"IndexController@return_url");
-
+    //网吧评论   
+    Route::get("comment","IndexController@comment");
+    //网吧评论显示
+    Route::get("comment_show",'IndexController@comment_show');
+    //网吧评论删除
+    Route::get("comment_del",'IndexController@comment_del');
 
     /*商户页面*/
     Route::get("merchant",'MerchantController@index');
