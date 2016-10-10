@@ -19,12 +19,11 @@ a { text-decoration: none; color: #ffffff}
 	<h1><a href="/">定机神器</a></h1>
 	 
 	<div class="connect">
-		<p>Link the world. Share to world.</p>
+		<p>djsq.qlh6.cn</p>
 	</div>
 	
 	<form action="register_do" method="post" id="registerForm">
-	<input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
-
+	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 		<div>
 			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
 		</div>

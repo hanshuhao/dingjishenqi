@@ -91,7 +91,7 @@ class LoginController extends Controller
      */
     public function  register()
     {
-        return  view("login.register");  
+            return  view("login.register");
     }
 
     /**
@@ -101,7 +101,6 @@ class LoginController extends Controller
     public function  register_do()
     {
         $arr= Request::input();
-        //var_dump($arr);die;
         $res['username'] = $arr['username'];
         $res['password'] = md5($arr['password']);
         //验证邮箱验证码
@@ -129,6 +128,13 @@ class LoginController extends Controller
         $return = DB::table('login')->insertGetId($res);//获取插入的id
         if($return)
         {
+            if($arr['id']!=""){
+                $id=$arr['id'];
+                $str=DB::table('login')->where('id','=',$id)->first();
+                $str=DB::table('users')->where("loginid",'=',$str['id'])->first();
+                $integral=$str['integral']+20;
+                $arr=DB::table('users')->where('id',$str['id'])->update(['integral'=>$integral]);
+            }
             Session::put('uid',$return);
             Session::put('uname',$arr['username']);
             Session::put('type',$arr['type']);
@@ -193,5 +199,113 @@ class LoginController extends Controller
     public function savePass()
     {
         return view('login.savepass');
+    }
+
+    /**
+     * [pass_do 通过邮箱和账号查询要修改的账号]
+     */
+    public function pass_do()
+    {
+        $arr = Request::input();
+        $email = $arr['email'];
+        if(!$arr)
+        {
+            $message="非正常访问";
+            $time="2";
+            $contro="welcome";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+        }
+        //查询登陆信息
+        $users = DB::table('login')->select('id')->where("username",$arr['username'])->where("email",$email)->first();
+        if(!$users)
+        {
+            $message="用户名或邮箱不正确";
+            $time="2";
+            $contro="savepass";
+            return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+        }
+        //发送邮件
+        $left = rand(1000,9999);
+        $right = rand(100,999);
+        $content = "您正通过邮箱修改定机神器的密码，请点击<a href='www.app.com/password?id=".$left.$users['id'].$right."'>跳转</a>。";
+        $flag = Mail::send('user.test',['name'=>$content],function($message)use($email){
+            $message ->to($email)->subject('定机神器邮箱验证');
+        });
+        if($flag)
+        {
+            $message="发送成功，请注意查收";
+        }
+        else
+        {
+            $message="发送失败";
+      }
+      $time="2";
+      $contro="welcome";
+      return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+    }
+
+    /**
+     * [password 显示修改页面]
+     * @return [type] [description]
+     */
+    public function password()
+    {
+      $arr = Request::input();
+      if(!$arr)
+      {
+        $message="非法访问";
+        $time="2";
+        $contro="welcome";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+      }
+      //获取id
+      $data['id'] = substr($arr['id'],4,-3);
+      return view('login.pass_do',$data);
+    }
+    /**
+     * [password_save 密码修改]
+     */
+    public function password_save()
+    {
+      //获取数值
+      $arr = Request::input();
+
+      if(!$arr)
+      {
+          $message="非正常访问";
+          $time="2";
+          $contro="welcome";
+          return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+      }
+      //验证
+      $res = DB::table('login')->select('password')->where('id',$arr['id'])->where('password',md5($arr['password']))->first();
+      if($res)
+      {
+        $message="不可与原密码一致";
+        $time="2";
+        $contro="savepass";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+      }
+      if($arr['password'] != $arr['confirm_password'])
+      {
+        $message="两次密码输入不一致";
+        $time="2";
+        $contro="savepass";
+        return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+      }
+      //修改
+      $re = DB::table('login')->where('id',$arr['id'])->update(['password'=>md5($arr['password'])]);
+      if($re)
+      {
+        $message="修改成功";
+      }
+      else
+      {
+        $message="修改失败";
+      }
+      $time="2";
+      $contro="welcome";
+      return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
+      var_dump($arr);
     }
 }

@@ -156,9 +156,15 @@
                     <li>
                         <a href="save"><i class="fa fa-edit"></i> 修改个人信息 </a>
                     </li>
-
+                    <li>
+                        <a href="vip"><i class="fa fa-edit"></i> VIP信息 </a>
+                    </li>
                     <li>
                         <a href="pass"><i class="fa fa-edit"></i> 修改密码</a>
+                    </li>
+
+                    <li>
+                        <a href="invite"><i class="fa fa-qrcode"></i> 邀请注册</a>
                     </li>
                 </ul>
 

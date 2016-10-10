@@ -18,10 +18,17 @@ Route::get('index',"IndexController@index");
 Route::any('welcome',"LoginController@welcome");
 //忘记密码
 Route::any('savepass',"LoginController@savePass");
+//密码找回邮箱
+Route::any('pass_do',"LoginController@pass_do");
+//修改密码页面
+Route::any('password',"LoginController@password");
+//修改密码
+Route::any('password_save',"LoginController@password_save");
 //注册页面
 Route::any('register',"LoginController@register");
 //验证邮箱
 Route::any('check_email',"LoginController@check_email");
+
      
 Route::any('login',"LoginController@login");
 //登录验证
@@ -74,9 +81,13 @@ Route::group(['middleware' => ['webs']], function () {
     Route::get('user/index','UsersController@index');
     Route::get('user/save','UsersController@save');
     Route::get('user/list','UsersController@lists');
+    Route::get('user/vip','UsersController@vip');
     Route::get('user/pass','UsersController@pass');
     Route::post('user/info','UsersController@info');
     Route::post('user/passsave','UsersController@passSave');
+    Route::any('user/invite_do','UsersController@invite_do');
+    Route::get('user/invite','UsersController@invite');
+    Route::get('user/enroll','UsersController@enroll');
 });
 /*
 |--------------------------------------------------------------------------

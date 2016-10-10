@@ -16,7 +16,7 @@
 		<p>djsq.qlh6.cn</p>
 	</div>
 	
-	<form action="login_do" method="post" id="loginForm">
+	<form action="pass_do" method="post">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
 		<div>

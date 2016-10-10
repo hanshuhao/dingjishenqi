@@ -18,8 +18,7 @@
 	
 	<form action="login_do" method="post" id="loginForm">
 	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-
-		<div>
+        <div>
 			<input type="text" name="username" class="username" placeholder="用户名" autocomplete="off"/>
 		</div>
 		<div>
