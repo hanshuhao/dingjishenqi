@@ -105,7 +105,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
         $date['on_time']=time();
         $date['down_time']=time()+3600*$arr['times'];
         //算出折扣后的金钱
-        $date['money']=$arr['money']*$discount;
+        $date['money']=sprintf('%.2f',$arr['money']*$discount);
+        //print_r($date);die;
         $date['iid']=$arr['id'];
         $date['loginid']=Session::get('uid');
         $date['loginid']=$id;
@@ -117,7 +118,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
              Session::put("I_".$id,$arr['id']);
              Session::put("C_".$id,$date['c_num']);
              Session::put("T_".$id,$arr['radio']);
-             Session::put("M_".$id,$arr['money']);
+             Session::put("M_".$id,$date['money']);
              return  Redirect('pay');
         }else{
             $message="提交失败";
@@ -239,7 +240,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                         "anti_phishing_key" => "", // 防钓鱼时间戳  若要使用请调用类文件submit中的query_timestamp函数
                         "exter_invoke_ip" => "", // 客户端的IP地址
                         "_input_charset" => 'utf-8', // 字符编码格式
-                        "it_b_pay"		 => '1m',	//时间
                 );
                 // 去除值为空的参数
                 foreach ($parameter as $k => $v) {
@@ -324,7 +324,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
                 $num  = Session::get("K_".$id);
                 $res =  DB::table('invoice')->where('l_num', $num)->update(['status' => 0]);
                 $integral = ceil(Session::get('M_'.$id));
-                $int_add = DB::table("users")->where("id",$id)->increment('integral',$integral);
+                DB::table("users")->where("id",$id)->increment('integral',$integral);
                 if($res){
                 //删除session
                 Session::forget("K_".$id);
