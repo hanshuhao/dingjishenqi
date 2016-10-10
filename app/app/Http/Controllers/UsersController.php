@@ -195,7 +195,6 @@ class UsersController extends Controller
 	 	$contro="pass";
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
 	}
-<<<<<<< HEAD
 
 	/**
 	 * [AJAXpass ajax验证密码]
@@ -247,16 +246,5 @@ class UsersController extends Controller
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
 
-    public function enroll(Request $request){
-       header("Content-Type:text/html;charset=utf-8");
-        $id=$request->all();
-        $id=$id['id'];
-        $id=base64_decode($id);
-        $id=substr($id,0,-4);
-        $id=substr($id,-1,4);
-
-        return view('user/enroll',['id'=>$id]);
-    }
-=======
->>>>>>> ff5e173ec6d8ebf14cf2ccb2071e848678ed5c7c
+   
 }
