@@ -23,7 +23,7 @@ a { text-decoration: none; color: #ffffff}
 	</div>
 	
 	<form action="register_do" method="post" id="registerForm">
-	<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+	<input type="hidden" name="_token" id="_token" value="<?php echo csrf_token(); ?>">
 		<div>
 			<input type="text" name="username" class="username" placeholder="您的用户名" autocomplete="off"/>
 		</div>
