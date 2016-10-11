@@ -389,7 +389,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
           $iid = Session::get('iid');
           $arr = DB::table("internet_bar")->where("id",$iid)->first();
           $data['comment'] = DB::table("comment")->join('login','comment.uid','=','login.id')->join('internet_bar','comment.iid','=','internet_bar.id')->get();
-          //print_r($comment);die;
+          //print_r($data);die;
           return view('index.comment',$arr,$data);
         }
 
@@ -449,5 +449,26 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
               }
           }
           
+        }
+
+
+        public function comment_huifu()
+        {
+          $ccid = $_GET['ccid'];
+          $arr = DB::table("comment")->where("ccid",$ccid)->get();
+          $username = $_GET['username'];
+          $iname = $_GET['iname'];
+          $str = "";
+          //print_r($arr);die;
+          if($arr){
+            foreach ($arr as $key => $v) {
+              $str = "<h5>".$iname.":</h5>";
+              $str = $str.$v['content']."&nbsp;&nbsp;&nbsp;&nbsp;";
+              $str = $str."(".$username.")<br/>";
+            }
+            return $str;
+          }else{
+            return 0;
+          }
         }
 }

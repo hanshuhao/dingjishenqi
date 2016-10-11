@@ -23,7 +23,8 @@
                                     <form role="form" method="post" action="invite_do" >
                                         <div class="form-group">
                                             <label>邀请人邮箱</label>
-                                         <input class="form-control" id="name" name="uname[]" placeholder="请填写邮箱号" >
+                                         <input class="form-control"  name="uname[]" placeholder="请填写邮箱号" >
+                                        <span class="checkemail"></span>
                                         </div>
                                         <div class="div"></div>
                                         <div class="form-group">
@@ -70,20 +71,33 @@
         var num=0;
         $("#button").click(function(){
             num=num+1;
-
             var str="";
-            //str+="<div>"
             str+='<div class="form-group">';
             str+='<label>邀请人邮箱</label>'
-            str+='<input class="form-control" id="name" name="uname[]" placeholder="请填写邮箱号" >';
+            str+='<input class="form-control" name="uname[]" placeholder="请填写邮箱号" >';
+            str+='<span class="checkemail"></span>';
             str+='</div>';
-
-            //str+="</div>"
-
-
             $('.div').append(str);
-            //$(".table").html(str)
         })
+        var sh=false;
+        $(document).on("blur",".form-control",function(){
+            var email=$(this).val()
+            var r_email  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(r_email.test(email)){
+                $(this).next('.checkemail').html("√")
+                sh=true;
+            }else{
+                $(this).next('.checkemail').html("<font color='red'>请输入正确邮箱</font>")
+                sh=false;
+            }
+        })
+        $('#btn').click(function(){
+            if(sh){
+                $('form').submit();
+            }else{
+                return false;
+            }
+        });
     })
 </script>
 

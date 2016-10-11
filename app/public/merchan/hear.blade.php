@@ -89,6 +89,9 @@
                 <li>
                     <a href="addlist"><i class="fa fa-desktop"></i>广告历史</a>
                 </li>
+                <li>
+                    <a href="i_comment"><i class="fa fa-desktop"></i>网吧评论</a>
+                </li>
             </ul>
 
         </div>
