@@ -26,7 +26,20 @@
         .name{
             color: red;
         }
+
+        #bg{ display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1001; -moz-opacity: 0.7; opacity:.70; filter: alpha(opacity=70);}
+        #show{display: none; position: absolute; top: 25%; left: 22%; width: 53%; height: 49%; padding: 8px; border: 8px solid #E8E9F7; background-color: white; z-index:1002; overflow: auto;}
+
+
     </style>
+<script language="javascript" type="text/javascript">
+
+ function hidediv() {
+document.getElementById("bg").style.display ='none';
+document.getElementById("show").style.display ='none';
+}
+</script>
+
 </head>
 <body>
 <div id="wrapper">
@@ -212,13 +225,18 @@
                                 {{ $v['content'] }}
                                 <?php $uid = Session::get("uid"); ?>
                                 <?php if($v['uid']==$uid || $v['iid']==$uid){
-                                        echo "<a href='javascript:void(0)' id='$v[cid]' class='del'>del?</a>";
+                                        echo "<a href='javascript:void(0)' id='$v[cid]' class='del'>del?</a>  |  <a href='javascript:void(0)' cid='$v[cid]' class='huifu' username='$v[username]' iname='$v[iname]'>查看回复</a>";
                                       } ?>
                                 </div>
-                                                                                                   
+                                       
+                    
                                 @endforeach
 
                             </div>
+                            <div id="bg"></div>
+                        <div id="show">点击关闭
+                                        <input id="btnclose" type="button" value="Close" onclick="hidediv();"/>
+                                        <div id="look"></div>
                         </div>
                     </div>
                        
@@ -268,6 +286,19 @@
                 }
             })
         });
+
+        $('.huifu').click(function(){
+            $("#show").show();
+            var ccid = $(this).attr('cid');
+            var username = $(this).attr("username");
+            var iname = $(this).attr("iname");
+            $.get("comment_huifu",{ccid:ccid,username:username,iname:iname},function(obj){
+                $("#look").html(obj);
+            });
+        });
+
+
+
     })
 </script>
 </body>

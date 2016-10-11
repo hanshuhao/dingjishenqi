@@ -356,7 +356,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
             }
         }
 
-
+        /**
+         * [comment 发布评论]
+         * @param  Request $request [description]
+         * @return [type]           [description]
+         */
         public function comment(Request $request)
         { 
           $data['content'] = Request::input('content');
@@ -376,15 +380,23 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
           
         }
 
+      /**
+       * [comment_show 评论显示页面]
+       * @return [type] [description]
+       */
         public function comment_show()
         {
           $iid = Session::get('iid');
           $arr = DB::table("internet_bar")->where("id",$iid)->first();
           $data['comment'] = DB::table("comment")->join('login','comment.uid','=','login.id')->join('internet_bar','comment.iid','=','internet_bar.id')->get();
-          //print_r($comment);die;
+          //print_r($data);die;
           return view('index.comment',$arr,$data);
         }
 
+        /**
+         * [comment_del 评论删除]
+         * @return [type] [description]
+         */
         public function comment_del()
         {
           $cid = $_GET['cid'];
@@ -392,6 +404,69 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
           if($res)
           { 
             return 1;
+          }else{
+            return 0;
+          }
+        }
+
+        /**
+         * [dianzan 点赞处理]
+         * @return [type] [description]
+         */
+        public function dianzan()
+        {
+          $iid = $_GET['iid'];
+          $uid = Session::get("uid");
+          $data['zan_name'] = $uid.$iid;
+          $data['zan_time'] = date("Y-m-d",time());
+
+          $ress = DB::table("dianzan")->where("zan_name",$data["zan_name"])->first();
+          if($ress){
+            if($data['zan_time']-$ress['zan_time']>=1){
+              DB::table("dianzan")->where("zan_name",$data["zan_name"])->update(["zan_time"=>$data["zan_time"]]);
+              $res = DB::table("internet_bar")->where("id",$iid)->increment('zan',1);
+              if($res)
+              {
+                return 1;
+              }
+              else
+              {
+                return 0;
+              }
+            }else{
+              return -1;//-1是一天只能赞一次
+            }
+          }else{
+            DB::table("dianzan")->insert($data);
+            $resss = DB::table("internet_bar")->where("id",$iid)->increment('zan',1);
+            if($resss)
+              {
+                return 1;
+              }
+              else
+              {
+                return 0;
+              }
+          }
+          
+        }
+
+
+        public function comment_huifu()
+        {
+          $ccid = $_GET['ccid'];
+          $arr = DB::table("comment")->where("ccid",$ccid)->get();
+          $username = $_GET['username'];
+          $iname = $_GET['iname'];
+          $str = "";
+          //print_r($arr);die;
+          if($arr){
+            foreach ($arr as $key => $v) {
+              $str = "<h5>".$iname.":</h5>";
+              $str = $str.$v['content']."&nbsp;&nbsp;&nbsp;&nbsp;";
+              $str = $str."(".$username.")<br/>";
+            }
+            return $str;
           }else{
             return 0;
           }

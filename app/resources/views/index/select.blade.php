@@ -24,6 +24,12 @@
             border: 1px solid blue;
             margin-top: 8px;
         }
+        .zan{
+            cursor: pointer;    
+        }
+        .p_zan{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -184,8 +190,9 @@
                 <div class="col-md-12">
                     <h1 class="page-header">
                         <input type="hidden" value="0" name="cc">
-                        网吧详情 <small>网吧信息</small>  
-
+                        网吧详情 <small>网吧信息</small> 
+                        <center>(<span class="zan_num">{{ @$zan }}</span>)<img src="images/zan.png" alt="赞" width="6%;" class="zan"><span class="p_zan">+1</span></center> 
+                        
                     </h1>
                 </div>
             </div>
@@ -295,6 +302,27 @@
                 }
             });
         });
+
+        //点赞
+        $('.zan').click(function(){
+            
+            var iid = $('input[name="iid"]').val();
+            $.get("dianzan",{iid:iid},function(obj){
+                if(obj==1){
+                    $(".p_zan").slideUp("fast");
+                    $(".p_zan").slideDown("slow"); 
+                    $(".p_zan").hide("slow");
+                    var zan = $('.zan_num').html();
+                    $('.zan_num').html(zan*1+1)
+                }else if(obj==-1){
+                    alert("每个人一天只能点一次赞，亲");
+                }else{
+                    alert("点赞失败");
+                }
+            })
+        });
+
+
     })
 </script>
 </body>

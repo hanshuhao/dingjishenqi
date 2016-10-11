@@ -294,5 +294,67 @@ class MerchantController extends Controller
         $contro="prupdates";
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
+    public function addlist(){
+        $ids=Session::get('uid');
+        $arr=DB::table('addad')->where('com_id',$ids)->get();
+       // print_r($arr);die
+        return view('merchant.addlist',['arr'=>$arr]);
+    }
+
+
+    public function i_comment()
+    {
+        $uid = Session::get("uid");
+        $arr = DB::table("internet_bar")->where("loginid",$uid)->first();
+        $iid = $arr['id'];
+        $data['comment'] = DB::table("comment")->where("iid",$iid)->join('login','comment.uid','=','login.id')->join('internet_bar','comment.iid','=','internet_bar.id')->get();
+        //print_r($data);
+        return view('merchant.i_comment',$arr,$data);
+    }
+
+
+    public function huifu_do()
+    {
+        $data['iid'] = $_GET["uid"];
+        $data['uid'] = Session::get("uid");
+        $data['content'] = $_GET["content"];
+        $data["c_time"] = date("Y-m-d H:i:s",time());
+        $data["ccid"] = $_GET['cid'];
+        $res = DB::table("comment")->insert($data);
+        if($res){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    public function so(){
+        $id=Session::get('uid');
+        $re=DB::table('internet_bar')->where('loginid',$id)->first();
+        $arr=Request::input();
+        $times=$arr['times'];
+        $times=strtotime($times);
+        $time=$times+3600*24;
+        $strs=DB::table('invoice')->where('on_time','>=',$times)->where('on_time','<=',$time)->where('iid',$re['id'])->get();
+        $str="";
+        foreach($strs as $v){
+            $str.="<tr class='odd gradeX'>";
+            $str.="<td>".$v['l_num']."</td>";
+            $str.="<td><b>".$v['c_num']."</b> 号</td>";
+            $str.="<td>".$v['username']."</td>";
+            $str.="<td>".$v['IDcard']."</td>";
+            $str.="<td>".date('Y-m-d H:i:s',$v['on_time'])."</td>";
+            $str.="<td>".date('Y-m-d H:i:s',$v['down_time'])."</td>";
+            $str.="<td class='center'>". $v['money'] ."￥</td>";
+            $str.='<td>';
+            if($v['status']==1){$s='订单过期';}elseif($v['status']=='0'){$s='一切良好';}else{$s='作废';}
+            $str.="$s";
+            $str.= '</td>';
+            $str.="</tr>";
+        }
+            $str.='</tbody>';
+            $str.='</table>';
+            /*$str.=$strs->fragment('foo')->render();*/
+        return $str;
+    }
 
 }
