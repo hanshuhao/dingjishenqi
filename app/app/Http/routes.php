@@ -66,6 +66,8 @@ Route::group(['middleware' => ['webs']], function () {
     Route::get("comment_show",'IndexController@comment_show');
     //网吧评论删除
     Route::get("comment_del",'IndexController@comment_del');
+    //网吧点赞
+    Route::get("dianzan","IndexController@dianzan");
 
     /*商户页面*/
     Route::get("merchant",'MerchantController@index');
