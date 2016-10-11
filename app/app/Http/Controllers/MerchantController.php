@@ -295,10 +295,37 @@ class MerchantController extends Controller
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
     public function addlist(){
-         $ids=Session::get('uid');
+        $ids=Session::get('uid');
         $arr=DB::table('addad')->where('com_id',$ids)->get();
        // print_r($arr);die
         return view('merchant.addlist',['arr'=>$arr]);
+    }
+
+
+    public function i_comment()
+    {
+        $uid = Session::get("uid");
+        $arr = DB::table("internet_bar")->where("loginid",$uid)->first();
+        $iid = $arr['id'];
+        $data['comment'] = DB::table("comment")->where("iid",$iid)->join('login','comment.uid','=','login.id')->join('internet_bar','comment.iid','=','internet_bar.id')->get();
+        //print_r($data);
+        return view('merchant.i_comment',$arr,$data);
+    }
+
+
+    public function huifu_do()
+    {
+        $data['iid'] = $_GET["uid"];
+        $data['uid'] = Session::get("uid");
+        $data['content'] = $_GET["content"];
+        $data["c_time"] = date("Y-m-d H:i:s",time());
+        $data["ccid"] = $_GET['cid'];
+        $res = DB::table("comment")->insert($data);
+        if($res){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
 }
