@@ -27,8 +27,6 @@
                                             <th>序号</th>
                                             <th>等级</th>
                                             <th>升级条件</th>
-                                            <th>身份标示</th>
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -36,10 +34,7 @@
                                         <tr class="odd gradeX">
                                             <td>{{ $v['id'] }}</td>
                                             <td><b>{{ $v['type'] }}</b></td>
-                                            <td>您累计充值到{{ $v['max'] }}</td>
-                                            <td>{{ $v['level'] }}</td>
-                                        
-                                            
+                                            <td>您累计消费到{{ $v['max'] }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -65,7 +60,7 @@
                                         <tr>
                                         <td>白银</td>
                                         <th><img src="/images/2.png" height="50" width="50"></th>
-                                        <td>充值累计2000定级积分获得或参加订机神器活动获得积分</td>
+                                        <td>充值累计2000定机积分获得或参加定机神器活动获得积分</td>
                                         <td>优惠10%</td>
                                         
                                         </tr>
@@ -74,13 +69,13 @@
                                         <td>黄金</td>
                                         <th><img src="/images/3.png" height="50" width="50"></th>
                                         <td>
-                                         充值累计3000定级积分获得或参加订机神器活动获得积分</td>
+                                         充值累计3000定机积分获得或参加定机神器活动获得积分</td>
                                         <td>优惠20%</td>
                                         
                                         </tr><tr>
                                         <td>钻石</td>
                                         <th><img src="/images/4.png" height="50" width="50"></th>
-                                        <td>充值累计4000定级积分获得或参加订机神器活动获得积分</td>
+                                        <td>充值累计4000定机积分获得或参加定机神器活动获得积分</td>
                                         <td>优惠30%</td>
                                      
                                         </tr>
