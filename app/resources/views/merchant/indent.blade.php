@@ -47,7 +47,7 @@
                                         <th>订单状态</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tr">
                                    @foreach($str as $v)
                                     <tr class="odd gradeX">
                                         <td>{{ $v['l_num'] }}</td>
@@ -62,7 +62,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div id="a">
                                 {{ $str->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -93,6 +95,13 @@
   <script>
   $(function() {
     $( "#datepicker" ).datepicker();
+     $("#datepicker").click(function(){
+            var times=$(this).val()
+             $.get("so", { times: times },function(msg){
+                 $('#tr').html(msg)
+                 $('#a').html("")
+             })
+        })
   });
   </script>
 <script>

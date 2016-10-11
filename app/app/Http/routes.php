@@ -78,7 +78,7 @@ Route::group(['middleware' => ['webs']], function () {
     Route::post("uplodes_do",'MerchantController@uplodes_do');
     Route::any("addad",'MerchantController@addad');
     Route::any("addinto",'MerchantController@addinto');
-
+    Route::get("so",'MerchantController@so');
     //个人中心
     Route::get('user/index','UsersController@index');
     Route::get('user/save','UsersController@save');
@@ -90,6 +90,7 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any('user/invite_do','UsersController@invite_do');
     Route::get('user/invite','UsersController@invite');
     Route::get('user/enroll','UsersController@enroll');
+    Route::get('user/seles','UsersController@seles');
 });
 /*
 |--------------------------------------------------------------------------
