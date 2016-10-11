@@ -17,6 +17,10 @@ class UsersController extends Controller
 	{	
 		//查询个人信息
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
+<<<<<<< HEAD
+=======
+       
+>>>>>>> 07e1e9fc59006f78d85b0cf485d81acbed06a67c
 		if(!$data){
 			$data=array('uname'=>Session::get('uname'),'info'=>1);
 		}
@@ -204,6 +208,10 @@ class UsersController extends Controller
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 07e1e9fc59006f78d85b0cf485d81acbed06a67c
     /*
      * 邀请好友页面
      */
@@ -245,5 +253,37 @@ class UsersController extends Controller
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
 
+
+  /*
+     * 订单搜索
+     */
+    public function seles(Request $request){
+        $id=Session::get('uid');
+        $arr=$request->all();
+        $times=$arr['times'];
+        $times=strtotime($times);
+        $time=$times+3600*24;
+        $strs=DB::table('invoice')->where('on_time','>=',$times)->where('on_time','<=',$time)->where('loginid',$id)->get();
+        $str="";
+        foreach($strs as $v){
+            $str.="<tr class='odd gradeX'>";
+            $str.="<td>".$v['l_num']."</td>";
+            $str.="<td><b>".$v['c_num']."</b> 号</td>";
+            $str.="<td>".$v['username']."</td>";
+            $str.="<td>".$v['IDcard']."</td>";
+            $str.="<td>".date('Y-m-d H:i:s',$v['on_time'])."</td>";
+            $str.="<td>".date('Y-m-d H:i:s',$v['down_time'])."</td>";
+            $str.="<td class='center'>". $v['money'] ."￥</td>";
+            $str.='<td>';
+            if($v['status']==1){$s='订单过期';}elseif($v['status']=='0'){$s='一切良好';}else{$s='作废';}
+            $str.="$s";
+            $str.= '</td>';
+            $str.="</tr>";
+        }
+            $str.='</tbody>';
+            $str.='</table>';
+            /*$str.=$strs->fragment('foo')->render();*/
+        return $str;
+    }
    
 }

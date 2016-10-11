@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-header">
-                        定机历史 <small>上机信息</small>
+                        广告历史 <small>广告信息</small>
                     </h1>
                 </div>
             </div>
@@ -37,34 +37,28 @@
                                         </div>
                                     <thead>
                                     <tr>
-                                        <th>订单号</th>
-                                        <th>机器号</th>
-                                        <th>姓名</th>
-                                        <th>身份证号</th>
-                                        <th>上机时间</th>
-                                        <th>下机时间</th>
-                                        <th>消费金额</th>
-                                        <th>订单状态</th>
+                                        <th>序号</th>
+                                        <th>广告内容</th>
+                                        <th>投放人</th>
+                                        
+                                        <th>投放时间</th>
+                                        <th>操作</th>
+                                    
                                     </tr>
                                     </thead>
-                                    <tbody id="tr">
-                                   @foreach($str as $v)
+                                    <tbody>
+                                   @foreach($arr as $v)
                                     <tr class="odd gradeX">
-                                        <td>{{ $v['l_num'] }}</td>
-                                        <td><b>{{ $v['c_num'] }}</b> 号</td>
-                                        <td>{{ $v['username'] }}</td>
-                                        <td>{{ $v['IDcard'] }}</td>
-                                        <td>{{ date('Y-m-d H:i:s',$v['on_time']) }}</td>
-                                        <td>{{ date('Y-m-d H:i:s',$v['down_time']) }}</td>
-                                        <td class="center">{{ $v['money'] }} ￥</td>
-                                        <td><?php if($v['status']==1){echo "订单过期";}elseif($v['status']=='0'){echo "<a href='xiaji?id=$v[id]'>下机？</a>";}else{echo "死活不付账";} ?></td>
+                                        <td>{{ $v['id'] }}</td>
+                                        <td>{{ $v['addtext'] }}</td>
+                                        <td>{{ $v['addname'] }}</td>
+                                          <td>{{ $v['addtime'] }}</td>
+                                    <td>删除</td>
                                     </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <div id="a">
-                                {{ $str->links() }}
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -95,13 +89,6 @@
   <script>
   $(function() {
     $( "#datepicker" ).datepicker();
-     $("#datepicker").click(function(){
-            var times=$(this).val()
-             $.get("so", { times: times },function(msg){
-                 $('#tr').html(msg)
-                 $('#a').html("")
-             })
-        })
   });
   </script>
 <script>

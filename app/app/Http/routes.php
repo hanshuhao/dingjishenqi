@@ -66,6 +66,8 @@ Route::group(['middleware' => ['webs']], function () {
     Route::get("comment_show",'IndexController@comment_show');
     //网吧评论删除
     Route::get("comment_del",'IndexController@comment_del');
+    //网吧点赞
+    Route::get("dianzan","IndexController@dianzan");
 
     /*商户页面*/
     Route::get("merchant",'MerchantController@index');
@@ -83,6 +85,9 @@ Route::group(['middleware' => ['webs']], function () {
     Route::post("uplodes_do",'MerchantController@uplodes_do');
     Route::any("addad",'MerchantController@addad');
     Route::any("addinto",'MerchantController@addinto');
+    Route::get("so",'MerchantController@so');
+    Route::any("addlist",'MerchantController@addlist');
+
 
     //个人中心
     Route::get('user/index','UsersController@index');
@@ -95,6 +100,7 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any('user/invite_do','UsersController@invite_do');
     Route::get('user/invite','UsersController@invite');
     Route::get('user/enroll','UsersController@enroll');
+    Route::get('user/seles','UsersController@seles');
 });
 /*
 |--------------------------------------------------------------------------
