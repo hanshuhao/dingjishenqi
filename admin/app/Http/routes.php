@@ -24,6 +24,7 @@ Route::get("/internet_bar",'AdminController@internet_bar');
 Route::get("/invoice",'AdminController@invoice');
 Route::get("/yes",'AdminController@yes');
 Route::get("/no" , 'AdminController@no');
+Route::any("/updstate" , 'AdminController@updstate');
 
 //积分
 Route::any("/integral" , 'IntegralController@integral');

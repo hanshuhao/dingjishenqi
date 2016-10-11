@@ -462,8 +462,8 @@
 						<li><span class="primary-font"><i class="icon-home"></i></span><a href="index.html"> 定机神器</a></li>
 						<li>用户中心</li>	 
 						<li>用户信息表</li>	 
+						<li><a href="javascript:;" >用户清理</a></li>
 					</ul>
-
 					<table class="table table-striped" id="dataTable">
 						<thead>
 							<tr>
@@ -490,8 +490,14 @@
 								<td>{{ $v->email }}</td>
 								<td>{{ $v->username }}</td>
 								<td>{{ $v->uphoto }}</td>
-								<td>{{ $v->status }}</td>
-								<td><a href="javascript:;" class="del" id="{{$v->id}}" ><s>删除</s></a></td>
+                                <td>
+                                    <?php if($v->status==0){?>
+                                    <img src="images/0.png" width="20px" height="20px"  name="state" id="{{ $v->id }}" state="1"/>
+                                    <?php }else{?>
+                                    <img src="images/1.jpg"  width="20px" height="20px"   name="state" id="{{ $v->id }}" state="0"/>
+                                    <?php } ?>
+                                </td>
+								<td><a href="javascript:;" class="del" id="{{$v->id}}" ><s><img src="images/20161009110547.png" align="center" width="25px" height="20px"  /></s></a></td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -593,6 +599,30 @@
 </html>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script>
+    $('img[name="state"]').click(function(){
+        var obj = $(this);
+        var gid = $(this).attr('id'); //id
+        var state = $(this).attr('state');//状态
+        $.ajax({
+            type:'post',
+            url:'updstate',
+            data:{
+                id:gid,
+                state:state
+            },
+            success:function(data){
+                if(data==1||data==0){
+                    if(data==1){
+                        obj.attr('state',0);
+                        obj.attr('src',"images/1.jpg");
+                    }else{
+                        obj.attr('state',1);
+                        obj.attr('src',"images/0.png");
+                    }
+                }
+            }
+        });
+    });
     $(document).ready(function(){
         //alert(id);
         $(".del").click(function(){
@@ -655,5 +685,8 @@
             $("#button2").click(function(){
                 $(":checkbox").attr("checked",false);   //设置所有复选框未勾选
             })
-        });
+        /*
+        清理
+         */
+    });
 </script>

@@ -140,4 +140,15 @@ class AdminController extends BaseController
             echo 0;
         }
     }
+    /**
+     * [no 修改状态]
+     * @return [type] [description]
+     */
+    public function updstate(){
+        $id = $_POST['id'];
+        $state = $_POST['state'];
+        $ar = DB::table('users')->where('id',$id)->update(['status'=>$state]);
+        if(!$ar){echo 1;die;}
+        echo $state;
+    }
 }
