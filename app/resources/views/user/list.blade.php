@@ -23,7 +23,12 @@
                             <div class="table-responsive">
 
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <input type="text" id="datepicker">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <div class="form-group">
+                                            <label>日期搜索</label>
+                                            <input type="text" class="form-control" id="datepicker" name="addtime" onblur="peo()" name="boss" placeholder="请填写"><span id="check_people"></span>
+                                    </div>
+                                <thead>
                                     <thead>
 
                                         <tr>
@@ -37,7 +42,7 @@
                                             <th>订单状态</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id='tr'>
                                         @foreach($data as $v)
                                         <tr class="odd gradeX">
                                             <td>{{ $v['l_num'] }}</td>
@@ -52,7 +57,9 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div id="a">
                                 {{ $data->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,6 +101,14 @@
   <script>
   $(function() {
     $( "#datepicker" ).datepicker();
+    $("#datepicker").click(function(){
+            var times=$(this).val()
+             $.get("seles", { times: times },function(msg){
+        
+                 $('#tr').html(msg)
+                 $('#a').html("")
+             })
+        })
   });
   </script>
 

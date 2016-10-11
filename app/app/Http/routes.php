@@ -90,6 +90,8 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any("addlist",'MerchantController@addlist');
     Route::get("i_comment","MerchantController@i_comment");
     Route::get("huifu_do","MerchantController@huifu_do");
+    Route::get("so",'MerchantController@so');
+    Route::any("addlist",'MerchantController@addlist');
 
     //个人中心
     Route::get('user/index','UsersController@index');
@@ -102,6 +104,7 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any('user/invite_do','UsersController@invite_do');
     Route::get('user/invite','UsersController@invite');
     Route::get('user/enroll','UsersController@enroll');
+    Route::get('user/seles','UsersController@seles');
 });
 /*
 |--------------------------------------------------------------------------
