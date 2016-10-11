@@ -128,7 +128,7 @@ class LoginController extends Controller
         $return = DB::table('login')->insertGetId($res);//获取插入的id
         if($return)
         {
-            if($arr['id']!=""){
+            if(isset($arr['id'])){
                 $id=$arr['id'];
                 $str=DB::table('login')->where('id','=',$id)->first();
                 $str=DB::table('users')->where("loginid",'=',$str['id'])->first();
