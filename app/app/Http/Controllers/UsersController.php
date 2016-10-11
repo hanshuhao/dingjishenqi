@@ -105,7 +105,7 @@ class UsersController extends Controller
 		$data['uname'] = $arr['uname'];
 		$data['sex'] = $arr['sex'];
 		$data['IDcard'] = $arr['IDcard'];
-		$data['email'] = $arr['email'];
+		//$data['email'] = $arr['email'];
 		$data['loginid'] = Session::get('uid');
 		
 		//数据入库

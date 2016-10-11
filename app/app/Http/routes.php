@@ -60,7 +60,12 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any('notify_url',"IndexController@notify_url");
     //支付失败
     Route::any('return_url',"IndexController@return_url");
-
+    //网吧评论   
+    Route::get("comment","IndexController@comment");
+    //网吧评论显示
+    Route::get("comment_show",'IndexController@comment_show');
+    //网吧评论删除
+    Route::get("comment_del",'IndexController@comment_del');
 
     /*商户页面*/
     Route::get("merchant",'MerchantController@index');
@@ -79,6 +84,9 @@ Route::group(['middleware' => ['webs']], function () {
     Route::any("addad",'MerchantController@addad');
     Route::any("addinto",'MerchantController@addinto');
     Route::get("so",'MerchantController@so');
+    Route::any("addlist",'MerchantController@addlist');
+
+
     //个人中心
     Route::get('user/index','UsersController@index');
     Route::get('user/save','UsersController@save');
