@@ -17,10 +17,6 @@ class UsersController extends Controller
 	{	
 		//查询个人信息
 		$data = DB::table('users')->where('loginid',Session::get('uid'))->first();
-<<<<<<< HEAD
-=======
-       
->>>>>>> 07e1e9fc59006f78d85b0cf485d81acbed06a67c
 		if(!$data){
 			$data=array('uname'=>Session::get('uname'),'info'=>1);
 		}
@@ -208,10 +204,6 @@ class UsersController extends Controller
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 07e1e9fc59006f78d85b0cf485d81acbed06a67c
     /*
      * 邀请好友页面
      */
