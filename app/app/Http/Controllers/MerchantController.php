@@ -294,5 +294,11 @@ class MerchantController extends Controller
         $contro="prupdates";
         return view('login.errors',['message'=>$message,'time'=>$time,'contro'=>$contro]);
     }
+    public function addlist(){
+         $ids=Session::get('uid');
+        $arr=DB::table('addad')->where('com_id',$ids)->get();
+       // print_r($arr);die
+        return view('merchant.addlist',['arr'=>$arr]);
+    }
 
 }

@@ -86,6 +86,9 @@
                  <li>
                     <a href="addad"><i class="fa fa-desktop"></i>广告添加</a>
                 </li>
+                <li>
+                    <a href="addlist"><i class="fa fa-desktop"></i>广告历史</a>
+                </li>
             </ul>
 
         </div>
